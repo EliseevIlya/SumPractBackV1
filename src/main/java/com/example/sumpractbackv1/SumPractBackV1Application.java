@@ -12,11 +12,7 @@ public class SumPractBackV1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SumPractBackV1Application.class, args);
-		//XmlToDatabase xmlToDatabase = new XmlToDatabase();
-		//xmlToDatabase.insert();
 
-		//test test = new test();
-		//test.ins();
 	}
 
 }
