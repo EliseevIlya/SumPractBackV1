@@ -1,17 +1,11 @@
-package com.example.sumpractbackv1.Services;
+package com.example.sumpractbackv1.service;
 
-import com.example.sumpractbackv1.DBEntity.*;
-import com.example.sumpractbackv1.Parser.Parcer;
-import com.example.sumpractbackv1.Parser.ParsEntity.*;
-import com.example.sumpractbackv1.Repository.*;
-import jakarta.transaction.Transactional;
-import jakarta.xml.bind.*;
+import com.example.sumpractbackv1.entity.*;
+import com.example.sumpractbackv1.parser.Parcer;
+import com.example.sumpractbackv1.parser.ParsEntity.*;
+import com.example.sumpractbackv1.repository.*;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
-
-
-import java.io.File;
 import java.time.*;
 
 @Service

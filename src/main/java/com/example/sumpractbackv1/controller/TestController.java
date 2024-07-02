@@ -1,6 +1,6 @@
-package com.example.sumpractbackv1.Controllers;
+package com.example.sumpractbackv1.controller;
 
-import com.example.sumpractbackv1.Services.XmlToDatabase;
+import com.example.sumpractbackv1.service.XmlToDatabase;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

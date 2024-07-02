@@ -1,4 +1,4 @@
-package com.example.sumpractbackv1.Parser.ParsEntity;
+package com.example.sumpractbackv1.parser.ParsEntity;
 
 
 import jakarta.xml.bind.annotation.*;

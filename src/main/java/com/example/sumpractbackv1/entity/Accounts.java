@@ -1,6 +1,7 @@
-package com.example.sumpractbackv1.DBEntity;
+package com.example.sumpractbackv1.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class Accounts {
     @Column(name = "account_id")
     private Long accountId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "bic_accounts_id", referencedColumnName = "BIC")
     private BICDirectoryEntry bicAccounts;
@@ -40,8 +42,6 @@ public class Accounts {
 
     @Column(name = "AccountStatus",  length = 5)
     private String accountStatus;
-
-
 
     // Getters and Setters
 }
