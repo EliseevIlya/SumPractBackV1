@@ -1,11 +1,9 @@
-package com.example.sumpractbackv1.Services;
+package com.example.sumpractbackv1.service;
 
-import com.example.sumpractbackv1.DBEntity.ImportData;
-import com.example.sumpractbackv1.DBEntity.TestEn;
-import com.example.sumpractbackv1.Repository.AccountsRepository;
-import com.example.sumpractbackv1.Repository.ImportDataRepository;
-import com.example.sumpractbackv1.Repository.TestRepo;
-import lombok.Setter;
+import com.example.sumpractbackv1.entity.ImportData;
+import com.example.sumpractbackv1.entity.TestEn;
+import com.example.sumpractbackv1.repository.ImportDataRepository;
+import com.example.sumpractbackv1.repository.TestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

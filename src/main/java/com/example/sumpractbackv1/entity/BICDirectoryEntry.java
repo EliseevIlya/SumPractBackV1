@@ -1,5 +1,6 @@
-package com.example.sumpractbackv1.DBEntity;
+package com.example.sumpractbackv1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,12 +22,15 @@ public class BICDirectoryEntry {
     @Column(name = "BIC")
     private int BIC;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bicParticipant", cascade = CascadeType.ALL)
     private Set<ParticipantInfo> participantInfos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bicAccounts", cascade = CascadeType.ALL)
     private Set<Accounts> accounts;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "import_bic_id", referencedColumnName = "import_id")
     private ImportData importDataBic;

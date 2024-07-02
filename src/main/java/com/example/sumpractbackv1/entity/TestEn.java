@@ -1,4 +1,4 @@
-package com.example.sumpractbackv1.DBEntity;
+package com.example.sumpractbackv1.entity;
 
 
 import jakarta.persistence.*;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class TestEn {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private Long accountId;
 

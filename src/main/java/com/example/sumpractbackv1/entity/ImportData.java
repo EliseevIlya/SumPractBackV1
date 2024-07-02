@@ -1,6 +1,7 @@
-package com.example.sumpractbackv1.DBEntity;
+package com.example.sumpractbackv1.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Setter
 public class ImportData {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "import_id")
     private Long importId;
 
@@ -46,6 +47,7 @@ public class ImportData {
     @Column(name = "DirectoryVersion")
     private Integer DirectoryVersion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "importDataBic", cascade = CascadeType.ALL)
     private Set<BICDirectoryEntry> bicDirectoryEntries;
 

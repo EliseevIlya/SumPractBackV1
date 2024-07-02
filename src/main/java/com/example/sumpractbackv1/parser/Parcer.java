@@ -1,6 +1,6 @@
-package com.example.sumpractbackv1.Parser;
+package com.example.sumpractbackv1.parser;
 
-import com.example.sumpractbackv1.Parser.ParsEntity.ED807;
+import com.example.sumpractbackv1.parser.ParsEntity.ED807;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;

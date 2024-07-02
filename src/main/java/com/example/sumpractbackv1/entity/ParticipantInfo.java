@@ -1,6 +1,7 @@
-package com.example.sumpractbackv1.DBEntity;
+package com.example.sumpractbackv1.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class ParticipantInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "participant_id")
     private Long participantId;
+
 
     @ManyToOne
     @JoinColumn(name = "BIC_participant", referencedColumnName = "BIC")
@@ -66,7 +68,6 @@ public class ParticipantInfo {
 
     @Column(name = "ParticipantStatus",  length = 5)
     private String participantStatus;
-
 
     @OneToMany(mappedBy = "participantRstrId", cascade = CascadeType.ALL)
     private Set<RstrList> rstrLists;

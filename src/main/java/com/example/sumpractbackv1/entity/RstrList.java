@@ -1,5 +1,6 @@
-package com.example.sumpractbackv1.DBEntity;
+package com.example.sumpractbackv1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,8 +28,6 @@ public class RstrList {
     @Column(name = "RstrDate")
     @Temporal(TemporalType.DATE)
     private Date rstrDate;
-
-
 
     // Getters and Setters
 }
