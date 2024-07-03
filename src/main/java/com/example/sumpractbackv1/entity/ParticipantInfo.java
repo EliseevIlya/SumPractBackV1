@@ -1,11 +1,11 @@
 package com.example.sumpractbackv1.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.sumpractbackv1.enums.ParticipantStatus;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.*;
 
 import java.util.Date;
 import java.util.Set;
@@ -14,6 +14,11 @@ import java.util.Set;
 @Table(name = "ParticipantInfo")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "participantId")
 public class ParticipantInfo {
 
     @Id
@@ -21,56 +26,70 @@ public class ParticipantInfo {
     @Column(name = "participant_id")
     private Long participantId;
 
-
+    //TODO связи
     @ManyToOne
     @JoinColumn(name = "BIC_participant", referencedColumnName = "BIC")
+    @JsonIdentityReference(alwaysAsId = true)
     private BICDirectoryEntry bicParticipant;
 
-    @Column(name = "NameP" , length = 255)
+    @Column(name = "NameP", length = 160)
     private String nameP;
 
-    @Column(name = "RegN")
+    @Column(name = "EnglName",length = 140)
+    private String englName;
+
+    @Column(name = "RegN",length = 9)
     private String regN;
 
-    @Column(name = "CntrCd",  length = 4)
+    @Column(name = "CntrCd", length = 2)
     private String cntrCd;
 
-    @Column(name = "Rgn")
-    private int rgn;
+    @Column(name = "Rgn", length = 2)
+    private String rgn;
 
-    @Column(name = "Ind")
-    private int ind;
+    @Column(name = "Ind", length = 6)
+    private String ind;
 
-    @Column(name = "Tnp" , length = 1)
+    @Column(name = "Tnp", length = 5)
     private String tnp;
 
-    @Column(name = "Nnp",  length = 50)
+    @Column(name = "Nnp", length = 25)
     private String nnp;
 
-    @Column(name = "Adr",  length = 255)
+    @Column(name = "Adr", length = 160)
     private String adr;
+
+    @Column(name = "PrntBIC",length = 9)
+    private Long prntBIC;
 
     @Column(name = "DateIn_participant")
     @Temporal(TemporalType.DATE)
     private Date dateInParticipant;
 
-    @Column(name = "PtType")
-    private int ptType;
+    @Column(name = "DateOut_participant")
+    @Temporal(TemporalType.DATE)
+    private Date dateOutParticipant;
 
-    @Column(name = "Srvcs")
-    private int srvcs;
+    @Column(name = "PtType",length = 2)
+    private String ptType;
 
-    @Column(name = "XchType")
-    private int xchType;
+    @Column(name = "Srvcs",length = 1)
+    private String srvcs;
 
-    @Column(name = "UID")
+    @Column(name = "XchType",length = 1)
+    private String xchType;
+
+    @Column(name = "UID",length = 10)
     private long uid;
 
-    @Column(name = "ParticipantStatus",  length = 5)
-    private String participantStatus;
+    @Column(name = "ParticipantStatus", length = 4)
+    private ParticipantStatus participantStatus;
+
+    //TODO время создания измения удаления
+    //TODO связи
 
     @OneToMany(mappedBy = "participantRstrId", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<RstrList> rstrLists;
 
-    // Getters and Setters
 }

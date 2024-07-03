@@ -1,10 +1,11 @@
 package com.example.sumpractbackv1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.sumpractbackv1.enums.ChangeType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.*;
 
 import java.util.Set;
 
@@ -12,29 +13,37 @@ import java.util.Set;
 @Table(name = "BICDirectoryEntry", uniqueConstraints = @UniqueConstraint(columnNames = "BIC"))
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "BICDid")
 public class BICDirectoryEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BICD_id")
-    private Long BICDid;
+    private Long bucId;
 
-    @Column(name = "BIC")
-    private int BIC;
+    @Column(name = "BIC",length = 9)
+    private Long bic;
 
-    @JsonIgnore
+    @Column(name = "ChangeType",length = 4)
+    private ChangeType changeType;
+
+    //TODO время создания измения удаления
+    //TODO связи
+
     @OneToMany(mappedBy = "bicParticipant", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<ParticipantInfo> participantInfos;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "bicAccounts", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Accounts> accounts;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "import_bic_id", referencedColumnName = "import_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private ImportData importDataBic;
-
-    // Getters and Setters
 }
-

@@ -1,17 +1,25 @@
 package com.example.sumpractbackv1.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.sumpractbackv1.enums.AccountStatus;
+import com.example.sumpractbackv1.enums.RegulationAccountType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
+
 
 @Entity
 @Table(name = "Accounts")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountId")
 public class Accounts {
 
     @Id
@@ -19,29 +27,34 @@ public class Accounts {
     @Column(name = "account_id")
     private Long accountId;
 
-    @JsonIgnore
+    //TODO связи
     @ManyToOne
     @JoinColumn(name = "bic_accounts_id", referencedColumnName = "BIC")
+    @JsonIdentityReference(alwaysAsId = true)
     private BICDirectoryEntry bicAccounts;
 
-    @Column(name = "Account",  length = 22)
+    @Column(name = "Account", length = 20)
     private String account;
 
-    @Column(name = "RegulationAccountType",  length = 5)
-    private String regulationAccountType;
+    @Column(name = "RegulationAccountType", length = 4)
+    private RegulationAccountType regulationAccountType;
 
-    @Column(name = "CK")
-    private int ck;
+    @Column(name = "CK",length = 2)
+    private String ck;
 
-    @Column(name = "AccountCBRBIC")
-    private int accountCBRBIC;
+    @Column(name = "AccountCBRBIC",length = 9)
+    private Long accountCbrbic;
 
     @Column(name = "DateIn_accounts")
     @Temporal(TemporalType.DATE)
     private Date dateInAccounts;
 
-    @Column(name = "AccountStatus",  length = 5)
-    private String accountStatus;
+    @Column(name = "DateOut_accounts")
+    @Temporal(TemporalType.DATE)
+    private Date dateOutAccounts;
 
-    // Getters and Setters
+    @Column(name = "AccountStatus", length = 4)
+    private AccountStatus accountStatus;
+    //TODO время создания измения удаления
+
 }

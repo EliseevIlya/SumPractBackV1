@@ -1,9 +1,11 @@
 package com.example.sumpractbackv1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.sumpractbackv1.enums.Rstr;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,6 +13,11 @@ import java.util.Date;
 @Table(name = "RstrList")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "rstrId")
 public class RstrList {
 
     @Id
@@ -18,16 +25,19 @@ public class RstrList {
     @Column(name = "rstr_id")
     private Long rstrId;
 
+
+    //TODO связи
     @ManyToOne
     @JoinColumn(name = "participan_rstr_id", referencedColumnName = "participant_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private ParticipantInfo participantRstrId;
 
-    @Column(name = "Rstr",  length = 5)
-    private String rstr;
+    @Column(name = "Rstr", length = 4)
+    private Rstr rstr;
 
     @Column(name = "RstrDate")
     @Temporal(TemporalType.DATE)
     private Date rstrDate;
 
-    // Getters and Setters
+    //TODO время создания измения удаления
 }
