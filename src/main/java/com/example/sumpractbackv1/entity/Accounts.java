@@ -12,14 +12,14 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "Accounts")
+@Table(name = "accounts")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountId")
 public class Accounts {
 
     @Id
@@ -28,33 +28,49 @@ public class Accounts {
     private Long accountId;
 
     //TODO связи
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "bic_accounts_id", referencedColumnName = "BIC")
     @JsonIdentityReference(alwaysAsId = true)
-    private BICDirectoryEntry bicAccounts;
+    private BICDirectoryEntry bicAccounts;*/
 
-    @Column(name = "Account", length = 20)
+    @Column(name = "account", length = 20)
     private String account;
 
-    @Column(name = "RegulationAccountType", length = 4)
+    @Column(name = "regulation_account_type", length = 4)
     private RegulationAccountType regulationAccountType;
 
-    @Column(name = "CK",length = 2)
+    @Column(name = "ck",length = 2)
     private String ck;
 
-    @Column(name = "AccountCBRBIC",length = 9)
+    @Column(name = "account_cbrbic",length = 9)
     private Long accountCbrbic;
 
-    @Column(name = "DateIn_accounts")
+    @Column(name = "date_in_accounts")
     @Temporal(TemporalType.DATE)
     private Date dateInAccounts;
 
-    @Column(name = "DateOut_accounts")
+    @Column(name = "date_out_accounts")
     @Temporal(TemporalType.DATE)
     private Date dateOutAccounts;
 
-    @Column(name = "AccountStatus", length = 4)
+    @Column(name = "dccount_status", length = 4)
     private AccountStatus accountStatus;
-    //TODO время создания измения удаления
 
+    //TODO время создания измения удаления
+    //TODO связи
+    @ManyToOne()
+    @JoinColumn(name = "bic_accounts_id", referencedColumnName = "BICD_id")
+    private BICDirectoryEntry bicAccountsId;
+
+    @Column(name = "creation_time_accounts")
+    @Temporal(TemporalType.DATE)
+    private Date creationTimeAccounts;
+
+    @Column(name = "change_time_accounts")
+    @Temporal(TemporalType.DATE)
+    private Date changeTimeAccounts;
+
+    @Column(name = "delete_time_accounts")
+    @Temporal(TemporalType.DATE)
+    private Date deleteTimeAccounts;
 }

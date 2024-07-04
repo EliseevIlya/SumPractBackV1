@@ -55,7 +55,7 @@ public class XmlToDatabase {
             for (ParsBICDirectoryEntry entry : ed807.getBicDirectoryEntries()) {
                 BICDirectoryEntry bicEntry = new BICDirectoryEntry();
                 bicEntry.setBic((long) entry.getBIC());
-                bicEntry.setImportDataBic(importData);
+                bicEntry.setImportDataBicId(importData);
 
                 try {
                     bicDirectoryEntryRepository.save(bicEntry);
@@ -68,7 +68,7 @@ public class XmlToDatabase {
                 if (entry.getParticipantInfos() != null) {
                     for (ParsParticipantInfo pInfo : entry.getParticipantInfos()) {
                         ParticipantInfo participantInfo = new ParticipantInfo();
-                        participantInfo.setBicParticipant(bicEntry);
+                        participantInfo.setBicParticipantInfoId(bicEntry);
                         participantInfo.setNameP(pInfo.getNameP());
                         participantInfo.setRegN(pInfo.getRegN());
                         participantInfo.setCntrCd(pInfo.getCntrCd());
@@ -94,7 +94,7 @@ public class XmlToDatabase {
                         if (pInfo.getRstrLists() != null) {
                             for (ParsRstrList rstr : pInfo.getRstrLists()) {
                                 RstrList rstrList = new RstrList();
-                                rstrList.setParticipantRstrId(participantInfo);
+                                rstrList.setParticipantInfoRstrListId(participantInfo);
                                 rstrList.setRstr(Rstr.valueOf(rstr.getRstr()));
                                 rstrList.setRstrDate(rstr.getRstrDate());
 
@@ -113,7 +113,7 @@ public class XmlToDatabase {
                 if (entry.getAccounts() != null) {
                     for (ParsAccounts acc : entry.getAccounts()) {
                         Accounts accounts = new Accounts();
-                        accounts.setBicAccounts(bicEntry);
+                        accounts.setBicAccountsId(bicEntry);
                         accounts.setAccount(acc.getAccount());
                         accounts.setRegulationAccountType(RegulationAccountType.valueOf(acc.getRegulationAccountType()));
                         accounts.setCk(String.valueOf(acc.getCk()));

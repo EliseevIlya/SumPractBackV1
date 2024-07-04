@@ -2,26 +2,24 @@ package com.example.sumpractbackv1.entity;
 
 import com.example.sumpractbackv1.enums.CreationReason;
 import com.example.sumpractbackv1.enums.InfoTypeCode;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.Set;
+
 
 @Entity
-@Table(name = "ImportData")
+@Table(name = "import_data")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "importId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "importId")
 public class ImportData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,48 +29,49 @@ public class ImportData {
     @Column(name = "xmlns", length = 255)
     private String xmlns;
 
-    @Column(name = "EDNo",length = 9)
+    @Column(name = "edno",length = 9)
     private Long edno;
 
-    @Column(name = "EDDate")
+    @Column(name = "ed_date")
     private LocalDate edDate;
 
-    @Column(name = "EDAuthor",length = 10)
+    @Column(name = "ed_author",length = 10)
     private Long edAuthor;
 
-    @Column(name = "EDReceiver",length = 10)
+    @Column(name = "ed_receiver",length = 10)
     private Long edReceiver;
 
-    @Column(name = "CreationReason", length = 4)
+    @Column(name = "creation_reason", length = 4)
     private CreationReason creationReason;
 
-    @Column(name = "CreationDateTime")
+    @Column(name = "creation_datec_time")
     private ZonedDateTime creationDateTime;
 
-    @Column(name = "InfoTypeCode", length = 4)
+    @Column(name = "info_type_code", length = 4)
     private InfoTypeCode infoTypeCode;
 
-    @Column(name = "BusinessDay")
+    @Column(name = "business_day")
     private LocalDate businessDay;
 
-    @Column(name = "DirectoryVersion")
+    @Column(name = "directory_version")
     private Integer directoryVersion;
 
     //TODO время создания измения удаления
-    @Column(name = "creation_time")
+    //TODO связь
+    @Column(name = "creation_time_import")
     @Temporal(TemporalType.DATE)
-    private Date creationTime;
+    private Date creationTimeImport;
 
-    @Column(name = "change_time")
+    @Column(name = "change_time_import")
     @Temporal(TemporalType.DATE)
-    private Date changeTime;
+    private Date changeTimeImport;
 
-    @Column(name = "delete_time")
+    @Column(name = "delete_time_import")
     @Temporal(TemporalType.DATE)
-    private Date deleteTime;
+    private Date deleteTimeImport;
 
     //TODO связь
-    @OneToMany(mappedBy = "importDataBic", cascade = CascadeType.MERGE)
+    /*@OneToMany(mappedBy = "importDataBic", cascade = CascadeType.MERGE)
     @JsonIdentityReference(alwaysAsId = true)
-    private Set<BICDirectoryEntry> bicDirectoryEntries;
+    private Set<BICDirectoryEntry> bicDirectoryEntries;*/
 }

@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
-@Table(name = "InitialED")
+@Table(name = "initial_ed")
 @Getter
 @Setter
 @Builder
@@ -20,15 +21,30 @@ public class InitialED {
     @Column(name = "initial_id")
     private Long initialId;
 
-    @Column(name = "EDNo_initial",length = 9)
+    @Column(name = "ed_no_initial",length = 9)
     private Long ednoInitial;
 
-    @Column(name = "EDDate_initial")
+    @Column(name = "ed_date_initial")
     private LocalDate edDateInitial;
 
-    @Column(name = "EDAuthor_initial",length = 10)
+    @Column(name = "ed_author_initial",length = 10)
     private Long edAuthorInitial;
     //TODO время создания измения удаления
     //TODO связи к заголовочному файлу
 
+    @ManyToOne()
+    @JoinColumn(name = "import_data_initial_id", referencedColumnName = "import_id")
+    private ImportData importDataInitialId;
+
+    @Column(name = "creation_time_initial")
+    @Temporal(TemporalType.DATE)
+    private Date creationTimeInitial;
+
+    @Column(name = "change_time_initial")
+    @Temporal(TemporalType.DATE)
+    private Date changeTimeInitial;
+
+    @Column(name = "delete_time_initial")
+    @Temporal(TemporalType.DATE)
+    private Date deleteTimeInitial;
 }

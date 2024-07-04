@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "InitialED")
+@Table(name = "acc_rstr_list")
 @Getter
 @Setter
 @Builder
@@ -17,18 +17,34 @@ public class AccRstrList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "AccRstrList_ig")
+    @Column(name = "acc_rstr_list_id")
     private int accRstrListId;
 
-    @Column(name = "AccRstr",length = 4)
+    @Column(name = "acc_rstr",length = 4)
     private AccRstr accRstr;
 
-    @Column(name = "AccRstrDate")
+    @Column(name = "acc_rstr_date")
     @Temporal(TemporalType.DATE)
     private Date accRstrDate;
 
-    @Column(name = "SuccessorBIC")
+    @Column(name = "successo_bic")
     private Long successorBIC;
-    //TODO связи
+
     //TODO время создания измения удаления
+    //TODO связи
+    @ManyToOne()
+    @JoinColumn(name = "accounts_acc_rstr_list_id", referencedColumnName = "account_id")
+    private Accounts bicAccRstrListId;
+
+    @Column(name = "creation_time_acc_rstr_list")
+    @Temporal(TemporalType.DATE)
+    private Date creationTimeAccRstrList;
+
+    @Column(name = "change_time_acc_rstr_list")
+    @Temporal(TemporalType.DATE)
+    private Date changeTimeAccRstrList;
+
+    @Column(name = "delete_time_acc_rstr_list")
+    @Temporal(TemporalType.DATE)
+    private Date deleteTimeAccRstrList;
 }
