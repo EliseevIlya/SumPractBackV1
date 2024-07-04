@@ -1,40 +1,65 @@
 package com.example.sumpractbackv1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.sumpractbackv1.enums.ChangeType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-
-import java.util.Set;
+import java.util.Date;
 
 @Entity
-@Table(name = "BICDirectoryEntry", uniqueConstraints = @UniqueConstraint(columnNames = "BIC"))
+@Table(name = "BICDirectoryEntry")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "BICDid")
 public class BICDirectoryEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BICD_id")
-    private Long BICDid;
+    @Column(name = "bicd_id")
+    private Long bicId;
 
-    @Column(name = "BIC")
-    private int BIC;
+    @Column(name = "bic",length = 9)
+    private Long bic;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "bicParticipant", cascade = CascadeType.ALL)
+    @Column(name = "change_type",length = 4)
+    private ChangeType changeType;
+
+    //TODO время создания измения удаления
+    //TODO связи
+
+    @ManyToOne()
+    @JoinColumn(name = "import_data_bic_id", referencedColumnName = "import_id")
+    private ImportData importDataBicId;
+
+    @Column(name = "creation_time_bicd")
+    @Temporal(TemporalType.DATE)
+    private Date creationTimeBicd;
+
+    @Column(name = "change_time_bicd")
+    @Temporal(TemporalType.DATE)
+    private Date changeTimeBicd;
+
+    @Column(name = "delete_time_bicd")
+    @Temporal(TemporalType.DATE)
+    private Date deleteTimeBicd;
+
+
+   /* @OneToMany(mappedBy = "bicParticipant", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<ParticipantInfo> participantInfos;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "bicAccounts", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Accounts> accounts;
 
-    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "import_bic_id", referencedColumnName = "import_id")
-    private ImportData importDataBic;
-
-    // Getters and Setters
+    @JsonIdentityReference(alwaysAsId = true)
+    private ImportData importDataBic;*/
 }
-

@@ -1,19 +1,24 @@
 package com.example.sumpractbackv1.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.sumpractbackv1.enums.ParticipantStatus;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.*;
 
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "ParticipantInfo")
+@Table(name = "participant_info")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "participantId")
 public class ParticipantInfo {
 
     @Id
@@ -21,56 +26,86 @@ public class ParticipantInfo {
     @Column(name = "participant_id")
     private Long participantId;
 
-
-    @ManyToOne
+    //TODO связи
+   /* @ManyToOne
     @JoinColumn(name = "BIC_participant", referencedColumnName = "BIC")
-    private BICDirectoryEntry bicParticipant;
+    @JsonIdentityReference(alwaysAsId = true)
+    private BICDirectoryEntry bicParticipant;*/
 
-    @Column(name = "NameP" , length = 255)
+    @Column(name = "name_p", length = 160)
     private String nameP;
 
-    @Column(name = "RegN")
+    @Column(name = "engl_name",length = 140)
+    private String englName;
+
+    @Column(name = "reg_n",length = 9)
     private String regN;
 
-    @Column(name = "CntrCd",  length = 4)
+    @Column(name = "cntr_cd", length = 2)
     private String cntrCd;
 
-    @Column(name = "Rgn")
-    private int rgn;
+    @Column(name = "rgn", length = 2)
+    private String rgn;
 
-    @Column(name = "Ind")
-    private int ind;
+    @Column(name = "ind", length = 6)
+    private String ind;
 
-    @Column(name = "Tnp" , length = 1)
+    @Column(name = "tnp", length = 5)
     private String tnp;
 
-    @Column(name = "Nnp",  length = 50)
+    @Column(name = "nnp", length = 25)
     private String nnp;
 
-    @Column(name = "Adr",  length = 255)
+    @Column(name = "adr", length = 160)
     private String adr;
 
-    @Column(name = "DateIn_participant")
+    @Column(name = "prnt_bic",length = 9)
+    private Long prntBIC;
+
+    @Column(name = "date_in_participant")
     @Temporal(TemporalType.DATE)
     private Date dateInParticipant;
 
-    @Column(name = "PtType")
-    private int ptType;
+    @Column(name = "date_out_participant")
+    @Temporal(TemporalType.DATE)
+    private Date dateOutParticipant;
 
-    @Column(name = "Srvcs")
-    private int srvcs;
+    @Column(name = "pt_type",length = 2)
+    private String ptType;
 
-    @Column(name = "XchType")
-    private int xchType;
+    @Column(name = "srvcs",length = 1)
+    private String srvcs;
 
-    @Column(name = "UID")
+    @Column(name = "xch_type",length = 1)
+    private String xchType;
+
+    @Column(name = "uid",length = 10)
     private long uid;
 
-    @Column(name = "ParticipantStatus",  length = 5)
-    private String participantStatus;
+    @Column(name = "participant_status", length = 4)
+    private ParticipantStatus participantStatus;
 
-    @OneToMany(mappedBy = "participantRstrId", cascade = CascadeType.ALL)
-    private Set<RstrList> rstrLists;
+    //TODO время создания измения удаления
+    //TODO связи
 
-    // Getters and Setters
+    @ManyToOne()
+    @JoinColumn(name = "bic_participant_info_id", referencedColumnName = "bicd_id")
+    private BICDirectoryEntry bicParticipantInfoId;
+
+    @Column(name = "creation_time_participant_info")
+    @Temporal(TemporalType.DATE)
+    private Date creationTimeParticipantInfo;
+
+    @Column(name = "change_time_participant_info")
+    @Temporal(TemporalType.DATE)
+    private Date changeTimeParticipantInfo;
+
+    @Column(name = "delete_time_participant_info")
+    @Temporal(TemporalType.DATE)
+    private Date deleteTimeParticipantInfo;
+
+    /*@OneToMany(mappedBy = "participantRstrId", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
+    private Set<RstrList> rstrLists;*/
+
 }

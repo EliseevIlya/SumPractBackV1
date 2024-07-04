@@ -17,7 +17,7 @@ public class Parcer {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             // Парсинг XML файла
-            File xmlFile = new File("D:\\file.xml");
+            File xmlFile = new File("D:\\file1.xml");
             ed807 = (ED807) unmarshaller.unmarshal(xmlFile);
         } catch (JAXBException e) {
             throw new RuntimeException(e);

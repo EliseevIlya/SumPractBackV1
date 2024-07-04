@@ -1,16 +1,23 @@
 package com.example.sumpractbackv1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.sumpractbackv1.enums.Rstr;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "RstrList")
+@Table(name = "rstr_list")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "rstrId")
 public class RstrList {
 
     @Id
@@ -18,16 +25,36 @@ public class RstrList {
     @Column(name = "rstr_id")
     private Long rstrId;
 
-    @ManyToOne
+
+    //TODO связи
+    /*@ManyToOne
     @JoinColumn(name = "participan_rstr_id", referencedColumnName = "participant_id")
-    private ParticipantInfo participantRstrId;
+    @JsonIdentityReference(alwaysAsId = true)
+    private ParticipantInfo participantRstrId;*/
 
-    @Column(name = "Rstr",  length = 5)
-    private String rstr;
+    @Column(name = "rstr", length = 4)
+    private Rstr rstr;
 
-    @Column(name = "RstrDate")
+    @Column(name = "rstr_date")
     @Temporal(TemporalType.DATE)
     private Date rstrDate;
 
-    // Getters and Setters
+    //TODO время создания измения удаления
+    //TODO связи
+
+    @ManyToOne()
+    @JoinColumn(name = "participant_info_rstr_list_id", referencedColumnName = "participant_id")
+    private ParticipantInfo participantInfoRstrListId;
+
+    @Column(name = "creation_time_rstr_list")
+    @Temporal(TemporalType.DATE)
+    private Date creationTimeRstrList;
+
+    @Column(name = "change_time_rstr_list")
+    @Temporal(TemporalType.DATE)
+    private Date changeTimeRstrList;
+
+    @Column(name = "delete_time_rstr_list")
+    @Temporal(TemporalType.DATE)
+    private Date deleteTimeRstrList;
 }
