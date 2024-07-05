@@ -3,6 +3,7 @@ package com.example.sumpractbackv1.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -38,14 +39,14 @@ public class PartInfo {
 
     @Column(name = "creation_time_part_info")
     @Temporal(TemporalType.DATE)
-    private Date creationTimePartInfo;
+    private LocalDate creationTimePartInfo;
 
     @Column(name = "change_time_part_info")
     @Temporal(TemporalType.DATE)
-    private Date changeTimePartInfo;
+    private LocalDate changeTimePartInfo;
 
     @Column(name = "delete_time_part_info")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimePartInfo;
+    private LocalDate deleteTimePartInfo;
 
 }

@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.parser.ParsEntity;
 
+import com.example.sumpractbackv1.enums.ParticipantStatus;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
@@ -16,6 +17,9 @@ public class ParsParticipantInfo {
     @XmlAttribute(name = "NameP")
     private String nameP;
 
+    @XmlAttribute(name = "EnglName")
+    private String engName;
+
     @XmlAttribute(name = "RegN")
     private String regN;
 
@@ -23,10 +27,10 @@ public class ParsParticipantInfo {
     private String cntrCd;
 
     @XmlAttribute(name = "Rgn")
-    private int rgn;
+    private String rgn;
 
     @XmlAttribute(name = "Ind")
-    private int ind;
+    private String ind;
 
     @XmlAttribute(name = "Tnp")
     private String tnp;
@@ -37,27 +41,32 @@ public class ParsParticipantInfo {
     @XmlAttribute(name = "Adr")
     private String adr;
 
+    @XmlAttribute(name = "PrntBIC")
+    private Long prntBIC;
+
     @XmlAttribute(name = "DateIn")
-    @Temporal(TemporalType.DATE)
-    private Date dateIn;
+    private String dateIn;
+
+    @XmlAttribute(name = "DateOut")
+    private String dateOut;
 
     @XmlAttribute(name = "PtType")
-    private int ptType;
+    private String ptType;
 
     @XmlAttribute(name = "Srvcs")
-    private int srvcs;
+    private String srvcs;
 
     @XmlAttribute(name = "XchType")
-    private int xchType;
+    private String xchType;
 
     @XmlAttribute(name = "UID")
-    private long uid;
+    private Long uid;
 
     @XmlAttribute(name = "ParticipantStatus")
-    private String participantStatus;
+    private ParticipantStatus participantStatus;
 
     @XmlElement(name = "RstrList",namespace = "urn:cbr-ru:ed:v2.0")
-    private List<ParsRstrList> rstrLists;
+    private List<ParsRstrList> parsRstrList;
 
     // Getters and Setters
 }
