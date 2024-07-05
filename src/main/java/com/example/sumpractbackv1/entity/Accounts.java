@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.entity;
 
+import com.example.sumpractbackv1.enums.AccRstr;
 import com.example.sumpractbackv1.enums.AccountStatus;
 import com.example.sumpractbackv1.enums.RegulationAccountType;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -8,7 +9,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -47,11 +50,11 @@ public class Accounts {
 
     @Column(name = "date_in_accounts")
     @Temporal(TemporalType.DATE)
-    private Date dateInAccounts;
+    private LocalDate dateInAccounts;
 
     @Column(name = "date_out_accounts")
     @Temporal(TemporalType.DATE)
-    private Date dateOutAccounts;
+    private LocalDate dateOutAccounts;
 
     @Column(name = "dccount_status", length = 4)
     private AccountStatus accountStatus;
@@ -62,15 +65,18 @@ public class Accounts {
     @JoinColumn(name = "bic_accounts_id", referencedColumnName = "BICD_id")
     private BICDirectoryEntry bicAccountsId;
 
+    @OneToMany(mappedBy = "bicAccRstrListId", cascade = CascadeType.MERGE)
+    private List<AccRstrList> accRstrLists;
+
     @Column(name = "creation_time_accounts")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeAccounts;
+    private LocalDate creationTimeAccounts;
 
     @Column(name = "change_time_accounts")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeAccounts;
+    private LocalDate changeTimeAccounts;
 
     @Column(name = "delete_time_accounts")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeAccounts;
+    private LocalDate deleteTimeAccounts;
 }

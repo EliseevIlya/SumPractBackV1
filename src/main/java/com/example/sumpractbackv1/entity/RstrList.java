@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -25,7 +26,6 @@ public class RstrList {
     @Column(name = "rstr_id")
     private Long rstrId;
 
-
     //TODO связи
     /*@ManyToOne
     @JoinColumn(name = "participan_rstr_id", referencedColumnName = "participant_id")
@@ -37,7 +37,7 @@ public class RstrList {
 
     @Column(name = "rstr_date")
     @Temporal(TemporalType.DATE)
-    private Date rstrDate;
+    private LocalDate rstrDate;
 
     //TODO время создания измения удаления
     //TODO связи
@@ -48,13 +48,13 @@ public class RstrList {
 
     @Column(name = "creation_time_rstr_list")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeRstrList;
+    private LocalDate creationTimeRstrList;
 
     @Column(name = "change_time_rstr_list")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeRstrList;
+    private LocalDate changeTimeRstrList;
 
     @Column(name = "delete_time_rstr_list")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeRstrList;
+    private LocalDate deleteTimeRstrList;
 }

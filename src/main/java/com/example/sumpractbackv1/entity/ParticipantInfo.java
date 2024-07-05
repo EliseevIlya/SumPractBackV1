@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -64,11 +66,11 @@ public class ParticipantInfo {
 
     @Column(name = "date_in_participant")
     @Temporal(TemporalType.DATE)
-    private Date dateInParticipant;
+    private LocalDate dateInParticipant;
 
     @Column(name = "date_out_participant")
     @Temporal(TemporalType.DATE)
-    private Date dateOutParticipant;
+    private LocalDate dateOutParticipant;
 
     @Column(name = "pt_type",length = 2)
     private String ptType;
@@ -80,7 +82,7 @@ public class ParticipantInfo {
     private String xchType;
 
     @Column(name = "uid",length = 10)
-    private long uid;
+    private Long uid;
 
     @Column(name = "participant_status", length = 4)
     private ParticipantStatus participantStatus;
@@ -92,17 +94,20 @@ public class ParticipantInfo {
     @JoinColumn(name = "bic_participant_info_id", referencedColumnName = "bicd_id")
     private BICDirectoryEntry bicParticipantInfoId;
 
+    @OneToMany(mappedBy = "participantInfoRstrListId", cascade = CascadeType.MERGE)
+    private List<RstrList>  rstrLists;
+
     @Column(name = "creation_time_participant_info")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeParticipantInfo;
+    private LocalDate creationTimeParticipantInfo;
 
     @Column(name = "change_time_participant_info")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeParticipantInfo;
+    private LocalDate changeTimeParticipantInfo;
 
     @Column(name = "delete_time_participant_info")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeParticipantInfo;
+    private LocalDate deleteTimeParticipantInfo;
 
     /*@OneToMany(mappedBy = "participantRstrId", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)

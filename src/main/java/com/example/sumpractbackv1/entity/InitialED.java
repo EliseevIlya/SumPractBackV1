@@ -38,13 +38,13 @@ public class InitialED {
 
     @Column(name = "creation_time_initial")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeInitial;
+    private LocalDate creationTimeInitial;
 
     @Column(name = "change_time_initial")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeInitial;
+    private LocalDate changeTimeInitial;
 
     @Column(name = "delete_time_initial")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeInitial;
+    private LocalDate deleteTimeInitial;
 }

@@ -3,6 +3,8 @@ package com.example.sumpractbackv1.entity;
 import com.example.sumpractbackv1.enums.AccRstr;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,14 +20,14 @@ public class AccRstrList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "acc_rstr_list_id")
-    private int accRstrListId;
+    private Long accRstrListId;
 
     @Column(name = "acc_rstr",length = 4)
     private AccRstr accRstr;
 
     @Column(name = "acc_rstr_date")
     @Temporal(TemporalType.DATE)
-    private Date accRstrDate;
+    private LocalDate accRstrDate;
 
     @Column(name = "successo_bic")
     private Long successorBIC;
@@ -38,13 +40,13 @@ public class AccRstrList {
 
     @Column(name = "creation_time_acc_rstr_list")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeAccRstrList;
+    private LocalDate creationTimeAccRstrList;
 
     @Column(name = "change_time_acc_rstr_list")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeAccRstrList;
+    private LocalDate changeTimeAccRstrList;
 
     @Column(name = "delete_time_acc_rstr_list")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeAccRstrList;
+    private LocalDate deleteTimeAccRstrList;
 }

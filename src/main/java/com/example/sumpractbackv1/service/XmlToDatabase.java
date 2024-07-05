@@ -1,13 +1,13 @@
 package com.example.sumpractbackv1.service;
 
 import com.example.sumpractbackv1.entity.*;
-import com.example.sumpractbackv1.enums.*;
 import com.example.sumpractbackv1.parser.Parcer;
 import com.example.sumpractbackv1.parser.ParsEntity.*;
 import com.example.sumpractbackv1.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.*;
+
 
 @Service
 @RequiredArgsConstructor
@@ -23,110 +23,219 @@ public class XmlToDatabase {
     private final ParticipantInfoRepository participantInfoRepository;
     //@Autowired
     private final RstrListRepository rstrListRepository;
+    private final AccRstrListRepository accRstrListRepository;
+    private final InitialEdRepository initialEdRepository;
+    private final PartInfoRepository partInfoRepository;
+    private final SwbicsRepository swbicsRepository;
 
 
     public void insert() {
         try {
-            ED807 ed807;
+            ParsImportFile parsImportFile;
             Parcer parcer = new Parcer();
-            ed807 = parcer.returnParc();
+            parsImportFile = parcer.returnParc();
 
             //TODO переделать все под Build или дополнить парсер
 
             // Сохранение данных в базу данных
-            ImportData importData = new ImportData();
+            /*ImportData importData = new ImportData();
             importData.setXmlns("urn:cbr-ru:ed:v2.0");
-            importData.setEdno(ed807.getEDNo());
-            importData.setEdDate(LocalDate.parse(ed807.getEDDate()));
-            importData.setEdAuthor(Long.valueOf(ed807.getEDAuthor()));
-            importData.setCreationReason(CreationReason.valueOf(ed807.getCreationReason()));
-            importData.setCreationDateTime(ZonedDateTime.parse(ed807.getCreationDateTime()));
-            importData.setInfoTypeCode(InfoTypeCode.valueOf(ed807.getInfoTypeCode()));
-            importData.setBusinessDay(LocalDate.parse(ed807.getBusinessDay()));
-            importData.setDirectoryVersion(ed807.getDirectoryVersion());
+            importData.setEdno(parsImportFile.getEdno());
+            importData.setEdDate(parsImportFile.getEdDate());
+            importData.setEdAuthor(Long.valueOf(parsImportFile.getEdAuthor()));
+            importData.setCreationReason(parsImportFile.getCreationReason());
+            importData.setCreationDateTime(parsImportFile.getCreationDateTime());
+            importData.setInfoTypeCode(parsImportFile.getInfoTypeCode());
+            importData.setBusinessDay(parsImportFile.getBusinessDay());
+            importData.setDirectoryVersion(parsImportFile.getDirectoryVersion());*/
 
-            try {
-                importDataRepository.save(importData);
-            } catch (Exception e) {
-                // Log and continue
-                System.err.println("Duplicate ImportData: " + e.getMessage());
-            }
+            if (parsImportFile != null) {
+                ImportData importData = ImportData.builder()
+                        .xmlns("urn:cbr-ru:ed:v2.0")
+                        .edno(parsImportFile.getEdno())
+                        .edDate(parsImportFile.getEdDate() != null ? LocalDate.parse(parsImportFile.getEdDate()) : null)
+                        .edAuthor(parsImportFile.getEdAuthor())
+                        .edReceiver(parsImportFile.getEdReceiver())
+                        .creationReason(parsImportFile.getCreationReason())
+                        .creationDateTime(parsImportFile.getCreationDateTime() != null ? ZonedDateTime.parse(parsImportFile.getCreationDateTime()) : null)
+                        .infoTypeCode(parsImportFile.getInfoTypeCode())
+                        .businessDay(parsImportFile.getBusinessDay() != null ? LocalDate.parse(parsImportFile.getBusinessDay()) : null)
+                        .directoryVersion(parsImportFile.getDirectoryVersion())
+                        .creationTimeImport(LocalDate.now())
+                        .build();
 
-            for (ParsBICDirectoryEntry entry : ed807.getBicDirectoryEntries()) {
-                BICDirectoryEntry bicEntry = new BICDirectoryEntry();
-                bicEntry.setBic((long) entry.getBIC());
-                bicEntry.setImportDataBicId(importData);
 
                 try {
-                    bicDirectoryEntryRepository.save(bicEntry);
+                    importDataRepository.save(importData);
                 } catch (Exception e) {
                     // Log and continue
-                    System.err.println("Duplicate BICDirectoryEntry: " + e.getMessage());
-                    continue; // Skip to next entry if this one fails
+                    System.err.println("Error in ImportData: " + e.getMessage());
                 }
+            }
 
-                if (entry.getParticipantInfos() != null) {
-                    for (ParsParticipantInfo pInfo : entry.getParticipantInfos()) {
-                        ParticipantInfo participantInfo = new ParticipantInfo();
-                        participantInfo.setBicParticipantInfoId(bicEntry);
-                        participantInfo.setNameP(pInfo.getNameP());
-                        participantInfo.setRegN(pInfo.getRegN());
-                        participantInfo.setCntrCd(pInfo.getCntrCd());
-                        participantInfo.setRgn(String.valueOf(pInfo.getRgn()));
-                        participantInfo.setInd(String.valueOf(pInfo.getInd()));
-                        participantInfo.setNnp(pInfo.getNnp());
-                        participantInfo.setAdr(pInfo.getAdr());
-                        participantInfo.setDateInParticipant(pInfo.getDateIn());
-                        participantInfo.setPtType(String.valueOf(pInfo.getPtType()));
-                        participantInfo.setSrvcs(String.valueOf(pInfo.getSrvcs()));
-                        participantInfo.setXchType(String.valueOf(pInfo.getXchType()));
-                        participantInfo.setUid(pInfo.getUid());
-                        participantInfo.setParticipantStatus(ParticipantStatus.valueOf(pInfo.getParticipantStatus()));
+            if (parsImportFile.getParsPartInfo() != null){
+                for (ParsPartInfo partInfoFile : parsImportFile.getParsPartInfo()){
 
-                        try {
-                            participantInfoRepository.save(participantInfo);
-                        } catch (Exception e) {
-                            // Log and continue
-                            System.err.println("Duplicate ParticipantInfo: " + e.getMessage());
-                            continue; // Skip to next participant info if this one fails
-                        }
+                    PartInfo partInfo =  PartInfo.builder()
+                            .partNo(partInfoFile.getPartNo())
+                            .partQuantity(partInfoFile.getPartQuantity())
+                            .partAggregateID(partInfoFile.getPartAggregateID())
+                            .creationTimePartInfo(LocalDate.now())
+                            .build();
 
-                        if (pInfo.getRstrLists() != null) {
-                            for (ParsRstrList rstr : pInfo.getRstrLists()) {
-                                RstrList rstrList = new RstrList();
-                                rstrList.setParticipantInfoRstrListId(participantInfo);
-                                rstrList.setRstr(Rstr.valueOf(rstr.getRstr()));
-                                rstrList.setRstrDate(rstr.getRstrDate());
+                    try {
+                        partInfoRepository.save(partInfo);
+                    } catch (Exception e) {
+                        // Log and continue
+                        System.err.println("Error in PartInfo: " + e.getMessage());
+                        continue; // Skip to next entry if this one fails
+                    }
 
-                                try {
-                                    rstrListRepository.save(rstrList);
-                                } catch (Exception e) {
-                                    // Log and continue
-                                    System.err.println("Duplicate RstrList: " + e.getMessage());
-                                    continue; // Skip to next restriction list if this one fails
+                }
+            }
+
+            if (parsImportFile.getParsInitialED() != null){
+                for (ParsInitialED parsInitialED : parsImportFile.getParsInitialED()){
+                    InitialED initialED = InitialED.builder()
+                            .ednoInitial(parsInitialED.getEdno())
+                            .edDateInitial(parsInitialED.getEdDate() != null ? LocalDate.parse(parsInitialED.getEdDate()) : null)
+                            .edAuthorInitial(parsInitialED.getEdAuthor())
+                            .build();
+
+                    try {
+                        initialEdRepository.save(initialED);
+                    } catch (Exception e) {
+                        // Log and continue
+                        System.err.println("Error in InitialEd: " + e.getMessage());
+                        continue; // Skip to next entry if this one fails
+                    }
+                }
+            }
+
+            if (parsImportFile.getParsBICDirectoryEntries() != null){
+                for (ParsBICDirectoryEntry entry : parsImportFile.getParsBICDirectoryEntries()) {
+                    BICDirectoryEntry bicEntry =  BICDirectoryEntry.builder()
+                            .bic(entry.getBic())
+                            .changeType(entry.getChangeType())
+                            .creationTimeBicd(LocalDate.now())
+                            .build();
+                    try {
+                        bicDirectoryEntryRepository.save(bicEntry);
+                    } catch (Exception e) {
+                        // Log and continue
+                        System.err.println("Error in BicDirectoryEntry: " + e.getMessage());
+                        continue; // Skip to next entry if this one fails
+                    }
+
+                    if (entry.getParsParticipantInfos() != null) {
+                        for (ParsParticipantInfo pInfo : entry.getParsParticipantInfos()) {
+                            ParticipantInfo participantInfo =  ParticipantInfo.builder()
+                                    .nameP(pInfo.getNameP())
+                                    .englName(pInfo.getEngName())
+                                    .regN(pInfo.getRegN())
+                                    .cntrCd(pInfo.getCntrCd())
+                                    .rgn(pInfo.getRgn())
+                                    .ind(pInfo.getInd())
+                                    .tnp(pInfo.getTnp())
+                                    .nnp(pInfo.getNnp())
+                                    .adr(pInfo.getAdr())
+                                    .prntBIC(pInfo.getPrntBIC())
+                                    .dateInParticipant(pInfo.getDateIn() != null ? LocalDate.parse(pInfo.getDateIn()) : null)
+                                    .dateOutParticipant(pInfo.getDateOut() != null ? LocalDate.parse(pInfo.getDateOut()) : null)
+                                    .ptType(pInfo.getPtType())
+                                    .srvcs(pInfo.getSrvcs())
+                                    .xchType(pInfo.getXchType())
+                                    .uid(pInfo.getUid())
+                                    .participantStatus(pInfo.getParticipantStatus())
+                                    .creationTimeParticipantInfo(LocalDate.now())
+                                    .build();
+
+                            try {
+                                participantInfoRepository.save(participantInfo);
+                            } catch (Exception e) {
+                                // Log and continue
+                                System.err.println("Error in ParticipantInfo: " + e.getMessage());
+                                continue; // Skip to next participant info if this one fails
+                            }
+
+                            if (pInfo.getParsRstrList() != null) {
+                                for (ParsRstrList parsRstrList : pInfo.getParsRstrList()) {
+                                    RstrList rstrList =  RstrList.builder()
+                                            .rstr(parsRstrList.getRstr())
+                                            .rstrDate(parsRstrList.getRstrDate() != null ? LocalDate.parse(parsRstrList.getRstrDate()) : null)
+                                            .creationTimeRstrList(LocalDate.now())
+                                            .build();
+
+                                    try {
+                                        rstrListRepository.save(rstrList);
+                                    } catch (Exception e) {
+                                        // Log and continue
+                                        System.err.println("Error in RstrList: " + e.getMessage());
+                                        continue; // Skip to next restriction list if this one fails
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if (entry.getAccounts() != null) {
-                    for (ParsAccounts acc : entry.getAccounts()) {
-                        Accounts accounts = new Accounts();
-                        accounts.setBicAccountsId(bicEntry);
-                        accounts.setAccount(acc.getAccount());
-                        accounts.setRegulationAccountType(RegulationAccountType.valueOf(acc.getRegulationAccountType()));
-                        accounts.setCk(String.valueOf(acc.getCk()));
-                        accounts.setAccountCbrbic((long) acc.getAccountCBRBIC());
-                        accounts.setDateInAccounts(acc.getDateIn());
-                        accounts.setAccountStatus(AccountStatus.valueOf(acc.getAccountStatus()));
+                    if (entry.getParsSwbics() != null) {
+                        for (ParsSwbics parsSwbics : entry.getParsSwbics()) {
+                            Swbics swbics = Swbics.builder()
+                                    .swbic(parsSwbics.getSwbic())
+                                    .defaultSwbic(parsSwbics.getDefaultSWBIC())
+                                    .creationTimeSwibcs(LocalDate.now())
+                                    .build();
 
-                        try {
-                            accountsRepository.save(accounts);
-                        } catch (Exception e) {
-                            // Log and continue
-                            System.err.println("Duplicate Accounts: " + e.getMessage());
-                            continue; // Skip to next account if this one fails
+                            try {
+                                swbicsRepository.save(swbics);
+                            } catch (Exception e) {
+                                // Log and continue
+                                System.err.println("Error in RstrList: " + e.getMessage());
+                                continue; // Skip to next restriction list if this one fails
+                            }
+
+                        }
+                    }
+
+                    if (entry.getParsAccounts() != null) {
+                        for (ParsAccounts parsAccounts : entry.getParsAccounts()) {
+                            Accounts accounts =  Accounts.builder()
+                                    .account(parsAccounts.getAccount())
+                                    .regulationAccountType(parsAccounts.getRegulationAccountType())
+                                    .ck(parsAccounts.getCk())
+                                    .accountCbrbic(parsAccounts.getAccountCBRBIC())
+                                    .dateInAccounts(parsAccounts.getDateIn() != null ?   LocalDate.parse(parsAccounts.getDateIn()) : null)
+                                    .dateOutAccounts(parsAccounts.getDateOut() != null ? LocalDate.parse(parsAccounts.getDateOut()) : null)
+                                    .accountStatus(parsAccounts.getAccountStatus())
+                                    .creationTimeAccounts(LocalDate.now())
+                                    .build();
+
+                            try {
+                                accountsRepository.save(accounts);
+                            } catch (Exception e) {
+                                // Log and continue
+                                System.err.println("Duplicate Accounts: " + e.getMessage());
+                                continue; // Skip to next account if this one fails
+                            }
+
+                            if (parsAccounts.getParsAccRstrList() != null){
+                                for (ParsAccRstrList parsAccRstrList : parsAccounts.getParsAccRstrList()) {
+                                    AccRstrList accRstrList = AccRstrList.builder()
+                                            .accRstr(parsAccRstrList.getAccRstr())
+                                            .accRstrDate(parsAccRstrList.getAccRstrDate() != null ? LocalDate.parse(parsAccRstrList.getAccRstrDate()) : null)
+                                            .successorBIC(parsAccRstrList.getSuccessorBIC())
+                                            .creationTimeAccRstrList(LocalDate.now())
+                                            .build();
+
+                                    try {
+                                        accRstrListRepository.save(accRstrList);
+                                    } catch (Exception e) {
+                                        // Log and continue
+                                        System.err.println("Duplicate Accounts: " + e.getMessage());
+                                        continue; // Skip to next account if this one fails
+                                    }
+                                }
+                            }
                         }
                     }
                 }

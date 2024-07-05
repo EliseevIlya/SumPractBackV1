@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "BICDirectoryEntry")
@@ -39,16 +41,24 @@ public class BICDirectoryEntry {
 
     @Column(name = "creation_time_bicd")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeBicd;
+    private LocalDate creationTimeBicd;
 
     @Column(name = "change_time_bicd")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeBicd;
+    private LocalDate changeTimeBicd;
 
     @Column(name = "delete_time_bicd")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeBicd;
+    private LocalDate deleteTimeBicd;
 
+    @OneToMany(mappedBy = "bicParticipantInfoId",cascade = CascadeType.MERGE)
+    private List<ParticipantInfo> participantInfoList;
+
+    @OneToMany(mappedBy = "bicSwibcsId",cascade = CascadeType.MERGE)
+    private List<Swbics> swbicsList;
+
+    @OneToMany(mappedBy = "bicAccountsId", cascade = CascadeType.MERGE)
+    private List<Accounts> accountsList;
 
    /* @OneToMany(mappedBy = "bicParticipant", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
