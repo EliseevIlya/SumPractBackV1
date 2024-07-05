@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.parser.ParsEntity;
 
+import com.example.sumpractbackv1.enums.Rstr;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
@@ -13,11 +14,11 @@ import java.util.Date;
 public class ParsRstrList {
 
     @XmlAttribute(name = "Rstr")
-    private String rstr;
+    private Rstr rstr;
 
     @XmlAttribute(name = "RstrDate")
     @Temporal(TemporalType.DATE)
-    private Date rstrDate;
+    private String rstrDate;
 
     // Getters and Setters
 }

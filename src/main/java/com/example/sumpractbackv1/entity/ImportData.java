@@ -9,6 +9,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -44,7 +45,7 @@ public class ImportData {
     @Column(name = "creation_reason", length = 4)
     private CreationReason creationReason;
 
-    @Column(name = "creation_datec_time")
+    @Column(name = "creation_date_time")
     private ZonedDateTime creationDateTime;
 
     @Column(name = "info_type_code", length = 4)
@@ -60,15 +61,24 @@ public class ImportData {
     //TODO связь
     @Column(name = "creation_time_import")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeImport;
+    private LocalDate creationTimeImport;
 
     @Column(name = "change_time_import")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeImport;
+    private LocalDate changeTimeImport;
 
     @Column(name = "delete_time_import")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeImport;
+    private LocalDate deleteTimeImport;
+
+    @OneToMany(mappedBy = "importDataPartInfoId",cascade = CascadeType.MERGE)
+    private List<PartInfo> partInfoList;
+
+    @OneToMany(mappedBy = "importDataInitialId", cascade = CascadeType.MERGE)
+    private List<InitialED> initialEDList;
+
+    @OneToMany(mappedBy = "importDataBicId", cascade = CascadeType.MERGE)
+    private List<BICDirectoryEntry> bicDirectoryEntryList;
 
     //TODO связь
     /*@OneToMany(mappedBy = "importDataBic", cascade = CascadeType.MERGE)

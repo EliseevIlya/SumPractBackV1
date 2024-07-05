@@ -1,11 +1,14 @@
 package com.example.sumpractbackv1.parser.ParsEntity;
 
+import com.example.sumpractbackv1.enums.AccountStatus;
+import com.example.sumpractbackv1.enums.RegulationAccountType;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,20 +19,24 @@ public class ParsAccounts {
     private String account;
 
     @XmlAttribute(name = "RegulationAccountType")
-    private String regulationAccountType;
+    private RegulationAccountType regulationAccountType;
 
     @XmlAttribute(name = "CK")
-    private int ck;
+    private String ck;
 
     @XmlAttribute(name = "AccountCBRBIC")
-    private int accountCBRBIC;
+    private Long accountCBRBIC;
 
     @XmlAttribute(name = "DateIn")
-    @Temporal(TemporalType.DATE)
-    private Date dateIn;
+    private String dateIn;
+
+    @XmlAttribute(name = "DateOut")
+    private String dateOut;
 
     @XmlAttribute(name = "AccountStatus")
-    private String accountStatus;
+    private AccountStatus accountStatus;
 
+    @XmlElement(name = "AccRstrList",namespace = "urn:cbr-ru:ed:v2.0")
+    private List<ParsAccRstrList> parsAccRstrList;
     // Getters and Setters
 }

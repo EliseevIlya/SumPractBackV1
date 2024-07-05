@@ -3,6 +3,7 @@ package com.example.sumpractbackv1.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -34,13 +35,13 @@ public class Swbics {
 
     @Column(name = "creation_time_swibcs")
     @Temporal(TemporalType.DATE)
-    private Date creationTimeSwibcs;
+    private LocalDate creationTimeSwibcs;
 
     @Column(name = "change_time_swibcs")
     @Temporal(TemporalType.DATE)
-    private Date changeTimeSwibcs;
+    private LocalDate changeTimeSwibcs;
 
     @Column(name = "delete_time_swibcs")
     @Temporal(TemporalType.DATE)
-    private Date deleteTimeSwibcs;
+    private LocalDate deleteTimeSwibcs;
 }
