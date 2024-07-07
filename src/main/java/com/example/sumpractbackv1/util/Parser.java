@@ -8,7 +8,7 @@ import java.io.File;
 
 import com.example.sumpractbackv1.model.parser.ParsImportFile;
 
-public class Parcer {
+public class Parser {
 
     public ParsImportFile returnParc() {
         ParsImportFile parsImportFile;
