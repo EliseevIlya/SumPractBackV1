@@ -1,9 +1,10 @@
 package com.example.sumpractbackv1.service;
 
-import com.example.sumpractbackv1.entity.*;
-import com.example.sumpractbackv1.parser.Parcer;
-import com.example.sumpractbackv1.parser.ParsEntity.*;
+import com.example.sumpractbackv1.model.entity.*;
+import com.example.sumpractbackv1.model.parser.*;
 import com.example.sumpractbackv1.repository.*;
+import com.example.sumpractbackv1.util.Parser;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.*;
@@ -32,8 +33,8 @@ public class XmlToDatabase {
     public void insert() {
         try {
             ParsImportFile parsImportFile;
-            Parcer parcer = new Parcer();
-            parsImportFile = parcer.returnParc();
+            Parser parser = new Parser();
+            parsImportFile = parser.returnParc();
 
             //TODO переделать все под Build или дополнить парсер
 
