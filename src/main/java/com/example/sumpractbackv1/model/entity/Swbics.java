@@ -1,4 +1,4 @@
-package com.example.sumpractbackv1.entity;
+package com.example.sumpractbackv1.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

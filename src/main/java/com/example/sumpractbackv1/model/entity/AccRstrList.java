@@ -1,11 +1,12 @@
-package com.example.sumpractbackv1.entity;
+package com.example.sumpractbackv1.model.entity;
 
-import com.example.sumpractbackv1.enums.AccRstr;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+
+import com.example.sumpractbackv1.model.enums.AccRstr;
 
 @Entity
 @Table(name = "acc_rstr_list")

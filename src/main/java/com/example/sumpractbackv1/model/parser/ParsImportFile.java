@@ -1,8 +1,6 @@
-package com.example.sumpractbackv1.parser.ParsEntity;
+package com.example.sumpractbackv1.model.parser;
 
 
-import com.example.sumpractbackv1.enums.CreationReason;
-import com.example.sumpractbackv1.enums.InfoTypeCode;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.xml.bind.annotation.*;
@@ -13,6 +11,9 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+
+import com.example.sumpractbackv1.model.enums.CreationReason;
+import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
 @Getter
 @Setter

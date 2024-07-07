@@ -1,7 +1,4 @@
-package com.example.sumpractbackv1.entity;
-
-import com.example.sumpractbackv1.enums.CreationReason;
-import com.example.sumpractbackv1.enums.InfoTypeCode;
+package com.example.sumpractbackv1.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +7,9 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+
+import com.example.sumpractbackv1.model.enums.CreationReason;
+import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
 
 @Entity

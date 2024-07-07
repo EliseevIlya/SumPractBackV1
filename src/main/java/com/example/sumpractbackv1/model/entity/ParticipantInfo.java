@@ -1,6 +1,6 @@
-package com.example.sumpractbackv1.entity;
+package com.example.sumpractbackv1.model.entity;
 
-import com.example.sumpractbackv1.enums.ParticipantStatus;
+import com.example.sumpractbackv1.model.enums.ParticipantStatus;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

@@ -1,9 +1,10 @@
 package com.example.sumpractbackv1.service;
 
-import com.example.sumpractbackv1.entity.*;
-import com.example.sumpractbackv1.parser.Parcer;
-import com.example.sumpractbackv1.parser.ParsEntity.*;
+import com.example.sumpractbackv1.model.entity.*;
+import com.example.sumpractbackv1.model.parser.*;
 import com.example.sumpractbackv1.repository.*;
+import com.example.sumpractbackv1.util.Parcer;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.*;

@@ -1,4 +1,4 @@
-package com.example.sumpractbackv1.parser.ParsEntity;
+package com.example.sumpractbackv1.model.parser;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;

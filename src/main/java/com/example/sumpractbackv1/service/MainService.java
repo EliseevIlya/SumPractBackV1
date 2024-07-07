@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.service;
 
-import com.example.sumpractbackv1.entity.*;
+import com.example.sumpractbackv1.model.entity.*;
 import com.example.sumpractbackv1.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

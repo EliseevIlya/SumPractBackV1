@@ -1,11 +1,12 @@
-package com.example.sumpractbackv1.parser;
+package com.example.sumpractbackv1.util;
 
-import com.example.sumpractbackv1.parser.ParsEntity.ParsImportFile;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
 import java.io.File;
+
+import com.example.sumpractbackv1.model.parser.ParsImportFile;
 
 public class Parcer {
 

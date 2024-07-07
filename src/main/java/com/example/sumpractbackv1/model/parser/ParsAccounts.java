@@ -1,7 +1,5 @@
-package com.example.sumpractbackv1.parser.ParsEntity;
+package com.example.sumpractbackv1.model.parser;
 
-import com.example.sumpractbackv1.enums.AccountStatus;
-import com.example.sumpractbackv1.enums.RegulationAccountType;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
@@ -9,6 +7,9 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
+
+import com.example.sumpractbackv1.model.enums.AccountStatus;
+import com.example.sumpractbackv1.model.enums.RegulationAccountType;
 
 @Getter
 @Setter

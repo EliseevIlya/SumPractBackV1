@@ -1,8 +1,8 @@
-package com.example.sumpractbackv1.entity;
+package com.example.sumpractbackv1.model.entity;
 
-import com.example.sumpractbackv1.enums.AccRstr;
-import com.example.sumpractbackv1.enums.AccountStatus;
-import com.example.sumpractbackv1.enums.RegulationAccountType;
+import com.example.sumpractbackv1.model.enums.AccRstr;
+import com.example.sumpractbackv1.model.enums.AccountStatus;
+import com.example.sumpractbackv1.model.enums.RegulationAccountType;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

@@ -1,12 +1,13 @@
-package com.example.sumpractbackv1.parser.ParsEntity;
+package com.example.sumpractbackv1.model.parser;
 
 
-import com.example.sumpractbackv1.enums.ChangeType;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+
+import com.example.sumpractbackv1.model.enums.ChangeType;
 
 @Getter
 @Setter
