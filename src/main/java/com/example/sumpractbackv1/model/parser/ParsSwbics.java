@@ -1,6 +1,8 @@
 package com.example.sumpractbackv1.model.parser;
 
 
+import com.example.sumpractbackv1.model.entity.Swbics;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -17,4 +19,12 @@ public class ParsSwbics {
 
     @XmlAttribute(name = "DefaultSWBIC")
     private Integer defaultSWBIC;
+
+    public Swbics toSwbics() {
+        return Swbics.builder()
+            .swbic(swbic)
+            .defaultSwbic(defaultSWBIC)
+            .build();
+    }
+    
 }

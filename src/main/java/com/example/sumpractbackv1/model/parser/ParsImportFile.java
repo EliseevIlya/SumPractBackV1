@@ -11,7 +11,9 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
@@ -60,6 +62,36 @@ public class ParsImportFile {
     @XmlElement(name = "BICDirectoryEntry",namespace = "urn:cbr-ru:ed:v2.0")
     private List<ParsBICDirectoryEntry> parsBICDirectoryEntries;
 
-
-    // Getters and Setters
+    public ImportData toImportData() {
+        return ImportData.builder()
+            .xmlns("urn:cbr-ru:ed:v2.0")
+            .edno(edno)
+            .edDate(edDate != null ? LocalDate.parse(edDate) : null)
+            .edAuthor(edAuthor)
+            .edReceiver(edReceiver)
+            .creationReason(creationReason)
+            .creationDateTime(creationDateTime != null ?
+                ZonedDateTime.parse(creationDateTime) : null)
+            .infoTypeCode(infoTypeCode)
+            .businessDay(businessDay != null ?
+                LocalDate.parse(businessDay) : null)
+            .directoryVersion(directoryVersion)
+            .partInfoList(parsPartInfo != null
+                ? parsPartInfo.stream()
+                    .map(ParsPartInfo::toPartInfo)
+                    .collect(Collectors.toList())
+                : null)
+            .initialEDList(parsInitialED != null
+                ? parsInitialED.stream()
+                    .map(ParsInitialED::toInitialED)
+                    .collect(Collectors.toList())
+                : null)
+            .bicDirectoryEntryList(parsBICDirectoryEntries != null
+                ? parsBICDirectoryEntries.stream()
+                    .map(ParsBICDirectoryEntry::toBICDirectoryEntry)
+                    .collect(Collectors.toList())
+                : null)
+            .build();
+    }
+    
 }

@@ -6,8 +6,10 @@ import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
+import com.example.sumpractbackv1.model.entity.AccRstrList;
 import com.example.sumpractbackv1.model.enums.AccRstr;
 
 @Getter
@@ -16,12 +18,20 @@ import com.example.sumpractbackv1.model.enums.AccRstr;
 public class ParsAccRstrList {
 
     @XmlAttribute(name = "AccRstr")
-    private AccRstr AccRstr;
+    private AccRstr accRstr;
 
     @XmlAttribute(name = "AccRstrDate")
-    private String AccRstrDate;
+    private String accRstrDate;
 
     @XmlAttribute(name = "SuccessorBIC")
-    private Long SuccessorBIC;
+    private Long successorBIC;
+
+    public AccRstrList toAccRstrList() {
+        return AccRstrList.builder()
+            .accRstr(accRstr)
+            .accRstrDate(accRstrDate != null ? LocalDate.parse(accRstrDate) : null)
+            .successorBIC(successorBIC)
+            .build();
+    }
 
 }

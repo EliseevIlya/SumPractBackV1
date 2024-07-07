@@ -10,7 +10,7 @@ import com.example.sumpractbackv1.model.parser.ParsImportFile;
 
 public class Parser {
 
-    public ParsImportFile returnParc() {
+    public ParsImportFile returnPars() {
         ParsImportFile parsImportFile;
         try {
             // Создание JAXB контекста и анмаршаллера
@@ -25,4 +25,5 @@ public class Parser {
         }
         return parsImportFile;
     }
+    
 }

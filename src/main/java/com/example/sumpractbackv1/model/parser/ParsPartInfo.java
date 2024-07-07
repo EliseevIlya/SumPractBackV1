@@ -1,6 +1,8 @@
 package com.example.sumpractbackv1.model.parser;
 
 
+import com.example.sumpractbackv1.model.entity.PartInfo;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -21,5 +23,12 @@ public class ParsPartInfo {
     @XmlAttribute(name = "PartAggregateID")
     private String partAggregateID;
 
+    public PartInfo toPartInfo() {
+        return PartInfo.builder()
+            .partNo(partNo)
+            .partQuantity(partQuantity)
+            .partAggregateID(partAggregateID)
+            .build();
+    }
 
 }

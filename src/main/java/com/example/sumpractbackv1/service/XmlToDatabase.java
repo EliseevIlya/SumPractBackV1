@@ -34,7 +34,7 @@ public class XmlToDatabase {
         try {
             ParsImportFile parsImportFile;
             Parser parser = new Parser();
-            parsImportFile = parser.returnParc();
+            parsImportFile = parser.returnPars();
 
             //TODO переделать все под Build или дополнить парсер
 

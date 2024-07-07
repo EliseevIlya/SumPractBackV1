@@ -5,9 +5,12 @@ import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.example.sumpractbackv1.model.entity.ParticipantInfo;
 import com.example.sumpractbackv1.model.enums.ParticipantStatus;
 
 @Getter
@@ -69,5 +72,30 @@ public class ParsParticipantInfo {
     @XmlElement(name = "RstrList",namespace = "urn:cbr-ru:ed:v2.0")
     private List<ParsRstrList> parsRstrList;
 
-    // Getters and Setters
+    public ParticipantInfo toParticipantInfo() {
+        return ParticipantInfo.builder()
+            .nameP(nameP)
+            .englName(engName)
+            .regN(regN)
+            .cntrCd(cntrCd)
+            .rgn(rgn)
+            .ind(ind)
+            .tnp(tnp)
+            .nnp(nnp)
+            .adr(adr)
+            .prntBIC(prntBIC)
+            .dateInParticipant(dateIn != null ? LocalDate.parse(dateIn) : null)
+            .dateOutParticipant(dateOut != null ? LocalDate.parse(dateOut) : null)
+            .ptType(ptType)
+            .srvcs(srvcs)
+            .xchType(xchType)
+            .uid(uid)
+            .participantStatus(participantStatus)
+            .rstrLists(parsRstrList != null
+                ? parsRstrList.stream()
+                    .map(ParsRstrList::toRstrList)
+                    .collect(Collectors.toList())
+                : null)
+            .build();
+    }
 }
