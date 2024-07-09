@@ -1,24 +1,39 @@
 package com.example.sumpractbackv1.model.entity;
 
-import java.time.ZonedDateTime;
-
 import org.springframework.data.annotation.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import lombok.*;
 
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @CreatedDate
-    private ZonedDateTime createdDate;
+    private LocalDateTime createdDate;
     
     @LastModifiedDate
-    private ZonedDateTime lastModifiedDate;
+    private LocalDateTime lastModifiedDate;
 
 	@CreatedBy
     private String createdBy;
     
     @LastModifiedBy
     private String lastModifiedBy;
+
+    @Column(nullable = false)
+    private Boolean deleted = Boolean.FALSE;
 	
 }

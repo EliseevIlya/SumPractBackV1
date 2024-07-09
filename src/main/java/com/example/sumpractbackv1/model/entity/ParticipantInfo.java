@@ -1,16 +1,11 @@
 package com.example.sumpractbackv1.model.entity;
 
 import com.example.sumpractbackv1.model.enums.ParticipantStatus;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "participant_info")
@@ -21,26 +16,15 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "participantId")
-public class ParticipantInfo {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "participant_id")
-    private Long participantId;
-
-    //TODO связи
-   /* @ManyToOne
-    @JoinColumn(name = "BIC_participant", referencedColumnName = "BIC")
-    @JsonIdentityReference(alwaysAsId = true)
-    private BICDirectoryEntry bicParticipant;*/
+public class ParticipantInfo extends BaseEntity {
 
     @Column(name = "name_p", length = 160)
     private String nameP;
 
-    @Column(name = "engl_name",length = 140)
+    @Column(name = "engl_name", length = 140)
     private String englName;
 
-    @Column(name = "reg_n",length = 9)
+    @Column(name = "reg_n", length = 9)
     private String regN;
 
     @Column(name = "cntr_cd", length = 2)
@@ -61,15 +45,13 @@ public class ParticipantInfo {
     @Column(name = "adr", length = 160)
     private String adr;
 
-    @Column(name = "prnt_bic",length = 9)
+    @Column(name = "prnt_bic", length = 9)
     private Long prntBIC;
 
     @Column(name = "date_in_participant")
-    @Temporal(TemporalType.DATE)
     private LocalDate dateInParticipant;
 
     @Column(name = "date_out_participant")
-    @Temporal(TemporalType.DATE)
     private LocalDate dateOutParticipant;
 
     @Column(name = "pt_type",length = 2)
@@ -87,30 +69,11 @@ public class ParticipantInfo {
     @Column(name = "participant_status", length = 4)
     private ParticipantStatus participantStatus;
 
-    //TODO время создания измения удаления
-    //TODO связи
-
-    @ManyToOne()
-    @JoinColumn(name = "bic_participant_info_id", referencedColumnName = "bicd_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bic_participant_info_id")
     private BICDirectoryEntry bicParticipantInfoId;
 
-    @OneToMany(mappedBy = "participantInfoRstrListId", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "participantInfoRstrListId", cascade = CascadeType.ALL)
     private List<RstrList>  rstrLists;
-
-    @Column(name = "creation_time_participant_info")
-    @Temporal(TemporalType.DATE)
-    private LocalDate creationTimeParticipantInfo;
-
-    @Column(name = "change_time_participant_info")
-    @Temporal(TemporalType.DATE)
-    private LocalDate changeTimeParticipantInfo;
-
-    @Column(name = "delete_time_participant_info")
-    @Temporal(TemporalType.DATE)
-    private LocalDate deleteTimeParticipantInfo;
-
-    /*@OneToMany(mappedBy = "participantRstrId", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<RstrList> rstrLists;*/
 
 }

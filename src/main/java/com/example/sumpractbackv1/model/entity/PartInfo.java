@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "part_info")
@@ -34,19 +33,16 @@ public class PartInfo {
     //TODO связи к заголовочному файлу
 
     @ManyToOne()
-    @JoinColumn(name = "importData_part_info_id", referencedColumnName = "import_id")
+    @JoinColumn(name = "importData_part_info_id")
     private ImportData importDataPartInfoId;
 
     @Column(name = "creation_time_part_info")
-    @Temporal(TemporalType.DATE)
     private LocalDate creationTimePartInfo;
 
     @Column(name = "change_time_part_info")
-    @Temporal(TemporalType.DATE)
     private LocalDate changeTimePartInfo;
 
     @Column(name = "delete_time_part_info")
-    @Temporal(TemporalType.DATE)
     private LocalDate deleteTimePartInfo;
 
 }

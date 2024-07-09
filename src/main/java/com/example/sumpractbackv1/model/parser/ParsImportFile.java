@@ -1,15 +1,12 @@
 package com.example.sumpractbackv1.model.parser;
 
 
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,7 +68,7 @@ public class ParsImportFile {
             .edReceiver(edReceiver)
             .creationReason(creationReason)
             .creationDateTime(creationDateTime != null ?
-                ZonedDateTime.parse(creationDateTime) : null)
+                LocalDateTime.parse(creationDateTime) : null)
             .infoTypeCode(infoTypeCode)
             .businessDay(businessDay != null ?
                 LocalDate.parse(businessDay) : null)

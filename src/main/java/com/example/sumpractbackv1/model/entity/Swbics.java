@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "swbics")
@@ -30,18 +29,15 @@ public class Swbics {
     //TODO время создания измения удаления
     //TODO связи
     @ManyToOne()
-    @JoinColumn(name = "bic_swibcs_id", referencedColumnName = "bicd_id")
+    @JoinColumn(name = "bic_swibcs_id")
     private BICDirectoryEntry bicSwibcsId;
 
     @Column(name = "creation_time_swibcs")
-    @Temporal(TemporalType.DATE)
     private LocalDate creationTimeSwibcs;
 
     @Column(name = "change_time_swibcs")
-    @Temporal(TemporalType.DATE)
     private LocalDate changeTimeSwibcs;
 
     @Column(name = "delete_time_swibcs")
-    @Temporal(TemporalType.DATE)
     private LocalDate deleteTimeSwibcs;
 }

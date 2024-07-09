@@ -5,14 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import com.example.sumpractbackv1.model.entity.User;
-
 @Configuration
-@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
+@EnableJpaAuditing
 public class PersistenceConfig {
 
 	@Bean
-    AuditorAware<User> auditorProvider() {
+    public AuditorAware<String> auditorProvider() {
         return new SpringSecurityAuditorAware();
     }
 	

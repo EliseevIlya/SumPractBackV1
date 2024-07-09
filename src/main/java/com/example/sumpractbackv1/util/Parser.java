@@ -18,7 +18,7 @@ public class Parser {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             // Парсинг XML файла
-            File xmlFile = new File("D:\\file2.xml");
+            File xmlFile = new File("./file2.xml");
             parsImportFile = (ParsImportFile) unmarshaller.unmarshal(xmlFile);
         } catch (JAXBException e) {
             throw new RuntimeException(e);

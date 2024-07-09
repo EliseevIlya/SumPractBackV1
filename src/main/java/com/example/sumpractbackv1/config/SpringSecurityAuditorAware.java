@@ -9,11 +9,11 @@ import com.example.sumpractbackv1.model.entity.User;
 import com.example.sumpractbackv1.service.UserService;
 
 
-public class SpringSecurityAuditorAware implements AuditorAware<User> {
+public class SpringSecurityAuditorAware implements AuditorAware<String> {
 
 	@Override
-	public @NonNull Optional<User> getCurrentAuditor() {
-		return UserService.getCurrentUser();
+	public @NonNull Optional<String> getCurrentAuditor() {
+		return UserService.getCurrentUser().map(User::getUsername);
 	}
 	
 }

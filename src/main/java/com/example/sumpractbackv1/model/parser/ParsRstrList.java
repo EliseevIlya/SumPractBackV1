@@ -19,7 +19,6 @@ public class ParsRstrList {
     private Rstr rstr;
 
     @XmlAttribute(name = "RstrDate")
-    @Temporal(TemporalType.DATE)
     private String rstrDate;
 
     public RstrList toRstrList() {
