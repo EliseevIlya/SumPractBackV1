@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
-import com.example.sumpractbackv1.entity.*;
+import com.example.sumpractbackv1.model.entity.*;
 import com.example.sumpractbackv1.service.MainService;
 import com.example.sumpractbackv1.service.XmlToDatabase;
 import lombok.RequiredArgsConstructor;
