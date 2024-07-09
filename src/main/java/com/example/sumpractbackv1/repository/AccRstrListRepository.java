@@ -7,4 +7,5 @@ import com.example.sumpractbackv1.model.entity.AccRstrList;
 
 @Repository
 public interface AccRstrListRepository extends JpaRepository<AccRstrList, Long> {
+	
 }

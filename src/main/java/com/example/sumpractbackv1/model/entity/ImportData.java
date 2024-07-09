@@ -19,7 +19,6 @@ import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "importId")
 public class ImportData extends BaseEntity {
 
     @Column(name = "xmlns", length = 255)

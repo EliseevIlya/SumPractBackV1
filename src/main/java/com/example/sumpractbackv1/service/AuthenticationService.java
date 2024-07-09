@@ -29,6 +29,7 @@ public class AuthenticationService {
      * Аутентификация пользователя
      *
      * @param request данные пользователя
+     * @param response ответ
      * @return токен
      */
     public JwtAuthenticationResponse signIn(SignInRequest request, HttpServletResponse response) {
@@ -65,6 +66,7 @@ public class AuthenticationService {
      * Обновление токена
      *
      * @param refreshToken токен
+     * @param response ответ
      * @return новый токен
      */
     public JwtAuthenticationResponse refreshToken(String refreshToken, HttpServletResponse response) {
@@ -102,6 +104,29 @@ public class AuthenticationService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Выход пользователя
+     *
+     * @param accessToken токен
+     * @param refreshToken токен
+     * @param response ответ
+     * @throws IOException в случае ошибки при работе с HTTP ответом
+     */
+    public void signOut(String accessToken, String refreshToken, HttpServletResponse response) {
+        if (StringUtils.isNotEmpty(accessToken)) {
+            tokenRepository.deleteByAccessToken(accessToken);
+        }
+        if (StringUtils.isNotEmpty(refreshToken)) {
+            tokenRepository.deleteByRefreshToken(refreshToken);
+        }
+        var cookie = new Cookie("refreshToken", "");
+        cookie.setHttpOnly(true);
+        // cookie.setSecure(true);
+        cookie.setPath("/api/auth/refresh");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 	
 }

@@ -7,14 +7,13 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "BICDirectoryEntry")
+@Table(name = "bic_directory_entry")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "BICDid")
 public class BICDirectoryEntry extends BaseEntity {
 
     @Column(name = "bic", length = 9)

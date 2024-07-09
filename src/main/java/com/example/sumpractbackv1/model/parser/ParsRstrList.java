@@ -1,6 +1,5 @@
 package com.example.sumpractbackv1.model.parser;
 
-import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
