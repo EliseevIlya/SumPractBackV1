@@ -19,8 +19,8 @@ public class Token {
 	@Column(name = "refresh_token")
 	private String refreshToken;
 	
-	@ManyToOne(targetEntity = User.class, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
 }

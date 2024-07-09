@@ -5,8 +5,9 @@ import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import com.example.sumpractbackv1.model.entity.RstrList;
 import com.example.sumpractbackv1.model.enums.Rstr;
 
 @Getter
@@ -18,8 +19,13 @@ public class ParsRstrList {
     private Rstr rstr;
 
     @XmlAttribute(name = "RstrDate")
-    @Temporal(TemporalType.DATE)
     private String rstrDate;
 
-    // Getters and Setters
+    public RstrList toRstrList() {
+        return RstrList.builder()
+                .rstr(rstr)
+                .rstrDate(rstrDate != null ? LocalDate.parse(rstrDate) : null)
+                .build();
+    }
+    
 }

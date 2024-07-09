@@ -10,7 +10,7 @@ import com.example.sumpractbackv1.model.parser.ParsImportFile;
 
 public class Parser {
 
-    public ParsImportFile returnParc() {
+    public ParsImportFile returnPars() {
         ParsImportFile parsImportFile;
         try {
             // Создание JAXB контекста и анмаршаллера
@@ -18,11 +18,12 @@ public class Parser {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             // Парсинг XML файла
-            File xmlFile = new File("D:\\file2.xml");
+            File xmlFile = new File("./file2.xml");
             parsImportFile = (ParsImportFile) unmarshaller.unmarshal(xmlFile);
         } catch (JAXBException e) {
             throw new RuntimeException(e);
         }
         return parsImportFile;
     }
+    
 }
