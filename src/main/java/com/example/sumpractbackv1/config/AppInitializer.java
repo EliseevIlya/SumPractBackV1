@@ -11,12 +11,19 @@ import com.example.sumpractbackv1.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Component
 @RequiredArgsConstructor
 public class AppInitializer {
     private final PasswordEncoder passwordEncoder;
 	private final UserRepository userRepository;
-	
+
+	@Value("${file.upload-dir}")
+	private String uploadDir;
 	@Value("${admin.username}")
 	private String adminUsername;
 	@Value("${admin.password}")
@@ -33,6 +40,15 @@ public class AppInitializer {
 				.build();
             userRepository.save(newUser);
         }
+		try {
+			Path uploadPath = Paths.get(uploadDir);
+
+			if (!Files.exists(uploadPath)) {
+				Files.createDirectories(uploadPath);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
 }

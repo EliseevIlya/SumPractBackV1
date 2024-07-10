@@ -7,17 +7,20 @@ import com.example.sumpractbackv1.util.Parser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
+
 @Service
 @RequiredArgsConstructor
 public class XmlToDatabase {
     private final ImportDataRepository importDataRepository;
 
-    public void insert() {
+    public void insert(Path importFilePath) {
         ParsImportFile parsImportFile;
         Parser parser = new Parser();
-        parsImportFile = parser.returnPars();
+        parsImportFile = parser.returnPars(importFilePath);
 
         importDataRepository.save(parsImportFile.toImportData());
+        System.out.println("File saved to database");
     }
 }
 
