@@ -1,13 +1,12 @@
 package com.example.sumpractbackv1.util;
 
+import com.example.sumpractbackv1.model.parser.ParsImportFile;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
 import java.io.File;
 import java.nio.file.Path;
-
-import com.example.sumpractbackv1.model.parser.ParsImportFile;
 
 public class Parser {
 
@@ -26,5 +25,5 @@ public class Parser {
         }
         return parsImportFile;
     }
-    
+
 }

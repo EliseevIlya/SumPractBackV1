@@ -20,10 +20,10 @@ public class Swbics {
     @Column(name = "swbic_id")
     private Long swbicsId;
 
-    @Column(name = "swbic",length = 11)
+    @Column(name = "swbic", length = 11)
     private String swbic;
 
-    @Column(name = "default_swbic",length = 1)
+    @Column(name = "default_swbic", length = 1)
     private Integer defaultSwbic;
 
     //TODO время создания измения удаления

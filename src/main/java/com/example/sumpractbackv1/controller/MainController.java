@@ -25,20 +25,24 @@ public class MainController {
 
     @GetMapping("/importDataGet")
     public List<ImportData> getImportData() {
-       return mainService.returnImportDataList();
+        return mainService.returnImportDataList();
     }
+
     @GetMapping("/BICGet")
     public List<BICDirectoryEntry> getBIC() {
         return mainService.returnBICDirectoryEntryList();
     }
+
     @GetMapping("/ParticipantGet")
     public List<ParticipantInfo> getParticipant() {
         return mainService.returnParticipantInfoList();
     }
+
     @GetMapping("/AccountsGet")
     public List<Accounts> accountsGet() {
         return mainService.returnAccountsList();
     }
+
     @GetMapping("/RstrGet")
     public List<RstrList> getRstrList() {
         return mainService.returnRstrListList();

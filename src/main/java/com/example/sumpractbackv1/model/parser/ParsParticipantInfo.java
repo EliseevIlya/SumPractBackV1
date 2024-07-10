@@ -1,15 +1,17 @@
 package com.example.sumpractbackv1.model.parser;
 
-import jakarta.xml.bind.annotation.*;
+import com.example.sumpractbackv1.model.entity.ParticipantInfo;
+import com.example.sumpractbackv1.model.enums.ParticipantStatus;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.example.sumpractbackv1.model.entity.ParticipantInfo;
-import com.example.sumpractbackv1.model.enums.ParticipantStatus;
 
 @Getter
 @Setter
@@ -67,33 +69,33 @@ public class ParsParticipantInfo {
     @XmlAttribute(name = "ParticipantStatus")
     private ParticipantStatus participantStatus;
 
-    @XmlElement(name = "RstrList",namespace = "urn:cbr-ru:ed:v2.0")
+    @XmlElement(name = "RstrList", namespace = "urn:cbr-ru:ed:v2.0")
     private List<ParsRstrList> parsRstrList;
 
     public ParticipantInfo toParticipantInfo() {
         return ParticipantInfo.builder()
-            .nameP(nameP)
-            .englName(engName)
-            .regN(regN)
-            .cntrCd(cntrCd)
-            .rgn(rgn)
-            .ind(ind)
-            .tnp(tnp)
-            .nnp(nnp)
-            .adr(adr)
-            .prntBIC(prntBIC)
-            .dateInParticipant(dateIn != null ? LocalDate.parse(dateIn) : null)
-            .dateOutParticipant(dateOut != null ? LocalDate.parse(dateOut) : null)
-            .ptType(ptType)
-            .srvcs(srvcs)
-            .xchType(xchType)
-            .uid(uid)
-            .participantStatus(participantStatus)
-            .rstrLists(parsRstrList != null
-                ? parsRstrList.stream()
-                    .map(ParsRstrList::toRstrList)
-                    .collect(Collectors.toList())
-                : null)
-            .build();
+                .nameP(nameP)
+                .englName(engName)
+                .regN(regN)
+                .cntrCd(cntrCd)
+                .rgn(rgn)
+                .ind(ind)
+                .tnp(tnp)
+                .nnp(nnp)
+                .adr(adr)
+                .prntBIC(prntBIC)
+                .dateInParticipant(dateIn != null ? LocalDate.parse(dateIn) : null)
+                .dateOutParticipant(dateOut != null ? LocalDate.parse(dateOut) : null)
+                .ptType(ptType)
+                .srvcs(srvcs)
+                .xchType(xchType)
+                .uid(uid)
+                .participantStatus(participantStatus)
+                .rstrLists(parsRstrList != null
+                        ? parsRstrList.stream()
+                        .map(ParsRstrList::toRstrList)
+                        .collect(Collectors.toList())
+                        : null)
+                .build();
     }
 }

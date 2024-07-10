@@ -1,21 +1,19 @@
 package com.example.sumpractbackv1.service;
 
-import java.util.Optional;
-
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.stereotype.Service;
-
 import com.example.sumpractbackv1.model.dto.JwtAuthenticationResponse;
 import com.example.sumpractbackv1.model.dto.SignInRequest;
 import com.example.sumpractbackv1.model.entity.Token;
 import com.example.sumpractbackv1.model.entity.User;
 import com.example.sumpractbackv1.repository.TokenRepository;
-
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +23,7 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final AuthenticationManager authenticationManager;
 
-	/**
+    /**
      * Аутентификация пользователя
      *
      * @param request данные пользователя
@@ -45,17 +43,17 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
 
         tokenRepository.save(Token.builder()
-            .user((User) user)
-            .accessToken(accessToken)
-            .refreshToken(refreshToken)
-            .build());
+                .user((User) user)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build());
 
         Cookie cookie = new Cookie("refreshToken", refreshToken);
         cookie.setHttpOnly(true);
         // cookie.setSecure(true);
         cookie.setPath("/api/auth/refresh");
-        cookie.setMaxAge(30*24*60*60);
-        
+        cookie.setMaxAge(30 * 24 * 60 * 60);
+
         response.addCookie(cookie);
 
         return new JwtAuthenticationResponse(accessToken);
@@ -75,23 +73,23 @@ public class AuthenticationService {
                 Optional<Token> token = tokenRepository.findByRefreshToken(refreshToken);
                 if (token.isPresent()) {
                     var user = token.get().getUser();
-                    
+
                     if (jwtService.isTokenValid(refreshToken, user)) {
                         var accessToken = jwtService.generateAccessToken(user);
                         var newRefreshToken = jwtService.generateRefreshToken(user);
                         tokenRepository.save(Token.builder()
-                            .user((User) user)
-                            .accessToken(accessToken)
-                            .refreshToken(newRefreshToken)
-                            .build());
+                                .user(user)
+                                .accessToken(accessToken)
+                                .refreshToken(newRefreshToken)
+                                .build());
                         tokenRepository.delete(token.get());
 
                         Cookie cookie = new Cookie("refreshToken", newRefreshToken);
                         cookie.setHttpOnly(true);
                         // cookie.setSecure(true);
                         cookie.setPath("/api/auth/refresh");
-                        cookie.setMaxAge(30*24*60*60);
-                        
+                        cookie.setMaxAge(30 * 24 * 60 * 60);
+
                         response.addCookie(cookie);
 
                         return new JwtAuthenticationResponse(accessToken);
@@ -103,5 +101,5 @@ public class AuthenticationService {
         }
         return null;
     }
-	
+
 }

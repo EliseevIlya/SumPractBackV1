@@ -1,11 +1,10 @@
 package com.example.sumpractbackv1.model.entity;
 
+import com.example.sumpractbackv1.model.enums.AccRstr;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-
-import com.example.sumpractbackv1.model.enums.AccRstr;
 
 @Entity
 @Table(name = "acc_rstr_list")
@@ -17,7 +16,7 @@ import com.example.sumpractbackv1.model.enums.AccRstr;
 @ToString
 public class AccRstrList extends BaseEntity {
 
-    @Column(name = "acc_rstr",length = 4)
+    @Column(name = "acc_rstr", length = 4)
     private AccRstr accRstr;
 
     @Column(name = "acc_rstr_date")
@@ -29,5 +28,5 @@ public class AccRstrList extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accounts_id")
     private Accounts accountsId;
-    
+
 }
