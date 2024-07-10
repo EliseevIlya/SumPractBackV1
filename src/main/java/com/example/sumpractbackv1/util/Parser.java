@@ -5,12 +5,13 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
 import java.io.File;
+import java.nio.file.Path;
 
 import com.example.sumpractbackv1.model.parser.ParsImportFile;
 
 public class Parser {
 
-    public ParsImportFile returnPars() {
+    public ParsImportFile returnPars(Path path) {
         ParsImportFile parsImportFile;
         try {
             // Создание JAXB контекста и анмаршаллера
@@ -18,7 +19,7 @@ public class Parser {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             // Парсинг XML файла
-            File xmlFile = new File("./file2.xml");
+            File xmlFile = new File(path.toString());
             parsImportFile = (ParsImportFile) unmarshaller.unmarshal(xmlFile);
         } catch (JAXBException e) {
             throw new RuntimeException(e);

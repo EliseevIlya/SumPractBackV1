@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import com.example.sumpractbackv1.model.enums.CreationReason;
@@ -40,7 +41,7 @@ public class ImportData extends BaseEntity {
     private CreationReason creationReason;
 
     @Column(name = "creation_date_time")
-    private LocalDateTime creationDateTime;
+    private ZonedDateTime creationDateTime;
 
     @Column(name = "info_type_code", length = 4)
     private InfoTypeCode infoTypeCode;

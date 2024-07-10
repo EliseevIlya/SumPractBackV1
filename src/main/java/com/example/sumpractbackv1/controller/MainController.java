@@ -17,11 +17,11 @@ public class MainController {
 
     private final MainService mainService;
     private final XmlToDatabase xmlToDatabase;
-
-    @GetMapping("/importData")
+    //TODO переписать через ResponseEntity
+    /*@GetMapping("/importData")
     public void dataInsert(){
         xmlToDatabase.insert();
-    }
+    }*/
 
     @GetMapping("/importDataGet")
     public List<ImportData> getImportData() {
