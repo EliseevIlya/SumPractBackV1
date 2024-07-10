@@ -7,6 +7,8 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+
 @Entity
 @Table(name = "participant_info")
 @Getter
@@ -15,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "participantId")
+@SQLDelete(sql = "UPDATE participant_info SET deleted = true WHERE id = ?")
 public class ParticipantInfo extends BaseEntity {
 
     @Column(name = "name_p", length = 160)
