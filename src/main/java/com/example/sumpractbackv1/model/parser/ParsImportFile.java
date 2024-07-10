@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,7 +69,7 @@ public class ParsImportFile {
             .edReceiver(edReceiver)
             .creationReason(creationReason)
             .creationDateTime(creationDateTime != null ?
-                LocalDateTime.parse(creationDateTime) : null)
+                ZonedDateTime.parse(creationDateTime) : null)
             .infoTypeCode(infoTypeCode)
             .businessDay(businessDay != null ?
                 LocalDate.parse(businessDay) : null)
