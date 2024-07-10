@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.SQLDelete;
+
 @Entity
 @Table(name = "rstr_list")
 @Getter
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@SQLDelete(sql = "UPDATE rstr_list SET deleted = true WHERE id = ?")
 public class RstrList extends BaseEntity {
 
     @Column(name = "rstr", length = 4)

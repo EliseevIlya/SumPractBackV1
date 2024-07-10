@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+
 @Entity
 @Table(name = "bic_directory_entry")
 @Getter
@@ -14,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@SQLDelete(sql = "UPDATE bic_directory_entry SET deleted = true WHERE bic = ?")
 public class BICDirectoryEntry extends BaseEntity {
 
     @Column(name = "bic", length = 9)

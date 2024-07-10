@@ -8,6 +8,8 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+
 
 @Entity
 @Table(name = "accounts")
@@ -17,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@SQLDelete(sql = "UPDATE accounts SET deleted = true WHERE id = ?")
 public class Accounts extends BaseEntity {
 
     @Column(name = "account", length = 20)

@@ -1,5 +1,7 @@
 package com.example.sumpractbackv1.model.entity;
 
+import org.hibernate.annotations.SQLDelete;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@SQLDelete(sql = "UPDATE swbics SET deleted = true WHERE id = ?")
 public class Swbics extends BaseEntity {
 
     @Column(name = "swbic",length = 11)

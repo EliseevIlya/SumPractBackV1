@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+
 import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
@@ -20,6 +22,7 @@ import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@SQLDelete(sql = "UPDATE import_data SET deleted = true WHERE id = ?")
 public class ImportData extends BaseEntity {
 
     @Column(name = "xmlns", length = 255)
