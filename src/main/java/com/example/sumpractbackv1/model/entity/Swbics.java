@@ -16,10 +16,10 @@ import lombok.*;
 @SQLDelete(sql = "UPDATE swbics SET deleted = true WHERE id = ?")
 public class Swbics extends BaseEntity {
 
-    @Column(name = "swbic",length = 11)
+    @Column(name = "swbic", length = 11)
     private String swbic;
 
-    @Column(name = "default_swbic",length = 1)
+    @Column(name = "default_swbic", length = 1)
     private Integer defaultSwbic;
 
     @ManyToOne()

@@ -19,7 +19,7 @@ public class PartInfo extends BaseEntity {
     @Column(name = "part_no", length = 6)
     private Integer partNo;
 
-    @Column(name = "part_quantity",length = 6)
+    @Column(name = "part_quantity", length = 6)
     private Integer partQuantity;
 
     @Column(name = "part_aggregate_id", length = 27)

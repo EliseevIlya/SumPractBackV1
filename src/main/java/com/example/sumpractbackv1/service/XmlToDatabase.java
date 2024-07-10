@@ -1,9 +1,8 @@
 package com.example.sumpractbackv1.service;
 
-import com.example.sumpractbackv1.model.parser.*;
-import com.example.sumpractbackv1.repository.*;
+import com.example.sumpractbackv1.model.parser.ParsImportFile;
+import com.example.sumpractbackv1.repository.ImportDataRepository;
 import com.example.sumpractbackv1.util.Parser;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

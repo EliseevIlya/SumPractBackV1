@@ -12,15 +12,15 @@ import lombok.*;
 @AllArgsConstructor
 public class Token {
 
-	@Id
-	@Column(name = "access_token")
-	private String accessToken;
-	
-	@Column(name = "refresh_token")
-	private String refreshToken;
-	
-	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
-	
+    @Id
+    @Column(name = "access_token")
+    private String accessToken;
+
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 }
