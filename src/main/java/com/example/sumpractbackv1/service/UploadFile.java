@@ -22,7 +22,7 @@ public class UploadFile {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    private XmlToDatabase xmlToDatabase;
+    private final XmlToDatabase xmlToDatabase;
 
     public ResponseEntity<String> uploadFile(MultipartFile file) {
         if (file.isEmpty()) {

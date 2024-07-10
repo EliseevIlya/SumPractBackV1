@@ -16,10 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImportController {
 
 
-    private UploadFile uploadFile;
+    private final UploadFile uploadFile;
 
     @PostMapping("/upload")
-    public void uploadFile(@RequestParam("file") MultipartFile file) {
+    public void uploadFile(@RequestParam(value = "file") MultipartFile file) {
         uploadFile.uploadFile(file);
 
     }
