@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.SQLDelete;
+
 @Entity
 @Table(name = "initial_ed")
 @Getter
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@SQLDelete(sql = "UPDATE initial_ed SET deleted = true WHERE id = ?")
 public class InitialED extends BaseEntity {
 
     @Column(name = "ed_no_initial", length = 9)

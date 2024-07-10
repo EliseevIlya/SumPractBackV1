@@ -6,6 +6,10 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.SQLDelete;
+
+import com.example.sumpractbackv1.model.enums.AccRstr;
+
 @Entity
 @Table(name = "acc_rstr_list")
 @Getter
@@ -14,6 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@SQLDelete(sql = "UPDATE acc_rstr_list SET deleted = true WHERE id=?")
 public class AccRstrList extends BaseEntity {
 
     @Column(name = "acc_rstr", length = 4)

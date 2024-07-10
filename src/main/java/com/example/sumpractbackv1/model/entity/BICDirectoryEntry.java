@@ -6,15 +6,17 @@ import lombok.*;
 
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+
 @Entity
-@Table(name = "BICDirectoryEntry")
+@Table(name = "bic_directory_entry")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "BICDid")
+@SQLDelete(sql = "UPDATE bic_directory_entry SET deleted = true WHERE bic = ?")
 public class BICDirectoryEntry extends BaseEntity {
 
     @Column(name = "bic", length = 9)
