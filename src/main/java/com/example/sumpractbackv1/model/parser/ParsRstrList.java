@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+import com.example.sumpractbackv1.model.entity.RstrList;
+import com.example.sumpractbackv1.model.enums.Rstr;
+
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
