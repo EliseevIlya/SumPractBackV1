@@ -1,15 +1,13 @@
 package com.example.sumpractbackv1.model.entity;
 
+import com.example.sumpractbackv1.model.enums.CreationReason;
+import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
-
-import com.example.sumpractbackv1.model.enums.CreationReason;
-import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
 
 @Entity
@@ -61,5 +59,5 @@ public class ImportData extends BaseEntity {
 
     @OneToMany(mappedBy = "importDataBicId", cascade = CascadeType.ALL)
     private List<BICDirectoryEntry> bicDirectoryEntryList;
-    
+
 }

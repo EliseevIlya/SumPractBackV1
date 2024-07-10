@@ -25,10 +25,10 @@ public class Accounts extends BaseEntity {
     @Column(name = "regulation_account_type", length = 4)
     private RegulationAccountType regulationAccountType;
 
-    @Column(name = "ck",length = 2)
+    @Column(name = "ck", length = 2)
     private String ck;
 
-    @Column(name = "account_cbrbic",length = 9)
+    @Column(name = "account_cbrbic", length = 9)
     private Long accountCbrbic;
 
     @Column(name = "date_in_accounts")

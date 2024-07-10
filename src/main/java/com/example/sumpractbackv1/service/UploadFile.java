@@ -1,7 +1,6 @@
 package com.example.sumpractbackv1.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class UploadFile {
         try {
             // Сохраняем файл в папку uploadDir
             byte[] bytes = file.getBytes();
-            String fileName = file.getName()+ "-"+ LocalDate.now()+"-"+ LocalDateTime.now().getNano()+"-"+file.getOriginalFilename();
+            String fileName = file.getName() + "-" + LocalDate.now() + "-" + LocalDateTime.now().getNano() + "-" + file.getOriginalFilename();
             Path path = Paths.get(uploadDir + File.separator + fileName);
             Files.write(path, bytes);
 
@@ -45,7 +44,6 @@ public class UploadFile {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка загрузки файла");
         }
     }
-
 
 
 }

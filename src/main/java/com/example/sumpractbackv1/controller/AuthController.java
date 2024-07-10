@@ -1,5 +1,13 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.JwtAuthenticationResponse;
+import com.example.sumpractbackv1.model.dto.SignInRequest;
+import com.example.sumpractbackv1.service.AuthenticationService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,23 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.sumpractbackv1.model.dto.JwtAuthenticationResponse;
-import com.example.sumpractbackv1.model.dto.SignInRequest;
-import com.example.sumpractbackv1.service.AuthenticationService;
-
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-	private final AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
-	@PostMapping("/sign-in")
+    @PostMapping("/sign-in")
     public JwtAuthenticationResponse signIn(@RequestBody @Valid SignInRequest request, HttpServletResponse response) {
         return authenticationService.signIn(request, response);
     }
@@ -45,12 +43,11 @@ public class AuthController {
         }
 
         JwtAuthenticationResponse data = refreshToken != null ?
-            authenticationService.refreshToken(refreshToken, response) :
-            null;
+                authenticationService.refreshToken(refreshToken, response) :
+                null;
 
         return data == null ? ResponseEntity.status(401).build() : ResponseEntity.ok(data);
     }
 
-    
-	
+
 }

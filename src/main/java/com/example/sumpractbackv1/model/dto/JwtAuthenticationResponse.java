@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JwtAuthenticationResponse {
 
-	private String accessToken;
-	
+    private String accessToken;
+
 }

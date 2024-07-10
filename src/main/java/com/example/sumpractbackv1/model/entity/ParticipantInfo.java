@@ -54,16 +54,16 @@ public class ParticipantInfo extends BaseEntity {
     @Column(name = "date_out_participant")
     private LocalDate dateOutParticipant;
 
-    @Column(name = "pt_type",length = 2)
+    @Column(name = "pt_type", length = 2)
     private String ptType;
 
-    @Column(name = "srvcs",length = 1)
+    @Column(name = "srvcs", length = 1)
     private String srvcs;
 
-    @Column(name = "xch_type",length = 1)
+    @Column(name = "xch_type", length = 1)
     private String xchType;
 
-    @Column(name = "uid",length = 10)
+    @Column(name = "uid", length = 10)
     private Long uid;
 
     @Column(name = "participant_status", length = 4)
@@ -74,6 +74,6 @@ public class ParticipantInfo extends BaseEntity {
     private BICDirectoryEntry bicParticipantInfoId;
 
     @OneToMany(mappedBy = "participantInfoRstrListId", cascade = CascadeType.ALL)
-    private List<RstrList>  rstrLists;
+    private List<RstrList> rstrLists;
 
 }
