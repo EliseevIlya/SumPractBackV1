@@ -15,17 +15,17 @@ import org.hibernate.annotations.SQLDelete;
 @SQLDelete(sql = "UPDATE part_info SET deleted = true WHERE id = ?")
 public class PartInfo extends BaseEntity {
 
-    @Column(name = "part_no", length = 6)
+    @Column(name = "part_no", length = 6, nullable = false)
     private Integer partNo;
 
-    @Column(name = "part_quantity", length = 6)
+    @Column(name = "part_quantity", length = 6, nullable = false)
     private Integer partQuantity;
 
-    @Column(name = "part_aggregate_id", length = 27)
+    @Column(name = "part_aggregate_id", length = 27, nullable = false)
     private String partAggregateID;
 
-    @ManyToOne()
-    @JoinColumn(name = "importData_part_info_id")
-    private ImportData importDataPartInfoId;
+    @OneToOne()
+    @JoinColumn(name = "import_data_id")
+    private ImportData importData;
 
 }

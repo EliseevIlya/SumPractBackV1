@@ -15,14 +15,14 @@ import org.hibernate.annotations.SQLDelete;
 @SQLDelete(sql = "UPDATE swbics SET deleted = true WHERE id = ?")
 public class Swbics extends BaseEntity {
 
-    @Column(name = "swbic", length = 11)
+    @Column(name = "swbic", length = 11, nullable = false)
     private String swbic;
 
-    @Column(name = "default_swbic", length = 1)
+    @Column(name = "default_swbic", length = 1, nullable = false)
     private Integer defaultSwbic;
 
     @ManyToOne()
-    @JoinColumn(name = "bic_swibcs_id")
-    private BICDirectoryEntry bicSwibcsId;
+    @JoinColumn(name = "bic_directory_entry_id")
+    private BICDirectoryEntry bicDirectoryEntry;
 
 }

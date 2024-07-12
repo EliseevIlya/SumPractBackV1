@@ -21,32 +21,32 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE accounts SET deleted = true WHERE id = ?")
 public class Accounts extends BaseEntity {
 
-    @Column(name = "account", length = 20)
+    @Column(name = "account", length = 20, nullable = false)
     private String account;
 
-    @Column(name = "regulation_account_type", length = 4)
+    @Column(name = "regulation_account_type", length = 4, nullable = false)
     private RegulationAccountType regulationAccountType;
 
     @Column(name = "ck", length = 2)
     private String ck;
 
-    @Column(name = "account_cbrbic", length = 9)
+    @Column(name = "account_cbrbic", length = 9, nullable = false)
     private Long accountCbrbic;
 
-    @Column(name = "date_in_accounts")
-    private LocalDate dateInAccounts;
+    @Column(name = "date_in", nullable = false)
+    private LocalDate dateIn;
 
-    @Column(name = "date_out_accounts")
-    private LocalDate dateOutAccounts;
+    @Column(name = "date_out")
+    private LocalDate dateOut;
 
     @Column(name = "account_status", length = 4)
     private AccountStatus accountStatus;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "bic_accounts_id")
-    private BICDirectoryEntry bicAccountsId;
+    @JoinColumn(name = "bic_directory_entry_id")
+    private BICDirectoryEntry bicDirectoryEntry;
 
-    @OneToMany(mappedBy = "accountsId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "accounts", cascade = CascadeType.ALL)
     private List<AccRstrList> accRstrLists;
 
 }

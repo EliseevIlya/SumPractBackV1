@@ -25,7 +25,7 @@ public class ParsBICDirectoryEntry {
     private ChangeType changeType;
 
     @XmlElement(name = "ParticipantInfo", namespace = "urn:cbr-ru:ed:v2.0")
-    private List<ParsParticipantInfo> parsParticipantInfos;
+    private ParsParticipantInfo parsParticipantInfo;
 
     @XmlElement(name = "SWBICS", namespace = "urn:cbr-ru:ed:v2.0")
     private List<ParsSwbics> parsSwbics;
@@ -34,13 +34,11 @@ public class ParsBICDirectoryEntry {
     private List<ParsAccounts> parsAccounts;
 
     public BICDirectoryEntry toBICDirectoryEntry() {
-        return BICDirectoryEntry.builder()
+        var bicDirectoryEntry = BICDirectoryEntry.builder()
                 .bic(bic)
                 .changeType(changeType)
-                .participantInfoList(parsParticipantInfos != null
-                        ? parsParticipantInfos.stream()
-                        .map(ParsParticipantInfo::toParticipantInfo)
-                        .collect(Collectors.toList())
+                .participantInfo(parsParticipantInfo != null
+                        ? parsParticipantInfo.toParticipantInfo()
                         : null)
                 .swbicsList(parsSwbics != null
                         ? parsSwbics.stream()
@@ -53,6 +51,18 @@ public class ParsBICDirectoryEntry {
                         .collect(Collectors.toList())
                         : null)
                 .build();
+        if (bicDirectoryEntry.getParticipantInfo() != null) {
+            bicDirectoryEntry.getParticipantInfo().setBicDirectoryEntry(bicDirectoryEntry);
+        }
+        if (bicDirectoryEntry.getSwbicsList() != null) {
+            bicDirectoryEntry.getSwbicsList().forEach(swbics ->
+                swbics.setBicDirectoryEntry(bicDirectoryEntry));
+        }
+        if (bicDirectoryEntry.getAccountsList() != null) {
+            bicDirectoryEntry.getAccountsList().forEach(accounts ->
+                accounts.setBicDirectoryEntry(bicDirectoryEntry));
+        }
+        return bicDirectoryEntry;
     }
 
 }

@@ -19,10 +19,10 @@ import java.time.LocalDate;
 @SQLDelete(sql = "UPDATE acc_rstr_list SET deleted = true WHERE id=?")
 public class AccRstrList extends BaseEntity {
 
-    @Column(name = "acc_rstr", length = 4)
+    @Column(name = "acc_rstr", length = 4, nullable = false)
     private AccRstr accRstr;
 
-    @Column(name = "acc_rstr_date")
+    @Column(name = "acc_rstr_date", nullable = false)
     private LocalDate accRstrDate;
 
     @Column(name = "successo_bic")
@@ -30,6 +30,6 @@ public class AccRstrList extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accounts_id")
-    private Accounts accountsId;
+    private Accounts accounts;
 
 }

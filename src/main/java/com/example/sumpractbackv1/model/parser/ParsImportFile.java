@@ -50,16 +50,16 @@ public class ParsImportFile {
     private Integer directoryVersion;
 
     @XmlElement(name = "PartInfo", namespace = "urn:cbr-ru:ed:v2.0")
-    private List<ParsPartInfo> parsPartInfo;
+    private ParsPartInfo parsPartInfo;
 
     @XmlElement(name = "InitialED", namespace = "urn:cbr-ru:ed:v2.0")
-    private List<ParsInitialED> parsInitialED;
+    private ParsInitialED parsInitialED;
 
     @XmlElement(name = "BICDirectoryEntry", namespace = "urn:cbr-ru:ed:v2.0")
     private List<ParsBICDirectoryEntry> parsBICDirectoryEntries;
 
     public ImportData toImportData() {
-        return ImportData.builder()
+        var importData = ImportData.builder()
                 .xmlns("urn:cbr-ru:ed:v2.0")
                 .edno(edno)
                 .edDate(edDate != null ? LocalDate.parse(edDate) : null)
@@ -72,15 +72,11 @@ public class ParsImportFile {
                 .businessDay(businessDay != null ?
                         LocalDate.parse(businessDay) : null)
                 .directoryVersion(directoryVersion)
-                .partInfoList(parsPartInfo != null
-                        ? parsPartInfo.stream()
-                        .map(ParsPartInfo::toPartInfo)
-                        .collect(Collectors.toList())
+                .partInfo(parsPartInfo != null
+                        ? parsPartInfo.toPartInfo()
                         : null)
-                .initialEDList(parsInitialED != null
-                        ? parsInitialED.stream()
-                        .map(ParsInitialED::toInitialED)
-                        .collect(Collectors.toList())
+                .initialED(parsInitialED != null
+                        ? parsInitialED.toInitialED()
                         : null)
                 .bicDirectoryEntryList(parsBICDirectoryEntries != null
                         ? parsBICDirectoryEntries.stream()
@@ -88,6 +84,17 @@ public class ParsImportFile {
                         .collect(Collectors.toList())
                         : null)
                 .build();
+        if (importData.getPartInfo() != null) {
+            importData.getPartInfo().setImportData(importData);
+        }
+        if (importData.getInitialED() != null) {
+            importData.getInitialED().setImportData(importData);
+        }
+        if (importData.getBicDirectoryEntryList() != null) {
+            importData.getBicDirectoryEntryList().forEach(bicDirectoryEntry ->
+                bicDirectoryEntry.setImportData(importData));
+        }
+        return importData;
     }
 
 }
