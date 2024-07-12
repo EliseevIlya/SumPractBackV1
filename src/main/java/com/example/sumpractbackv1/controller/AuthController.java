@@ -1,17 +1,9 @@
 package com.example.sumpractbackv1.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.sumpractbackv1.config.JwtAuthenticationFilter;
 import com.example.sumpractbackv1.model.dto.JwtAuthenticationResponse;
 import com.example.sumpractbackv1.model.dto.SignInRequest;
 import com.example.sumpractbackv1.service.AuthenticationService;
-
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -84,5 +76,5 @@ public class AuthController {
         authenticationService.signOut(accessToken, refreshToken, response);
         return ResponseEntity.ok().body("ok");
     }
-	
+
 }

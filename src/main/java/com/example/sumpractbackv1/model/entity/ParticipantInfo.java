@@ -3,11 +3,10 @@ package com.example.sumpractbackv1.model.entity;
 import com.example.sumpractbackv1.model.enums.ParticipantStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "participant_info")

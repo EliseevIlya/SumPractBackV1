@@ -2,10 +2,9 @@ package com.example.sumpractbackv1.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.time.LocalDate;
-
-import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "initial_ed")

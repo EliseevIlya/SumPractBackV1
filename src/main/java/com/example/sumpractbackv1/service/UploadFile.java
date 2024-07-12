@@ -19,10 +19,9 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class UploadFile {
+    private final XmlToDatabase xmlToDatabase;
     @Value("${file.upload-dir}")
     private String uploadDir;
-
-    private final XmlToDatabase xmlToDatabase;
 
     public ResponseEntity<String> uploadFile(MultipartFile file) {
         if (file.isEmpty()) {
