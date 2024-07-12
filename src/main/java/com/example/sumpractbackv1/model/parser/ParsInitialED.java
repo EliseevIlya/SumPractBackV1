@@ -25,9 +25,9 @@ public class ParsInitialED {
 
     public InitialED toInitialED() {
         return InitialED.builder()
-                .ednoInitial(edno)
-                .edDateInitial(edDate != null ? LocalDate.parse(edDate) : null)
-                .edAuthorInitial(edAuthor)
+                .edno(edno)
+                .edDate(edDate != null ? LocalDate.parse(edDate) : null)
+                .edAuthor(edAuthor)
                 .build();
     }
 

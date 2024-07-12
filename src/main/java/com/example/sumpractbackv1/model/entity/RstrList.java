@@ -18,14 +18,14 @@ import java.time.LocalDate;
 @SQLDelete(sql = "UPDATE rstr_list SET deleted = true WHERE id = ?")
 public class RstrList extends BaseEntity {
 
-    @Column(name = "rstr", length = 4)
+    @Column(name = "rstr", length = 4, nullable = false)
     private Rstr rstr;
 
-    @Column(name = "rstr_date")
+    @Column(name = "rstr_date", nullable = false)
     private LocalDate rstrDate;
 
     @ManyToOne()
-    @JoinColumn(name = "participant_info_rstr_list_id")
-    private ParticipantInfo participantInfoRstrListId;
+    @JoinColumn(name = "participant_info_id")
+    private ParticipantInfo participantInfo;
 
 }

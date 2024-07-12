@@ -1,6 +1,5 @@
 package com.example.sumpractbackv1.model.parser;
 
-
 import com.example.sumpractbackv1.model.entity.PartInfo;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;

@@ -44,13 +44,13 @@ public class ParsAccounts {
     private List<ParsAccRstrList> parsAccRstrList;
 
     public Accounts toAccounts() {
-        return Accounts.builder()
+        var accounts = Accounts.builder()
                 .account(account)
                 .regulationAccountType(regulationAccountType)
                 .ck(ck)
                 .accountCbrbic(accountCBRBIC)
-                .dateInAccounts(dateIn != null ? LocalDate.parse(dateIn) : null)
-                .dateOutAccounts(dateOut != null ? LocalDate.parse(dateOut) : null)
+                .dateIn(dateIn != null ? LocalDate.parse(dateIn) : null)
+                .dateOut(dateOut != null ? LocalDate.parse(dateOut) : null)
                 .accountStatus(accountStatus)
                 .accRstrLists(parsAccRstrList != null
                         ? parsAccRstrList.stream()
@@ -58,6 +58,11 @@ public class ParsAccounts {
                         .collect(Collectors.toList())
                         : null)
                 .build();
+        if (accounts.getAccRstrLists() != null) {
+            accounts.getAccRstrLists().forEach(accRstrList ->
+                accRstrList.setAccounts(accounts));
+        }
+        return accounts;
     }
 
 }

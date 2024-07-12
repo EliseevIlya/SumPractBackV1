@@ -73,7 +73,7 @@ public class ParsParticipantInfo {
     private List<ParsRstrList> parsRstrList;
 
     public ParticipantInfo toParticipantInfo() {
-        return ParticipantInfo.builder()
+        var participantInfo = ParticipantInfo.builder()
                 .nameP(nameP)
                 .englName(engName)
                 .regN(regN)
@@ -84,8 +84,8 @@ public class ParsParticipantInfo {
                 .nnp(nnp)
                 .adr(adr)
                 .prntBIC(prntBIC)
-                .dateInParticipant(dateIn != null ? LocalDate.parse(dateIn) : null)
-                .dateOutParticipant(dateOut != null ? LocalDate.parse(dateOut) : null)
+                .dateIn(dateIn != null ? LocalDate.parse(dateIn) : null)
+                .dateOut(dateOut != null ? LocalDate.parse(dateOut) : null)
                 .ptType(ptType)
                 .srvcs(srvcs)
                 .xchType(xchType)
@@ -97,5 +97,10 @@ public class ParsParticipantInfo {
                         .collect(Collectors.toList())
                         : null)
                 .build();
+        if (participantInfo.getRstrLists() != null) {
+            participantInfo.getRstrLists().forEach(rstrList ->
+                    rstrList.setParticipantInfo(participantInfo));
+        }
+        return participantInfo;
     }
 }

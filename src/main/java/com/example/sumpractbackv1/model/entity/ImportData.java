@@ -25,40 +25,40 @@ public class ImportData extends BaseEntity {
     @Column(name = "xmlns", length = 255)
     private String xmlns;
 
-    @Column(name = "edno", length = 9)
+    @Column(name = "edno", length = 9, nullable = false)
     private Long edno;
 
-    @Column(name = "ed_date")
+    @Column(name = "ed_date", nullable = false)
     private LocalDate edDate;
 
-    @Column(name = "ed_author", length = 10)
+    @Column(name = "ed_author", length = 10, nullable = false)
     private Long edAuthor;
 
     @Column(name = "ed_receiver", length = 10)
     private Long edReceiver;
 
-    @Column(name = "creation_reason", length = 4)
+    @Column(name = "creation_reason", length = 4, nullable = false)
     private CreationReason creationReason;
 
-    @Column(name = "creation_date_time")
+    @Column(name = "creation_date_time", nullable = false)
     private ZonedDateTime creationDateTime;
 
-    @Column(name = "info_type_code", length = 4)
+    @Column(name = "info_type_code", length = 4, nullable = false)
     private InfoTypeCode infoTypeCode;
 
-    @Column(name = "business_day")
+    @Column(name = "business_day", nullable = false)
     private LocalDate businessDay;
 
     @Column(name = "directory_version")
     private Integer directoryVersion;
 
-    @OneToMany(mappedBy = "importDataPartInfoId", cascade = CascadeType.ALL)
-    private List<PartInfo> partInfoList;
+    @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL)
+    private PartInfo partInfo;
 
-    @OneToMany(mappedBy = "importDataInitialId", cascade = CascadeType.ALL)
-    private List<InitialED> initialEDList;
+    @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL)
+    private InitialED initialED;
 
-    @OneToMany(mappedBy = "importDataBicId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "importData", cascade = CascadeType.ALL)
     private List<BICDirectoryEntry> bicDirectoryEntryList;
 
 }
