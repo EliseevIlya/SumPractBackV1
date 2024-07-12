@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.response.ImportDataResponse;
 import com.example.sumpractbackv1.model.dto.search.*;
 import com.example.sumpractbackv1.model.entity.*;
 import com.example.sumpractbackv1.service.MainService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -80,8 +82,9 @@ public class MainController {
     }
 
     @GetMapping("/ImportDataGet")
-    public ResponseEntity<List<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
-        List<ImportData> result = mainService.searchImportData(criteria);
+    public ResponseEntity<List<ImportDataResponse>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
+        List<ImportDataResponse> result = mainService.searchImportData(criteria)
+                .stream().map(ImportDataResponse::new).collect(Collectors.toList());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
