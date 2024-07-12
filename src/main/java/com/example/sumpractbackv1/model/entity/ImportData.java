@@ -4,15 +4,11 @@ import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
-
-import org.hibernate.annotations.SQLDelete;
-
-import com.example.sumpractbackv1.model.enums.CreationReason;
-import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
 
 @Entity

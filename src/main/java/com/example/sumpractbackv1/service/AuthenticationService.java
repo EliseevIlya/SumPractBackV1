@@ -26,7 +26,7 @@ public class AuthenticationService {
     /**
      * Аутентификация пользователя
      *
-     * @param request данные пользователя
+     * @param request  данные пользователя
      * @param response ответ
      * @return токен
      */
@@ -64,7 +64,7 @@ public class AuthenticationService {
      * Обновление токена
      *
      * @param refreshToken токен
-     * @param response ответ
+     * @param response     ответ
      * @return новый токен
      */
     public JwtAuthenticationResponse refreshToken(String refreshToken, HttpServletResponse response) {
@@ -107,9 +107,9 @@ public class AuthenticationService {
     /**
      * Выход пользователя
      *
-     * @param accessToken токен
+     * @param accessToken  токен
      * @param refreshToken токен
-     * @param response ответ
+     * @param response     ответ
      * @throws IOException в случае ошибки при работе с HTTP ответом
      */
     public void signOut(String accessToken, String refreshToken, HttpServletResponse response) {
@@ -126,5 +126,5 @@ public class AuthenticationService {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
     }
-	
+
 }

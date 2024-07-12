@@ -1,9 +1,8 @@
 package com.example.sumpractbackv1.model.entity;
 
-import org.hibernate.annotations.SQLDelete;
-
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "part_info")

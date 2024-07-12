@@ -11,10 +11,10 @@ public interface TokenRepository extends JpaRepository<Token, String> {
 
     Optional<Token> findByAccessToken(String accessToken);
 
-	Optional<Token> findByRefreshToken(String refreshToken);
+    Optional<Token> findByRefreshToken(String refreshToken);
 
-	void deleteByAccessToken(String accessToken);
+    void deleteByAccessToken(String accessToken);
 
-	void deleteByRefreshToken(String refreshToken);
-	
+    void deleteByRefreshToken(String refreshToken);
+
 }

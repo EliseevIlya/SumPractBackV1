@@ -3,10 +3,9 @@ package com.example.sumpractbackv1.model.entity;
 import com.example.sumpractbackv1.model.enums.ChangeType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.util.List;
-
-import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "bic_directory_entry")
@@ -35,7 +34,7 @@ public class BICDirectoryEntry extends BaseEntity {
     @OneToMany(mappedBy = "bicSwibcsId", cascade = CascadeType.ALL)
     private List<Swbics> swbicsList;
 
-    @OneToMany(mappedBy = "bicAccountsId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bicAccountsId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Accounts> accountsList;
 
 }

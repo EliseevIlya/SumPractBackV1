@@ -1,9 +1,8 @@
 package com.example.sumpractbackv1.model.entity;
 
-import org.hibernate.annotations.SQLDelete;
-
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "swbics")
@@ -25,5 +24,5 @@ public class Swbics extends BaseEntity {
     @ManyToOne()
     @JoinColumn(name = "bic_swibcs_id")
     private BICDirectoryEntry bicSwibcsId;
-    
+
 }

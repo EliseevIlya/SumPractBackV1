@@ -4,11 +4,10 @@ import com.example.sumpractbackv1.model.enums.AccountStatus;
 import com.example.sumpractbackv1.model.enums.RegulationAccountType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import org.hibernate.annotations.SQLDelete;
 
 
 @Entity
@@ -43,7 +42,7 @@ public class Accounts extends BaseEntity {
     @Column(name = "account_status", length = 4)
     private AccountStatus accountStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "bic_accounts_id")
     private BICDirectoryEntry bicAccountsId;
 
