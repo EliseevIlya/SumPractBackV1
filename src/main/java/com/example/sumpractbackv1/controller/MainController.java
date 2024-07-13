@@ -107,7 +107,7 @@ public class MainController {
     }
 
     @GetMapping("/RstrListGet")
-    public ResponseEntity<List<RstrList>> searchRstrList(@Valid RstrListSearchCriteria criteria) {
+    public ResponseEntity<List<RstrList>> searchRstrList(RstrListSearchCriteria criteria) {
         List<RstrList> result = mainService.searchRstrList(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

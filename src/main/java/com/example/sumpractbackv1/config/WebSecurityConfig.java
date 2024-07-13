@@ -32,6 +32,19 @@ public class WebSecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/auth/**",
+            "/error"
+    };
+
+    private static final String[] SWAGGER_WHITELIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-resources/**",
+            "/swagger-resources"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, Environment env) throws Exception {
         boolean dev = env.acceptsProfiles(Profiles.of("dev"));
@@ -48,7 +61,8 @@ public class WebSecurityConfig {
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> {
                     request
-                            .requestMatchers("/auth/**", "/error").permitAll()
+                            .requestMatchers(AUTH_WHITELIST).permitAll()
+                            .requestMatchers(SWAGGER_WHITELIST).permitAll()
                             .anyRequest().authenticated();
                 })
                 .httpBasic(basic -> basic.disable())

@@ -5,12 +5,15 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.springdoc.core.annotations.ParameterObject;
+
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ParameterObject
 public class AccRstrListSearchCriteria extends BaseEntitySearchCriteria {
     private AccRstr accRstr;
     private LocalDate accRstrDate;

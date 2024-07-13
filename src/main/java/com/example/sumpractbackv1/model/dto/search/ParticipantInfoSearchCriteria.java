@@ -5,11 +5,14 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.springdoc.core.annotations.ParameterObject;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ParameterObject
 public class ParticipantInfoSearchCriteria extends BaseEntitySearchCriteria {
     private String nameP;
     private String englName;

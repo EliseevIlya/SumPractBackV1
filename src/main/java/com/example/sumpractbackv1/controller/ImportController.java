@@ -18,7 +18,7 @@ public class ImportController {
 
     private final UploadFile uploadFile;
 
-    @PostMapping("/upload")
+    @PostMapping(path = "/upload", consumes = "multipart/form-data")
     public void uploadFile(@RequestParam(value = "file") MultipartFile file) {
         uploadFile.uploadFile(file);
 
