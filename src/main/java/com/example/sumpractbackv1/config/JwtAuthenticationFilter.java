@@ -32,14 +32,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        if (request.getServletPath().startsWith("/api/auth/")) {
-            filterChain.doFilter(RequestURIOverriderServletFilter.getFilter(request), response);
+        if (request.getServletPath().startsWith("/auth/")) {
+            filterChain.doFilter(request, response);
             return;
         }
 
         var authHeader = request.getHeader(HEADER_NAME);
         if (StringUtils.isEmpty(authHeader) || !authHeader.startsWith(BEARER_PREFIX)) {
-            filterChain.doFilter(RequestURIOverriderServletFilter.getFilter(request), response);
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -70,7 +70,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (JwtException e) {
         }
-        filterChain.doFilter(RequestURIOverriderServletFilter.getFilter(request), response);
+        filterChain.doFilter(request, response);
     }
 
 }
