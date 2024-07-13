@@ -5,11 +5,14 @@ import lombok.*;
 
 import java.util.Date;
 
+import org.springdoc.core.annotations.ParameterObject;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ParameterObject
 public class UserSearchCriteria {
     private Long id;
     private String username;

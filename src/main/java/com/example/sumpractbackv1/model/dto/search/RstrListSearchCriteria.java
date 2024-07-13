@@ -4,11 +4,14 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.springdoc.core.annotations.ParameterObject;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ParameterObject
 public class RstrListSearchCriteria extends BaseEntitySearchCriteria {
     private String rstr;
     private LocalDate rstrDate;

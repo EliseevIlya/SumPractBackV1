@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
+
+import io.swagger.v3.oas.annotations.Parameter;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class BaseEntitySearchCriteria {
 
     private Long id;
@@ -18,7 +22,7 @@ public class BaseEntitySearchCriteria {
     private LocalDateTime lastModifiedDate;
     private String createdBy;
     private String lastModifiedBy;
-    private Boolean deleted;
-
+    @Parameter()
+    private Boolean deleted = Boolean.FALSE;
 
 }
