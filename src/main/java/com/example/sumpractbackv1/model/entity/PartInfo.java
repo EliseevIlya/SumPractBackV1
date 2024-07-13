@@ -12,7 +12,7 @@ import org.hibernate.annotations.SQLDelete;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@SQLDelete(sql = "UPDATE part_info SET deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE part_info SET deleted = true, import_data_id = null WHERE id = ?")
 public class PartInfo extends BaseEntity {
 
     @Column(name = "part_no", length = 6, nullable = false)
@@ -24,7 +24,7 @@ public class PartInfo extends BaseEntity {
     @Column(name = "part_aggregate_id", length = 27, nullable = false)
     private String partAggregateID;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "import_data_id")
     private ImportData importData;
 

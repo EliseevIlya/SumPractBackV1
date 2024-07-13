@@ -2,6 +2,7 @@ package com.example.sumpractbackv1.util.specifications;
 
 import com.example.sumpractbackv1.model.dto.search.AccountsSearchCriteria;
 import com.example.sumpractbackv1.model.entity.Accounts;
+
 import jakarta.persistence.criteria.Predicate;
 import lombok.ToString;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,31 +18,49 @@ public class AccountsSpecifications {
             List<Predicate> predicates = new ArrayList<>();
 
             // Поля Accounts
-            if (criteria.getAccount() != null && !criteria.getAccount().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("account"), criteria.getAccount()));
+            if (criteria.getSearchAccount() != null && !criteria.getSearchAccount().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("account"),
+                    StaticUtils.likePattern(criteria.getSearchAccount())));
             }
             if (criteria.getRegulationAccountType() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("regulationAccountType"), criteria.getRegulationAccountType()));
+                predicates.add(criteriaBuilder.equal(root.get("regulationAccountType"),
+                    criteria.getRegulationAccountType()));
             }
-            if (criteria.getCk() != null && !criteria.getCk().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("ck"), criteria.getCk()));
+            if (criteria.getSearchCk() != null && !criteria.getSearchCk().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("ck"),
+                    StaticUtils.likePattern(criteria.getSearchCk())));
             }
-            if (criteria.getAccountCbrbic() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("accountCbrbic"), criteria.getAccountCbrbic()));
+            if (criteria.getSearchAccountCbrbic() != null) {
+                predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("accountCbrbic"),
+                    criteria.getSearchAccountCbrbic()));
             }
-            if (criteria.getDateInAccounts() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("dateInAccounts"), criteria.getDateInAccounts()));
+            if (criteria.getFromDateInAccounts() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateInAccounts"),
+                    criteria.getFromDateInAccounts()));
             }
-            if (criteria.getDateOutAccounts() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("dateOutAccounts"), criteria.getDateOutAccounts()));
+            if (criteria.getToDateInAccounts() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateInAccounts"),
+                    criteria.getToDateInAccounts()));
+            }
+            if (criteria.getFromDateOutAccounts() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateOutAccounts"),
+                    criteria.getFromDateOutAccounts()));
+            }
+            if (criteria.getToDateOutAccounts() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateOutAccounts"),
+                    criteria.getToDateOutAccounts()));
             }
             if (criteria.getAccountStatus() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("accountStatus"), criteria.getAccountStatus()));
+                predicates.add(criteriaBuilder.equal(root.get("accountStatus"),
+                    criteria.getAccountStatus()));
+            }
+            if (criteria.getBicDirectoryEntryId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("bicDirectoryEntry").get("id"),
+                    criteria.getBicDirectoryEntryId()));
             }
 
             // Поля BaseEntity
             predicates.addAll(BaseEntitySpecifications.byBaseCriteria(root, query, criteriaBuilder, criteria));
-
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };

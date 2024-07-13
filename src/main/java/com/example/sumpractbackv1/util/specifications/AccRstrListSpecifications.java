@@ -2,6 +2,7 @@ package com.example.sumpractbackv1.util.specifications;
 
 import com.example.sumpractbackv1.model.dto.search.AccRstrListSearchCriteria;
 import com.example.sumpractbackv1.model.entity.AccRstrList;
+
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -16,16 +17,24 @@ public class AccRstrListSpecifications {
 
             // Поля AccRstrList
             if (criteria.getAccRstr() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("accRstr"), criteria.getAccRstr()));
+                predicates.add(criteriaBuilder.equal(root.get("accRstr"),
+                    criteria.getAccRstr()));
             }
-            if (criteria.getAccRstrDate() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("accRstrDate"), criteria.getAccRstrDate()));
+            if (criteria.getFromAccRstrDate() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("accRstrDate"),
+                    criteria.getFromAccRstrDate()));
             }
-            if (criteria.getSuccessorBIC() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("successorBIC"), criteria.getSuccessorBIC()));
+            if (criteria.getToAccRstrDate() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("accRstrDate"),
+                    criteria.getToAccRstrDate()));
+            }
+            if (criteria.getSearchSuccessorBIC() != null) {
+                predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("successorBIC"),
+                    criteria.getSearchSuccessorBIC()));
             }
             if (criteria.getAccountsId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("accountsId").get("id"), criteria.getAccountsId()));
+                predicates.add(criteriaBuilder.equal(root.get("accounts").get("id"),
+                    criteria.getAccountsId()));
             }
 
             // Поля BaseEntity

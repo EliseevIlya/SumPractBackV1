@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@SQLDelete(sql = "UPDATE participant_info SET deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE participant_info SET deleted = true, bic_directory_entry_id = null WHERE id = ?")
 public class ParticipantInfo extends BaseEntity {
 
     @Column(name = "name_p", length = 160, nullable = false)
