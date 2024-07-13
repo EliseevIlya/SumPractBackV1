@@ -24,7 +24,7 @@ public class BICDirectoryEntry extends BaseEntity {
     @Column(name = "change_type", length = 4)
     private ChangeType changeType;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "import_data_id")
     private ImportData importData;
 

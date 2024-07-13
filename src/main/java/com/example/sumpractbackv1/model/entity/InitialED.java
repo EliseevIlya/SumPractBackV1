@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@SQLDelete(sql = "UPDATE initial_ed SET deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE initial_ed SET deleted = true, import_data_id = null WHERE id = ?")
 public class InitialED extends BaseEntity {
 
     @Column(name = "ed_no", length = 9, nullable = false)

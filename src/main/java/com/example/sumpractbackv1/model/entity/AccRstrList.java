@@ -28,7 +28,7 @@ public class AccRstrList extends BaseEntity {
     @Column(name = "successo_bic")
     private Long successorBIC;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "accounts_id")
     private Accounts accounts;
 

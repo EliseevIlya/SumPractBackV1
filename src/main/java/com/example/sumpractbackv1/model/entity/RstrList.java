@@ -24,7 +24,7 @@ public class RstrList extends BaseEntity {
     @Column(name = "rstr_date", nullable = false)
     private LocalDate rstrDate;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "participant_info_id")
     private ParticipantInfo participantInfo;
 

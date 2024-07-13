@@ -21,7 +21,7 @@ public class Swbics extends BaseEntity {
     @Column(name = "default_swbic", length = 1, nullable = false)
     private Integer defaultSwbic;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "bic_directory_entry_id")
     private BICDirectoryEntry bicDirectoryEntry;
 
