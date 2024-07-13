@@ -10,7 +10,7 @@
 | JWT_SECRET           | ...                                      | ключ для генерации и проверки токена |
 | ADMIN_USER           | admin                                    | Имя первого админа                                  |
 | ADMIN_PASSWORD       | admin                                    | Пароль первого админа                            |
-| PROFILE              | prod                                     | если установить dev отключит cors             |
+| PROFILE              | dev                                      | dev отключает cors                                        |
 
 Можно также установить в `application.properties`.
 
