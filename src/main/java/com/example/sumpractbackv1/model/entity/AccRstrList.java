@@ -1,6 +1,10 @@
 package com.example.sumpractbackv1.model.entity;
 
 import com.example.sumpractbackv1.model.enums.AccRstr;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -30,6 +34,8 @@ public class AccRstrList extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "accounts_id")
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
     private Accounts accounts;
 
 }

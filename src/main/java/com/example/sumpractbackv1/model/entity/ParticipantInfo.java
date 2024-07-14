@@ -1,9 +1,14 @@
 package com.example.sumpractbackv1.model.entity;
 
 import com.example.sumpractbackv1.model.enums.ParticipantStatus;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -72,9 +77,14 @@ public class ParticipantInfo extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bic_directory_entry_id")
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
     private BICDirectoryEntry bicDirectoryEntry;
 
     @OneToMany(mappedBy = "participantInfo", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @SQLRestriction("deleted = false")
     private List<RstrList> rstrLists;
 
 }

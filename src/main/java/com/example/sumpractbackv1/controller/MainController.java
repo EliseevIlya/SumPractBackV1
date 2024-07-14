@@ -1,12 +1,9 @@
 package com.example.sumpractbackv1.controller;
 
-import com.example.sumpractbackv1.model.dto.response.ImportDataResponse;
-import com.example.sumpractbackv1.model.dto.response.InitialEDResponse;
-import com.example.sumpractbackv1.model.dto.response.PartInfoResponse;
 import com.example.sumpractbackv1.model.dto.search.*;
 import com.example.sumpractbackv1.model.entity.*;
 import com.example.sumpractbackv1.service.MainService;
-import com.example.sumpractbackv1.service.XmlToDatabase;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,7 +20,6 @@ import java.util.stream.Collectors;
 public class MainController {
 
     private final MainService mainService;
-    private final XmlToDatabase xmlToDatabase;
     //TODO переписать через ResponseEntity и параметры запроса
     /*
     @GetMapping("/importData")
@@ -83,17 +78,18 @@ public class MainController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    // @ApiResponse(content = @Content(
+    //     array = @ArraySchema(schema = @Schema(implementation = ImportDataResponse.class))
+    // ))
     @GetMapping("/ImportDataGet")
-    public ResponseEntity<List<ImportDataResponse>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
-        List<ImportDataResponse> result = mainService.searchImportData(criteria)
-                .stream().map(ImportDataResponse::new).collect(Collectors.toList());
+    public ResponseEntity<List<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
+        List<ImportData> result = mainService.searchImportData(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/InitialEDGet")
-    public ResponseEntity<List<InitialEDResponse>> searchInitialED(@Valid InitialEDSearchCriteria criteria) {
-        List<InitialEDResponse> result = mainService.searchInitialED(criteria)
-            .stream().map(InitialEDResponse::new).collect(Collectors.toList());
+    public ResponseEntity<List<InitialED>> searchInitialED(@Valid InitialEDSearchCriteria criteria) {
+        List<InitialED> result = mainService.searchInitialED(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -104,9 +100,8 @@ public class MainController {
     }
 
     @GetMapping("/PartInfoGet")
-    public ResponseEntity<List<PartInfoResponse>> searchPartInfo(@Valid PartInfoSearchCriteria criteria) {
-        List<PartInfoResponse> result = mainService.searchPartInfo(criteria)
-            .stream().map(PartInfoResponse::new).collect(Collectors.toList());
+    public ResponseEntity<List<PartInfo>> searchPartInfo(@Valid PartInfoSearchCriteria criteria) {
+        List<PartInfo> result = mainService.searchPartInfo(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
