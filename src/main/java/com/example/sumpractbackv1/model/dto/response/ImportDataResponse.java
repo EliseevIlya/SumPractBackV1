@@ -12,8 +12,13 @@ import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
-@Data
-public class ImportDataResponse {
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Getter
+@Setter
+@ToString
+@Schema(name = "ImportData")
+public class ImportDataResponse extends BaseEntityResponse {
 	
 	private String xmlns;
 
@@ -37,11 +42,13 @@ public class ImportDataResponse {
 
 	private PartInfoResponse partInfo;
 
+	@Schema(nullable = true)
 	private InitialEDResponse initialED;
 
 	private List<Long> bicDirectoryEntryList;
 
 	public ImportDataResponse(ImportData importData) {
+		super(importData);
 		this.xmlns = importData.getXmlns();
 		this.edno = importData.getEdno();
 		this.edDate = importData.getEdDate();
@@ -62,7 +69,7 @@ public class ImportDataResponse {
 				? importData.getBicDirectoryEntryList().stream()
 						.map(BICDirectoryEntry::getId)
 						.collect(Collectors.toList())
-				: null;
+				: List.of();
 	}
 
 }

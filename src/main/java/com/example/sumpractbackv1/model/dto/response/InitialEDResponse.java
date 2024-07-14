@@ -4,10 +4,14 @@ import java.time.LocalDate;
 
 import com.example.sumpractbackv1.model.entity.InitialED;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-@Data
-public class InitialEDResponse {
+@Getter
+@Setter
+@ToString
+@Schema(name = "InitialED")
+public class InitialEDResponse extends BaseEntityResponse {
 
 	private Long edno;
 
@@ -16,6 +20,7 @@ public class InitialEDResponse {
 	private Long edAuthor;
 
 	public InitialEDResponse(InitialED initialED) {
+		super(initialED);
 		this.edno = initialED.getEdno();
 		this.edDate = initialED.getEdDate();
 		this.edAuthor = initialED.getEdAuthor();

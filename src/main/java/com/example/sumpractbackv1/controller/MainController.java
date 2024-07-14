@@ -1,6 +1,8 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.response.ImportDataResponse;
+import com.example.sumpractbackv1.model.dto.response.InitialEDResponse;
+import com.example.sumpractbackv1.model.dto.response.PartInfoResponse;
 import com.example.sumpractbackv1.model.dto.search.*;
 import com.example.sumpractbackv1.model.entity.*;
 import com.example.sumpractbackv1.service.MainService;
@@ -89,8 +91,9 @@ public class MainController {
     }
 
     @GetMapping("/InitialEDGet")
-    public ResponseEntity<List<InitialED>> searchInitialED(@Valid InitialEDSearchCriteria criteria) {
-        List<InitialED> result = mainService.searchInitialED(criteria);
+    public ResponseEntity<List<InitialEDResponse>> searchInitialED(@Valid InitialEDSearchCriteria criteria) {
+        List<InitialEDResponse> result = mainService.searchInitialED(criteria)
+            .stream().map(InitialEDResponse::new).collect(Collectors.toList());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -101,8 +104,9 @@ public class MainController {
     }
 
     @GetMapping("/PartInfoGet")
-    public ResponseEntity<List<PartInfo>> searchPartInfo(@Valid PartInfoSearchCriteria criteria) {
-        List<PartInfo> result = mainService.searchPartInfo(criteria);
+    public ResponseEntity<List<PartInfoResponse>> searchPartInfo(@Valid PartInfoSearchCriteria criteria) {
+        List<PartInfoResponse> result = mainService.searchPartInfo(criteria)
+            .stream().map(PartInfoResponse::new).collect(Collectors.toList());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
