@@ -1,6 +1,10 @@
 package com.example.sumpractbackv1.model.entity;
 
 import com.example.sumpractbackv1.model.enums.Rstr;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -24,8 +28,10 @@ public class RstrList extends BaseEntity {
     @Column(name = "rstr_date", nullable = false)
     private LocalDate rstrDate;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "participant_info_id")
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
     private ParticipantInfo participantInfo;
 
 }

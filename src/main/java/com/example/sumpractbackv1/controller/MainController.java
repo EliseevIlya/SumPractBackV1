@@ -3,7 +3,7 @@ package com.example.sumpractbackv1.controller;
 import com.example.sumpractbackv1.model.dto.search.*;
 import com.example.sumpractbackv1.model.entity.*;
 import com.example.sumpractbackv1.service.MainService;
-import com.example.sumpractbackv1.service.XmlToDatabase;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,6 @@ import java.util.List;
 public class MainController {
 
     private final MainService mainService;
-    private final XmlToDatabase xmlToDatabase;
     //TODO переписать через ResponseEntity и параметры запроса
     /*
     @GetMapping("/importData")
@@ -79,6 +78,9 @@ public class MainController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    // @ApiResponse(content = @Content(
+    //     array = @ArraySchema(schema = @Schema(implementation = ImportDataResponse.class))
+    // ))
     @GetMapping("/ImportDataGet")
     public ResponseEntity<List<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
         List<ImportData> result = mainService.searchImportData(criteria);
