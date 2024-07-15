@@ -27,7 +27,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE import_data SET deleted = true WHERE id = ?")
 public class ImportData extends BaseEntity {
 
-    @Column(name = "xmlns", length = 255)
+    @Column(name = "xmlns")
     private String xmlns;
 
     @Column(name = "edno", length = 9, nullable = false)
@@ -54,19 +54,19 @@ public class ImportData extends BaseEntity {
     @Column(name = "business_day", nullable = false)
     private LocalDate businessDay;
 
-    @Column(name = "directory_version")
+    @Column(name = "directory_version", length = 2)
     private Integer directoryVersion;
 
     @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL)
     private PartInfo partInfo;
 
     @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL)
-    private InitialED initialED;
+    private InitialEd initialED;
 
     @OneToMany(mappedBy = "importData", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId=true)
     @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
     @SQLRestriction("deleted = false")
-    private List<BICDirectoryEntry> bicDirectoryEntryList;
+    private List<BicDirectoryEntry> bicDirectoryEntryList;
 
 }

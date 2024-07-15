@@ -1,7 +1,7 @@
 package com.example.sumpractbackv1.util.specifications;
 
 import com.example.sumpractbackv1.model.dto.search.InitialEdSearchCriteria;
-import com.example.sumpractbackv1.model.entity.InitialED;
+import com.example.sumpractbackv1.model.entity.InitialEd;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class InitialEdSpecifications {
 
-    public static Specification<InitialED> byCriteria(InitialEdSearchCriteria criteria) {
+    public static Specification<InitialEd> byCriteria(InitialEdSearchCriteria criteria) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

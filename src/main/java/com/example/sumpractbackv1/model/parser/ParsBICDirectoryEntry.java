@@ -1,7 +1,7 @@
 package com.example.sumpractbackv1.model.parser;
 
 
-import com.example.sumpractbackv1.model.entity.BICDirectoryEntry;
+import com.example.sumpractbackv1.model.entity.BicDirectoryEntry;
 import com.example.sumpractbackv1.model.enums.ChangeType;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -33,8 +33,8 @@ public class ParsBICDirectoryEntry {
     @XmlElement(name = "Accounts", namespace = "urn:cbr-ru:ed:v2.0")
     private List<ParsAccounts> parsAccounts;
 
-    public BICDirectoryEntry toBICDirectoryEntry() {
-        var bicDirectoryEntry = BICDirectoryEntry.builder()
+    public BicDirectoryEntry toBICDirectoryEntry() {
+        var bicDirectoryEntry = BicDirectoryEntry.builder()
                 .bic(bic)
                 .changeType(changeType)
                 .participantInfo(parsParticipantInfo != null
