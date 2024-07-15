@@ -17,12 +17,28 @@ import io.swagger.v3.oas.annotations.Parameter;
 @ToString
 public class BaseEntitySearchCriteria {
 
+    @Parameter(description = "Идентификатор")
     private Long id;
-    private LocalDateTime createdDate;
-    private LocalDateTime lastModifiedDate;
+
+    @Parameter(description = "Параметр для поиска по дате создания")
+    private LocalDateTime fromCreatedDate;
+
+    @Parameter(description = "Параметр для поиска по дате создания")
+    private LocalDateTime toCreatedDate;
+
+    @Parameter(description = "Параметр для поиска по дате изменения")
+    private LocalDateTime fromLastModifiedDate;
+
+    @Parameter(description = "Параметр для поиска по дате изменения")
+    private LocalDateTime toLastModifiedDate;
+
+    @Parameter(description = "Параметр для поиска по имени создателя")
     private String createdBy;
+
+    @Parameter(description = "Параметр для поиска по имени изменявшего")
     private String lastModifiedBy;
-    @Parameter()
-    private Boolean deleted = Boolean.FALSE;
+    
+    @Parameter(description = "Флаг, показывающий нужно ли включать удаленные сущности")
+    private Boolean includeDeleted = Boolean.FALSE;
 
 }

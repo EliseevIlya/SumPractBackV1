@@ -12,7 +12,7 @@ import org.springdoc.core.annotations.ParameterObject;
 @NoArgsConstructor
 @ToString
 @ParameterObject
-public class InitialEDSearchCriteria extends BaseEntitySearchCriteria {
+public class InitialEdSearchCriteria extends BaseEntitySearchCriteria {
     private Long ednoInitial;
     private LocalDate edDateInitial;
     private Long edAuthorInitial;

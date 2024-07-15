@@ -73,7 +73,7 @@ public class MainController {
     }
 
     @GetMapping("/BicDirectoryEntryGet")
-    public ResponseEntity<List<BICDirectoryEntry>> searchBICDirectoryEntry(@Valid BICDirectoryEntrySearchCriteria criteria) {
+    public ResponseEntity<List<BICDirectoryEntry>> searchBICDirectoryEntry(@Valid BicDirectoryEntrySearchCriteria criteria) {
         List<BICDirectoryEntry> result = mainService.searchBICDirectoryEntries(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -88,7 +88,7 @@ public class MainController {
     }
 
     @GetMapping("/InitialEDGet")
-    public ResponseEntity<List<InitialED>> searchInitialED(@Valid InitialEDSearchCriteria criteria) {
+    public ResponseEntity<List<InitialED>> searchInitialED(@Valid InitialEdSearchCriteria criteria) {
         List<InitialED> result = mainService.searchInitialED(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

@@ -65,8 +65,8 @@ public class MainService {
         return accRstrListRepository.findAll(spec);
     }
 
-    public List<BICDirectoryEntry> searchBICDirectoryEntries(BICDirectoryEntrySearchCriteria criteria) {
-        Specification<BICDirectoryEntry> spec = BICDirectoryEntrySpecifications.byCriteria(criteria);
+    public List<BICDirectoryEntry> searchBICDirectoryEntries(BicDirectoryEntrySearchCriteria criteria) {
+        Specification<BICDirectoryEntry> spec = BicDirectoryEntrySpecifications.byCriteria(criteria);
         return bicDirectoryEntryRepository.findAll(spec);
     }
 
@@ -75,8 +75,8 @@ public class MainService {
         return importDataRepository.findAll(spec);
     }
 
-    public List<InitialED> searchInitialED(InitialEDSearchCriteria criteria) {
-        Specification<InitialED> spec = InitialEDSpecifications.byCriteria(criteria);
+    public List<InitialED> searchInitialED(InitialEdSearchCriteria criteria) {
+        Specification<InitialED> spec = InitialEdSpecifications.byCriteria(criteria);
         return initialEDRepository.findAll(spec);
     }
 
