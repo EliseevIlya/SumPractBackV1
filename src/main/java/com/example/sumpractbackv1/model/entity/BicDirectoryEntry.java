@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @SQLDelete(sql = "UPDATE bic_directory_entry SET deleted = true WHERE bic = ?")
-public class BICDirectoryEntry extends BaseEntity {
+public class BicDirectoryEntry extends BaseEntity {
 
     @Column(name = "bic", length = 9, nullable = false)
     private Long bic;

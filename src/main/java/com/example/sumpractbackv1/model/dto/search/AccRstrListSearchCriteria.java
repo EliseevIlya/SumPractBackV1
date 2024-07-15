@@ -29,7 +29,6 @@ public class AccRstrListSearchCriteria extends BaseEntitySearchCriteria {
     private LocalDate toAccRstrDate;
 
     @Parameter(description = "БИК преемника")
-    @Digits(integer = 9, fraction = 0)
     private String searchSuccessorBIC;
 
     @Parameter(description = "Id Accounts")

@@ -1,7 +1,7 @@
 package com.example.sumpractbackv1.util.specifications;
 
 import com.example.sumpractbackv1.model.dto.search.BICDirectoryEntrySearchCriteria;
-import com.example.sumpractbackv1.model.entity.BICDirectoryEntry;
+import com.example.sumpractbackv1.model.entity.BicDirectoryEntry;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BICDirectoryEntrySpecifications {
 
-    public static Specification<BICDirectoryEntry> byCriteria(BICDirectoryEntrySearchCriteria criteria) {
+    public static Specification<BicDirectoryEntry> byCriteria(BICDirectoryEntrySearchCriteria criteria) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.model.parser;
 
-import com.example.sumpractbackv1.model.entity.InitialED;
+import com.example.sumpractbackv1.model.entity.InitialEd;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -23,8 +23,8 @@ public class ParsInitialED {
     @XmlAttribute(name = "EDAuthor")
     private Long edAuthor;
 
-    public InitialED toInitialED() {
-        return InitialED.builder()
+    public InitialEd toInitialED() {
+        return InitialEd.builder()
                 .edno(edno)
                 .edDate(edDate != null ? LocalDate.parse(edDate) : null)
                 .edAuthor(edAuthor)
