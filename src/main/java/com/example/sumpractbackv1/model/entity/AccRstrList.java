@@ -29,7 +29,7 @@ public class AccRstrList extends BaseEntity {
     @Column(name = "acc_rstr_date", nullable = false)
     private LocalDate accRstrDate;
 
-    @Column(name = "successo_bic")
+    @Column(name = "successo_bic", length = 9)
     private Long successorBIC;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

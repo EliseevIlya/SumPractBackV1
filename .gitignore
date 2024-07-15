@@ -6,6 +6,7 @@ target/
 .env
 /uploads
 
+src/main/resources/static/Structur.docx
 ### STS ###
 .apt_generated
 .classpath

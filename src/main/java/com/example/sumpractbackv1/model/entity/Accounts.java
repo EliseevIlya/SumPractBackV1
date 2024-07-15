@@ -50,7 +50,7 @@ public class Accounts extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "bic_directory_entry_id")@JsonIdentityReference(alwaysAsId=true)
     @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-    private BICDirectoryEntry bicDirectoryEntry;
+    private BicDirectoryEntry bicDirectoryEntry;
 
     @OneToMany(mappedBy = "accounts", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId=true)
