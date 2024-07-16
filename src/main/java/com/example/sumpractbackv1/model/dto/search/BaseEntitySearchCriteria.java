@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 @ToString
 public class BaseEntitySearchCriteria {
 
-    @Parameter(description = "Идентификатор")
+    @Parameter(description = "Фильтр по идентификатору")
     private Long id;
 
     @Parameter(description = "Параметр для поиска по дате создания")

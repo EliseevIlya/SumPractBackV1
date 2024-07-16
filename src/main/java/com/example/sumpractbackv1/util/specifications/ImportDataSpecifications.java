@@ -18,23 +18,28 @@ public class ImportDataSpecifications {
             if (criteria.getXmlns() != null && !criteria.getXmlns().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("xmlns"), criteria.getXmlns()));
             }
-            if (criteria.getEdno() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("edno"), criteria.getEdno()));
+            if (criteria.getSearchEdno() != null) {
+                predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("edno"),
+                    criteria.getSearchEdno()));
             }
-            if (criteria.getEdDate() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("edDate"), criteria.getEdDate()));
+            if (criteria.getSearchEdAuthor() != null) {
+                predicates.add(StaticUtils.likeTenD(criteriaBuilder, root.get("edAuthor"),
+                    criteria.getSearchEdAuthor()));
             }
-            if (criteria.getEdAuthor() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("edAuthor"), criteria.getEdAuthor()));
-            }
-            if (criteria.getEdReceiver() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("edReceiver"), criteria.getEdReceiver()));
+            if (criteria.getSearchEdReceiver() != null) {
+                predicates.add(StaticUtils.likeTenD(criteriaBuilder, root.get("edReceiver"),
+                    criteria.getSearchEdReceiver()));
             }
             if (criteria.getCreationReason() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("creationReason"), criteria.getCreationReason()));
             }
-            if (criteria.getCreationDateTime() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("creationDateTime"), criteria.getCreationDateTime()));
+            if (criteria.getFromCreationDateTime() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("creationDateTime"),
+                    criteria.getFromCreationDateTime()));
+            }
+            if (criteria.getToCreationDateTime() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("creationDateTime"),
+                    criteria.getToCreationDateTime()));
             }
             if (criteria.getInfoTypeCode() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("infoTypeCode"), criteria.getInfoTypeCode()));

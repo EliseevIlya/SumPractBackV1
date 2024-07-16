@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
-import com.example.sumpractbackv1.model.dto.search.InitialEDSearchCriteria;
+import com.example.sumpractbackv1.model.dto.search.InitialEdSearchCriteria;
 import com.example.sumpractbackv1.model.entity.InitialEd;
 import com.example.sumpractbackv1.service.controllersServices.InitialEdService;
 import jakarta.validation.Valid;
@@ -19,8 +19,8 @@ public class InitialEdController {
     private final InitialEdService initialEdService;
 
     @GetMapping("/get")
-    public ResponseEntity<List<InitialEd>> searchInitialED(@Valid InitialEDSearchCriteria criteria) {
-        List<InitialEd> result = initialEdService.searchInitialED(criteria);
+    public ResponseEntity<List<InitialEd>> searchInitialED(@Valid InitialEdSearchCriteria criteria) {
+        List<InitialEd> result = initialEdService.searchInitialEd(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних

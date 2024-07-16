@@ -15,26 +15,25 @@ public class InitialEdSpecifications {
             List<Predicate> predicates = new ArrayList<>();
 
             // Поля InitialED
-            if (criteria.getEdnoInitial() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("ednoInitial"), criteria.getEdnoInitial()));
+            if (criteria.getSearchEdno() != null) {
+                predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("edno"),
+                    criteria.getSearchEdno()));
             }
-            if (criteria.getEdDateInitial() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("edDateInitial"), criteria.getEdDateInitial()));
+            if (criteria.getFromEdDate() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("edDate"),
+                    criteria.getFromEdDate()));
             }
-            if (criteria.getEdAuthorInitial() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("edAuthorInitial"), criteria.getEdAuthorInitial()));
+            if (criteria.getToEdDate() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("edDate"),
+                    criteria.getToEdDate()));
             }
-            if (criteria.getImportDataInitialId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("importDataInitialId"), criteria.getImportDataInitialId()));
+            if (criteria.getSearchEdAuthor() != null) {
+                predicates.add(StaticUtils.likeTenD(criteriaBuilder, root.get("edAuthor"),
+                    criteria.getSearchEdAuthor()));
             }
-            if (criteria.getCreationTimeInitial() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("creationTimeInitial"), criteria.getCreationTimeInitial()));
-            }
-            if (criteria.getChangeTimeInitial() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("changeTimeInitial"), criteria.getChangeTimeInitial()));
-            }
-            if (criteria.getDeleteTimeInitial() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("deleteTimeInitial"), criteria.getDeleteTimeInitial()));
+            if (criteria.getImportDataId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("importData").get("id"),
+                    criteria.getImportDataId()));
             }
 
             // Поля BaseEntity

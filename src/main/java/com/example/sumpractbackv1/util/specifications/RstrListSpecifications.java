@@ -15,14 +15,20 @@ public class RstrListSpecifications {
             List<Predicate> predicates = new ArrayList<>();
 
             // Поля RstrList
-            if (criteria.getRstr() != null && !criteria.getRstr().isEmpty()) {
+            if (criteria.getRstr() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("rstr"), criteria.getRstr()));
             }
-            if (criteria.getRstrDate() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("rstrDate"), criteria.getRstrDate()));
+            if (criteria.getFromRstrDate() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("rstrDate"),
+                    criteria.getFromRstrDate()));
             }
-            if (criteria.getParticipantInfoRstrListId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("participantInfoRstrListId"), criteria.getParticipantInfoRstrListId()));
+            if (criteria.getToRstrDate() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("rstrDate"),
+                    criteria.getToRstrDate()));
+            }
+            if (criteria.getParticipantInfoId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("participantInfo").get("id"),
+                    criteria.getParticipantInfoId()));
             }
 
             // Поля BaseEntity

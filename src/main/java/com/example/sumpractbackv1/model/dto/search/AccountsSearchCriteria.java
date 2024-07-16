@@ -19,35 +19,35 @@ import org.springdoc.core.annotations.ParameterObject;
 @ParameterObject
 public class AccountsSearchCriteria extends BaseEntitySearchCriteria {
 
-    @Parameter(description = "Параметр для поиска счета")
+    @Parameter(description = "Поиск по номеру счета")
     private String searchAccount;
 
-    @Parameter(description = "Тип счета")
+    @Parameter(description = "Фильтр по типу счета")
     private RegulationAccountType regulationAccountType;
 
-    @Parameter(description = "Параметр для поиска по контрольному ключу")
+    @Parameter(description = "Поиск по контрольному ключу")
     private String searchCk;
 
-    @Parameter(description = "Параметр для поиска по БИК ПБР, обслуживающего счет участника перевода")
+    @Parameter(description = "Поиск по БИК ПБР, обслуживающего счет участника перевода")
     private String searchAccountCbrbic;
     
-    @Parameter(description = "Фильтрация по дате открытия счета")
+    @Parameter(description = "Поиск по дате открытия счета")
     private LocalDate fromDateInAccounts;
 
-    @Parameter(description = "Фильтрация по дате открытия счета")
+    @Parameter(description = "Поиск по дате открытия счета")
     private LocalDate toDateInAccounts;
 
-    @Parameter(description = "Фильтрация по дате исключения информации о счете участника")
+    @Parameter(description = "Поиск по дате исключения информации о счете участника")
     private LocalDate fromDateOutAccounts;
 
-    @Parameter(description = "Фильтрация по дате исключения информации о счете участника")
+    @Parameter(description = "Поиск по дате исключения информации о счете участника")
     private LocalDate toDateOutAccounts;
 
-    @Parameter(description = "Статус счета")
+    @Parameter(description = "Фильтр по статусу счета")
     private AccountStatus accountStatus;
 
-    @Parameter(description = "Id BICDirectoryEntry")
-    @Positive(message = "Id BICDirectoryEntry должен быть больше нуля")
+    @Parameter(description = "Фильтр по Id BicDirectoryEntry")
+    @Positive(message = "Id BicDirectoryEntry должен быть больше нуля")
     private Long bicDirectoryEntryId;
 
 }

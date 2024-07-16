@@ -1,9 +1,9 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
-import com.example.sumpractbackv1.model.dto.search.InitialEDSearchCriteria;
+import com.example.sumpractbackv1.model.dto.search.InitialEdSearchCriteria;
 import com.example.sumpractbackv1.model.entity.InitialEd;
 import com.example.sumpractbackv1.repository.InitialEdRepository;
-import com.example.sumpractbackv1.util.specifications.InitialEDSpecifications;
+import com.example.sumpractbackv1.util.specifications.InitialEdSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,8 +17,8 @@ import java.util.List;
 public class InitialEdService {
     private final InitialEdRepository initialEDRepository;
 
-    public List<InitialEd> searchInitialED(InitialEDSearchCriteria criteria) {
-        Specification<InitialEd> spec = InitialEDSpecifications.byCriteria(criteria);
+    public List<InitialEd> searchInitialEd(InitialEdSearchCriteria criteria) {
+        Specification<InitialEd> spec = InitialEdSpecifications.byCriteria(criteria);
         return initialEDRepository.findAll(spec);
     }
     //TODO логику для прокидывания родителя и дочерних

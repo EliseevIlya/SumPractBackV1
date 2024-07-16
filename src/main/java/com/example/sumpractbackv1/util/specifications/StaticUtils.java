@@ -19,5 +19,17 @@ public class StaticUtils {
 			likePattern(value)
 		);
 	}
+
+	public static Predicate likeTenD(CriteriaBuilder criteriaBuilder, Expression<?> x, String value) {
+		return criteriaBuilder.like(
+			criteriaBuilder.function(
+				"to_char",
+				String.class,
+				x,
+				criteriaBuilder.literal("0000000000")
+			),
+			likePattern(value)
+		);
+	}
 	
 }
