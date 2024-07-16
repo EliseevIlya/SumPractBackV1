@@ -14,23 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/accRstrList")
 @RequiredArgsConstructor
 public class AccRstrListController {
-
     private final AccRstrListService accRstrListService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<ResponseDto<AccRstrList>> searchAccRstrList(@Valid AccRstrListSearchCriteria criteria) {
         ResponseDto<AccRstrList> result = accRstrListService.searchAccRstrList(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
 
-    @PutMapping("/create")
-    public ResponseEntity<AccRstrList> createAccRstrList(@Valid @RequestBody AccRstrList accRstrList) {
+    @PutMapping
+    public ResponseEntity<AccRstrList> saveAccRstrList(@Valid @RequestBody AccRstrList accRstrList) {
         accRstrListService.saveAccRstrList(accRstrList);
         return new ResponseEntity<>(accRstrList, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<AccRstrList> deleteAccRstrList(@PathVariable Long id) {
         if (!accRstrListService.existsAccRstrListById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
