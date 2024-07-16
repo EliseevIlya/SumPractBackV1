@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.config;
 
-import com.example.sumpractbackv1.service.UserService;
+import com.example.sumpractbackv1.service.controllersServices.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

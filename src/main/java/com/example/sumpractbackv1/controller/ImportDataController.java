@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.ImportDataSearchCriteria;
 import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.service.controllersServices.ImportDataService;
@@ -21,8 +22,8 @@ public class ImportDataController {
     //     array = @ArraySchema(schema = @Schema(implementation = ImportDataResponse.class))
     // ))
     @GetMapping("/get")
-    public ResponseEntity<List<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
-        List<ImportData> result = importDataService.searchImportData(criteria);
+    public ResponseEntity<ResponseDto<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
+        ResponseDto<ImportData> result = importDataService.searchImportData(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
