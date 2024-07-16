@@ -19,18 +19,18 @@ public class UserSpecifications {
             }
             if (criteria.getSearchUsername() != null && !criteria.getSearchUsername().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("username"),
-                    StaticUtils.likePattern(criteria.getSearchUsername())));
+                        StaticUtils.likePattern(criteria.getSearchUsername())));
             }
             if (criteria.getRole() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("role"), criteria.getRole()));
             }
             if (criteria.getFromCreatedAt() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createdAt"),
-                    criteria.getFromCreatedAt()));
+                        criteria.getFromCreatedAt()));
             }
             if (criteria.getToCreatedAt() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("createdAt"),
-                    criteria.getToCreatedAt()));
+                        criteria.getToCreatedAt()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

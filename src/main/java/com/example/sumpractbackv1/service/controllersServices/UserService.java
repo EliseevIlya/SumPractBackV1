@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,11 +54,12 @@ public class UserService {
     public UserDetailsService userDetailsService() {
         return this::getByUsername;
     }
+
     //TODO вынести в отдельный сервис или переместить в папку controllersServices
     public ResponseDto<User> searchUsers(UserSearchCriteria criteria) {
         Specification<User> spec = UserSpecifications.byCriteria(criteria);
         Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
-        return new ResponseDto<>(repository.findAll(spec,pageable));
+        return new ResponseDto<>(repository.findAll(spec, pageable));
     }
     //TODO логику для прокидывания родителя и дочерних
 

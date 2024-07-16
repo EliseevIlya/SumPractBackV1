@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/swbics")
 @RequiredArgsConstructor
@@ -34,7 +32,7 @@ public class SwbicsController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Swbics> deleteSwbics(@PathVariable Long id) {
-        if (!swbicsService.existsSwbicsById(id)){
+        if (!swbicsService.existsSwbicsById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         swbicsService.deleteSwbicsById(id);

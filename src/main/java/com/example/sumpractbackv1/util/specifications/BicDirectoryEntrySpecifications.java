@@ -17,15 +17,15 @@ public class BicDirectoryEntrySpecifications {
             // Поля BICDirectoryEntry
             if (criteria.getSearchBic() != null) {
                 predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("bic"),
-                    criteria.getSearchBic()));
+                        criteria.getSearchBic()));
             }
             if (criteria.getChangeType() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("changeType"),
-                    criteria.getChangeType()));
+                        criteria.getChangeType()));
             }
             if (criteria.getImportDataId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("importData").get("id"),
-                    criteria.getImportDataId()));
+                        criteria.getImportDataId()));
             }
 
             // Поля BaseEntity

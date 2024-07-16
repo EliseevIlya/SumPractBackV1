@@ -17,15 +17,15 @@ public class SwbicsSpecifications {
             // Поля Swbics
             if (criteria.getSearchSwbic() != null && !criteria.getSearchSwbic().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("swbic"),
-                    StaticUtils.likePattern(criteria.getSearchSwbic())));
+                        StaticUtils.likePattern(criteria.getSearchSwbic())));
             }
             if (criteria.getDefaultSwbic() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("defaultSwbic"),
-                    criteria.getDefaultSwbic()));
+                        criteria.getDefaultSwbic()));
             }
             if (criteria.getBicDirectoryEntryId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("bicDirectoryEntry").get("id"),
-                    criteria.getBicDirectoryEntryId()));
+                        criteria.getBicDirectoryEntryId()));
             }
 
             // Поля BaseEntity

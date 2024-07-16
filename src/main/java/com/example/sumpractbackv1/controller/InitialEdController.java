@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/initialEd")
 @RequiredArgsConstructor
@@ -34,7 +32,7 @@ public class InitialEdController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<InitialEd> deleteInitialED(@PathVariable Long id) {
-        if (!initialEdService.existsInitialEDById(id)){
+        if (!initialEdService.existsInitialEDById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         initialEdService.deleteInitialEDById(id);

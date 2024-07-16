@@ -10,14 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/importData")
 @RequiredArgsConstructor
 public class ImportDataController {
 
     private final ImportDataService importDataService;
+
     // @ApiResponse(content = @Content(
     //     array = @ArraySchema(schema = @Schema(implementation = ImportDataResponse.class))
     // ))
@@ -36,7 +35,7 @@ public class ImportDataController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ImportData> deleteImportData(@PathVariable Long id) {
-        if (!importDataService.existsImportDataById(id)){
+        if (!importDataService.existsImportDataById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         importDataService.deleteImportDataById(id);

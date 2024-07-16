@@ -13,8 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -24,7 +22,7 @@ public class ImportDataService {
     public ResponseDto<ImportData> searchImportData(ImportDataSearchCriteria criteria) {
         Specification<ImportData> spec = ImportDataSpecifications.byCriteria(criteria);
         Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
-        return new ResponseDto<>(importDataRepository.findAll(spec,pageable));
+        return new ResponseDto<>(importDataRepository.findAll(spec, pageable));
     }
     //TODO логику для прокидывания родителя и дочерних
 

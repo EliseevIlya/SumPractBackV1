@@ -2,7 +2,6 @@ package com.example.sumpractbackv1.util.specifications;
 
 import com.example.sumpractbackv1.model.dto.search.AccRstrListSearchCriteria;
 import com.example.sumpractbackv1.model.entity.AccRstrList;
-
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -18,23 +17,23 @@ public class AccRstrListSpecifications {
             // Поля AccRstrList
             if (criteria.getAccRstr() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("accRstr"),
-                    criteria.getAccRstr()));
+                        criteria.getAccRstr()));
             }
             if (criteria.getFromAccRstrDate() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("accRstrDate"),
-                    criteria.getFromAccRstrDate()));
+                        criteria.getFromAccRstrDate()));
             }
             if (criteria.getToAccRstrDate() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("accRstrDate"),
-                    criteria.getToAccRstrDate()));
+                        criteria.getToAccRstrDate()));
             }
             if (criteria.getSearchSuccessorBIC() != null) {
                 predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("successorBIC"),
-                    criteria.getSearchSuccessorBIC()));
+                        criteria.getSearchSuccessorBIC()));
             }
             if (criteria.getAccountsId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("accounts").get("id"),
-                    criteria.getAccountsId()));
+                        criteria.getAccountsId()));
             }
 
             // Поля BaseEntity

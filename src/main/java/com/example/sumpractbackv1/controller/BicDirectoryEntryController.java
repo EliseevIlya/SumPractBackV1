@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/bicDirectoryEntry")
 @RequiredArgsConstructor
@@ -34,7 +32,7 @@ public class BicDirectoryEntryController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<BicDirectoryEntry> deleteBICDirectoryEntry(@PathVariable Long id) {
-        if (!bicDirectoryEntryService.existsBicDirectoryEntryById(id)){
+        if (!bicDirectoryEntryService.existsBicDirectoryEntryById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         bicDirectoryEntryService.deleteBicDirectoryEntryById(id);

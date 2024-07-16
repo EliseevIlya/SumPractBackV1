@@ -13,8 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -24,7 +22,7 @@ public class AccRstrListService {
     public ResponseDto<AccRstrList> searchAccRstrList(AccRstrListSearchCriteria criteria) {
         Specification<AccRstrList> spec = AccRstrListSpecifications.byCriteria(criteria);
         Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
-        return new ResponseDto<>(accRstrListRepository.findAll(spec,pageable));
+        return new ResponseDto<>(accRstrListRepository.findAll(spec, pageable));
     }
 
     public void saveAccRstrList(AccRstrList accRstrList) {

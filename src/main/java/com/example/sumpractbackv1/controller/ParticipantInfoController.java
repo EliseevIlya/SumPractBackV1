@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/participantInfo")
 @RequiredArgsConstructor
@@ -34,7 +32,7 @@ public class ParticipantInfoController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ParticipantInfo> deleteParticipantInfo(@PathVariable Long id) {
-        if (!participantInfoService.existsParticipantInfoById(id)){
+        if (!participantInfoService.existsParticipantInfoById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         participantInfoService.deleteParticipantInfoById(id);

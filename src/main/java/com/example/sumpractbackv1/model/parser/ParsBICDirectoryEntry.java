@@ -56,11 +56,11 @@ public class ParsBICDirectoryEntry {
         }
         if (bicDirectoryEntry.getSwbicsList() != null) {
             bicDirectoryEntry.getSwbicsList().forEach(swbics ->
-                swbics.setBicDirectoryEntry(bicDirectoryEntry));
+                    swbics.setBicDirectoryEntry(bicDirectoryEntry));
         }
         if (bicDirectoryEntry.getAccountsList() != null) {
             bicDirectoryEntry.getAccountsList().forEach(accounts ->
-                accounts.setBicDirectoryEntry(bicDirectoryEntry));
+                    accounts.setBicDirectoryEntry(bicDirectoryEntry));
         }
         return bicDirectoryEntry;
     }

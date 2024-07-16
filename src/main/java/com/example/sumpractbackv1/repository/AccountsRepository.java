@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface AccountsRepository extends JpaRepository<Accounts, Long>, JpaSpecificationExecutor<Accounts> {
 
     @Query("UPDATE Accounts SET deleted = true WHERE id = ?1")
-    public void softDeleteById(Long accounts_id);
+    void softDeleteById(Long accounts_id);
 
 }

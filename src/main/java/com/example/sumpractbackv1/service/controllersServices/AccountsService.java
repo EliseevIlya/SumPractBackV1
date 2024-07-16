@@ -14,7 +14,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 
-
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -25,11 +24,11 @@ public class AccountsService {
     public ResponseDto<Accounts> searchAccounts(AccountsSearchCriteria criteria) {
         Specification<Accounts> spec = AccountsSpecifications.byCriteria(criteria);
         Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
-        return new ResponseDto<>(accountsRepository.findAll(spec,pageable));
+        return new ResponseDto<>(accountsRepository.findAll(spec, pageable));
     }
 
     //TODO логику для прокидывания родителя и дочерних
-    public void saveAccount( Accounts accounts) {
+    public void saveAccount(Accounts accounts) {
         accountsRepository.saveAndFlush(accounts);
     }
 
