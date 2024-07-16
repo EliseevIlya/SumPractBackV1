@@ -14,23 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/bicDirectoryEntry")
 @RequiredArgsConstructor
 public class BicDirectoryEntryController {
-
     private final BicDirectoryEntryService bicDirectoryEntryService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<ResponseDto<BicDirectoryEntry>> searchBICDirectoryEntry(@Valid BicDirectoryEntrySearchCriteria criteria) {
         ResponseDto<BicDirectoryEntry> result = bicDirectoryEntryService.searchBicDirectoryEntries(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
 
-    @PutMapping("/save")
+    @PutMapping
     public ResponseEntity<BicDirectoryEntry> saveBICDirectoryEntry(@Valid @RequestBody BicDirectoryEntry bicDirectoryEntry) {
         bicDirectoryEntryService.saveBicDirectoryEntry(bicDirectoryEntry);
         return new ResponseEntity<>(bicDirectoryEntry, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<BicDirectoryEntry> deleteBICDirectoryEntry(@PathVariable Long id) {
         if (!bicDirectoryEntryService.existsBicDirectoryEntryById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

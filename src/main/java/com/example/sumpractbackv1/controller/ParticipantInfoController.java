@@ -14,23 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/participantInfo")
 @RequiredArgsConstructor
 public class ParticipantInfoController {
-
     private final ParticipantInfoService participantInfoService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<ResponseDto<ParticipantInfo>> searchParticipantInfo(@Valid ParticipantInfoSearchCriteria criteria) {
         ResponseDto<ParticipantInfo> result = participantInfoService.searchParticipantInfo(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
 
-    @PutMapping("/save")
+    @PutMapping
     public ResponseEntity<ParticipantInfo> saveParticipantInfo(@Valid @RequestBody ParticipantInfo participantInfo) {
         participantInfoService.saveParticipantInfo(participantInfo);
         return new ResponseEntity<>(participantInfo, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ParticipantInfo> deleteParticipantInfo(@PathVariable Long id) {
         if (!participantInfoService.existsParticipantInfoById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

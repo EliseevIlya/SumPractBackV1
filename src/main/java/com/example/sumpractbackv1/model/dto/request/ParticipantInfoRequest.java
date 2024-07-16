@@ -2,9 +2,14 @@ package com.example.sumpractbackv1.model.dto.request;
 
 import com.example.sumpractbackv1.model.enums.ParticipantStatus;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@Getter
+@Setter
 public class ParticipantInfoRequest extends BaseEntityRequest {
 
     private String nameP;
