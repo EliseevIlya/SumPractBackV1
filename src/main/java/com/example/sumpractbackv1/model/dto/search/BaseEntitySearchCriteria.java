@@ -1,5 +1,7 @@
 package com.example.sumpractbackv1.model.dto.search;
 
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,5 +42,13 @@ public class BaseEntitySearchCriteria {
     
     @Parameter(description = "Флаг, показывающий нужно ли включать удаленные сущности")
     private Boolean includeDeleted = Boolean.FALSE;
+
+    @Parameter(description = "номер страницы")
+    @PositiveOrZero()
+    private Integer page = 0;
+
+    @Parameter(description = "количество отоброжаемых элементов")
+    @Positive()
+    private Integer size = 10;
 
 }

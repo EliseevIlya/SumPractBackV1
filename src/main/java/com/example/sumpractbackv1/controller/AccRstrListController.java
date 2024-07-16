@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.AccRstrListSearchCriteria;
 import com.example.sumpractbackv1.model.entity.AccRstrList;
 import com.example.sumpractbackv1.service.controllersServices.AccRstrListService;
@@ -19,8 +20,8 @@ public class AccRstrListController {
     private final AccRstrListService accRstrListService;
 
     @GetMapping("/get")
-    public ResponseEntity<List<AccRstrList>> searchAccRstrList(@Valid AccRstrListSearchCriteria criteria) {
-        List<AccRstrList> result = accRstrListService.searchAccRstrList(criteria);
+    public ResponseEntity<ResponseDto<AccRstrList>> searchAccRstrList(@Valid AccRstrListSearchCriteria criteria) {
+        ResponseDto<AccRstrList> result = accRstrListService.searchAccRstrList(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних

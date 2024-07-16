@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.PartInfoSearchCriteria;
 import com.example.sumpractbackv1.model.entity.PartInfo;
 import com.example.sumpractbackv1.service.controllersServices.PartInfoService;
@@ -19,8 +20,8 @@ public class PartInfoController {
     private final PartInfoService partInfoService;
 
     @GetMapping("/get")
-    public ResponseEntity<List<PartInfo>> searchPartInfo(@Valid PartInfoSearchCriteria criteria) {
-        List<PartInfo> result = partInfoService.searchPartInfo(criteria);
+    public ResponseEntity<ResponseDto<PartInfo>> searchPartInfo(@Valid PartInfoSearchCriteria criteria) {
+        ResponseDto<PartInfo> result = partInfoService.searchPartInfo(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних

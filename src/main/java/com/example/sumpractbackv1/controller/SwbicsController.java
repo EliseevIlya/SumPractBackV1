@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.SwbicsSearchCriteria;
 import com.example.sumpractbackv1.model.entity.Swbics;
 import com.example.sumpractbackv1.service.controllersServices.SwbicsService;
@@ -18,9 +19,9 @@ public class SwbicsController {
 
     private final SwbicsService swbicsService;
 
-    @GetMapping("/SwbicsGet")
-    public ResponseEntity<List<Swbics>> searchSwbics(@Valid SwbicsSearchCriteria criteria) {
-        List<Swbics> result = swbicsService.searchSwbics(criteria);
+    @GetMapping("/get")
+    public ResponseEntity<ResponseDto<Swbics>> searchSwbics(@Valid SwbicsSearchCriteria criteria) {
+        ResponseDto<Swbics> result = swbicsService.searchSwbics(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних

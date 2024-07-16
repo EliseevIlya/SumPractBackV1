@@ -1,11 +1,15 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.AccRstrListSearchCriteria;
 import com.example.sumpractbackv1.model.entity.AccRstrList;
 import com.example.sumpractbackv1.repository.AccRstrListRepository;
 import com.example.sumpractbackv1.util.specifications.AccRstrListSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +21,10 @@ import java.util.List;
 public class AccRstrListService {
     private final AccRstrListRepository accRstrListRepository;
 
-    public List<AccRstrList> searchAccRstrList(AccRstrListSearchCriteria criteria) {
+    public ResponseDto<AccRstrList> searchAccRstrList(AccRstrListSearchCriteria criteria) {
         Specification<AccRstrList> spec = AccRstrListSpecifications.byCriteria(criteria);
-        return accRstrListRepository.findAll(spec);
+        Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
+        return new ResponseDto<>(accRstrListRepository.findAll(spec,pageable));
     }
 
     public void saveAccRstrList(AccRstrList accRstrList) {

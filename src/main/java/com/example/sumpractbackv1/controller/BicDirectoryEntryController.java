@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.BicDirectoryEntrySearchCriteria;
 import com.example.sumpractbackv1.model.entity.BicDirectoryEntry;
 import com.example.sumpractbackv1.service.controllersServices.BicDirectoryEntryService;
@@ -19,8 +20,8 @@ public class BicDirectoryEntryController {
     private final BicDirectoryEntryService bicDirectoryEntryService;
 
     @GetMapping("/get")
-    public ResponseEntity<List<BicDirectoryEntry>> searchBICDirectoryEntry(@Valid BicDirectoryEntrySearchCriteria criteria) {
-        List<BicDirectoryEntry> result = bicDirectoryEntryService.searchBicDirectoryEntries(criteria);
+    public ResponseEntity<ResponseDto<BicDirectoryEntry>> searchBICDirectoryEntry(@Valid BicDirectoryEntrySearchCriteria criteria) {
+        ResponseDto<BicDirectoryEntry> result = bicDirectoryEntryService.searchBicDirectoryEntries(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних

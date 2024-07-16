@@ -1,11 +1,15 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.ImportDataSearchCriteria;
 import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.repository.ImportDataRepository;
 import com.example.sumpractbackv1.util.specifications.ImportDataSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +21,10 @@ import java.util.List;
 public class ImportDataService {
     private final ImportDataRepository importDataRepository;
 
-    public List<ImportData> searchImportData(ImportDataSearchCriteria criteria) {
+    public ResponseDto<ImportData> searchImportData(ImportDataSearchCriteria criteria) {
         Specification<ImportData> spec = ImportDataSpecifications.byCriteria(criteria);
-        return importDataRepository.findAll(spec);
+        Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
+        return new ResponseDto<>(importDataRepository.findAll(spec,pageable));
     }
     //TODO логику для прокидывания родителя и дочерних
 

@@ -1,10 +1,14 @@
-package com.example.sumpractbackv1.service;
+package com.example.sumpractbackv1.service.controllersServices;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.UserSearchCriteria;
 import com.example.sumpractbackv1.model.entity.User;
 import com.example.sumpractbackv1.repository.UserRepository;
 import com.example.sumpractbackv1.util.specifications.UserSpecifications;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -52,9 +56,10 @@ public class UserService {
         return this::getByUsername;
     }
     //TODO вынести в отдельный сервис или переместить в папку controllersServices
-    public List<User> searchUsers(UserSearchCriteria criteria) {
+    public ResponseDto<User> searchUsers(UserSearchCriteria criteria) {
         Specification<User> spec = UserSpecifications.byCriteria(criteria);
-        return repository.findAll(spec);
+        Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
+        return new ResponseDto<>(repository.findAll(spec,pageable));
     }
     //TODO логику для прокидывания родителя и дочерних
 
