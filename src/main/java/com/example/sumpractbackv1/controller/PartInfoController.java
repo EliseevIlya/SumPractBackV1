@@ -15,23 +15,22 @@ import java.util.List;
 @RequestMapping("/partInfo")
 @RequiredArgsConstructor
 public class PartInfoController {
-
     private final PartInfoService partInfoService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<PartInfo>> searchPartInfo(@Valid PartInfoSearchCriteria criteria) {
         List<PartInfo> result = partInfoService.searchPartInfo(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
 
-    @PutMapping("/save")
+    @PutMapping
     public ResponseEntity<PartInfo> savePartInfo(@Valid @RequestBody PartInfo partInfo) {
         partInfoService.savePartInfo(partInfo);
         return new ResponseEntity<>(partInfo, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<PartInfo> deletePartInfo(@PathVariable Long id) {
         if (!partInfoService.existsPartInfoById(id)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

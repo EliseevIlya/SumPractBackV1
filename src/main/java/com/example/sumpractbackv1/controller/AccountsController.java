@@ -15,23 +15,22 @@ import java.util.List;
 @RequestMapping("/accounts")
 @RequiredArgsConstructor
 public class AccountsController {
-
     private final AccountsService accountsService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<Accounts>> searchAccounts(@Valid AccountsSearchCriteria criteria) {
         List<Accounts> result = accountsService.searchAccounts(criteria);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
-    @PutMapping("/save")
+    @PutMapping
     public ResponseEntity<Accounts> saveAccounts(@Valid @RequestBody Accounts accounts) {
         accountsService.saveAccount(accounts);
         return new ResponseEntity<>(accounts, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Accounts> deleteAccounts(@PathVariable Long id) {
         if (!accountsService.existsAccountById(id)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

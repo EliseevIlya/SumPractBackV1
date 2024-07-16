@@ -24,8 +24,8 @@ public class AccountsService {
     }
 
     //TODO логику для прокидывания родителя и дочерних
-    public void saveAccount( Accounts accounts) {
-        accountsRepository.saveAndFlush(accounts);
+    public void saveAccount(Accounts accounts) {
+        accountsRepository.save(accounts);
     }
 
     public void deleteAccountById(Long id) {

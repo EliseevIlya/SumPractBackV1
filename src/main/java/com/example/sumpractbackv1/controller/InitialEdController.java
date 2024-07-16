@@ -15,23 +15,22 @@ import java.util.List;
 @RequestMapping("/initialEd")
 @RequiredArgsConstructor
 public class InitialEdController {
-
     private final InitialEdService initialEdService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<InitialEd>> searchInitialED(@Valid InitialEdSearchCriteria criteria) {
         List<InitialEd> result = initialEdService.searchInitialEd(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
 
-    @PutMapping("/save")
+    @PutMapping
     public ResponseEntity<InitialEd> saveInitialED(@Valid @RequestBody InitialEd initialEd) {
         initialEdService.saveInitialED(initialEd);
         return new ResponseEntity<>(initialEd, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<InitialEd> deleteInitialED(@PathVariable Long id) {
         if (!initialEdService.existsInitialEDById(id)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

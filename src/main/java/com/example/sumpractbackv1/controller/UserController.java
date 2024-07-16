@@ -15,23 +15,22 @@ import java.util.List;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<User>> searchUsers(@Valid UserSearchCriteria criteria) {
         List<User> result = userService.searchUsers(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
 
-    @PutMapping("/save")
+    @PutMapping
     public ResponseEntity<User> saveUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id) {
         if (!userService.existsUserById(id)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

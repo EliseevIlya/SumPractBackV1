@@ -15,25 +15,24 @@ import java.util.List;
 @RequestMapping("/importData")
 @RequiredArgsConstructor
 public class ImportDataController {
-
     private final ImportDataService importDataService;
     // @ApiResponse(content = @Content(
     //     array = @ArraySchema(schema = @Schema(implementation = ImportDataResponse.class))
     // ))
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
         List<ImportData> result = importDataService.searchImportData(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
 
-    @PutMapping("/save")
+    @PutMapping
     public ResponseEntity<ImportData> saveImportData(@Valid @RequestBody ImportData criteria) {
         importDataService.saveImportData(criteria);
         return new ResponseEntity<>(criteria, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ImportData> deleteImportData(@PathVariable Long id) {
         if (!importDataService.existsImportDataById(id)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

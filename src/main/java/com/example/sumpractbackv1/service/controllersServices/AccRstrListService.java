@@ -23,7 +23,7 @@ public class AccRstrListService {
     }
 
     public void saveAccRstrList(AccRstrList accRstrList) {
-        accRstrListRepository.saveAndFlush(accRstrList);
+        accRstrListRepository.save(accRstrList);
     }
     //TODO логику для прокидывания родителя и дочерних
 
