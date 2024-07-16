@@ -16,16 +16,20 @@ public class PartInfoSpecifications {
 
             // Поля PartInfo
             if (criteria.getPartNo() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("partNo"), criteria.getPartNo()));
+                predicates.add(criteriaBuilder.equal(root.get("partNo"),
+                    criteria.getPartNo()));
             }
             if (criteria.getPartQuantity() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("partQuantity"), criteria.getPartQuantity()));
+                predicates.add(criteriaBuilder.equal(root.get("partQuantity"),
+                    criteria.getPartQuantity()));
             }
-            if (criteria.getPartAggregateID() != null && !criteria.getPartAggregateID().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("partAggregateID"), criteria.getPartAggregateID()));
+            if (criteria.getSearchPartAggregateID() != null && !criteria.getSearchPartAggregateID().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("partAggregateID"),
+                    StaticUtils.likePattern(criteria.getSearchPartAggregateID())));
             }
-            if (criteria.getImportDataPartInfoId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("importDataPartInfoId"), criteria.getImportDataPartInfoId()));
+            if (criteria.getImportDataId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("importData").get("id"),
+                    criteria.getImportDataId()));
             }
 
             // Поля BaseEntity

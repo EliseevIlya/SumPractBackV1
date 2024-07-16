@@ -17,14 +17,20 @@ public class UserSpecifications {
             if (criteria.getId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("id"), criteria.getId()));
             }
-            if (criteria.getUsername() != null && !criteria.getUsername().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("username"), criteria.getUsername()));
+            if (criteria.getSearchUsername() != null && !criteria.getSearchUsername().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("username"),
+                    StaticUtils.likePattern(criteria.getSearchUsername())));
             }
             if (criteria.getRole() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("role"), criteria.getRole()));
             }
-            if (criteria.getCreatedAt() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("createdAt"), criteria.getCreatedAt()));
+            if (criteria.getFromCreatedAt() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createdAt"),
+                    criteria.getFromCreatedAt()));
+            }
+            if (criteria.getToCreatedAt() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("createdAt"),
+                    criteria.getToCreatedAt()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

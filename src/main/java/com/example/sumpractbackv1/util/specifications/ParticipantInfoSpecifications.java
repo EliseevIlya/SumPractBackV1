@@ -15,14 +15,17 @@ public class ParticipantInfoSpecifications {
             List<Predicate> predicates = new ArrayList<>();
 
             // Поля ParticipantInfo
-            if (criteria.getNameP() != null && !criteria.getNameP().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("nameP"), criteria.getNameP()));
+            if (criteria.getSearchNameP() != null && !criteria.getSearchNameP().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("nameP"),
+                    StaticUtils.likePattern(criteria.getSearchNameP())));
             }
-            if (criteria.getEnglName() != null && !criteria.getEnglName().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("englName"), criteria.getEnglName()));
+            if (criteria.getSearchEnglName() != null && !criteria.getSearchEnglName().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("englName"),
+                    StaticUtils.likePattern(criteria.getSearchEnglName())));
             }
-            if (criteria.getRegN() != null && !criteria.getRegN().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("regN"), criteria.getRegN()));
+            if (criteria.getSearchRegN() != null && !criteria.getSearchRegN().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("regN"),
+                    StaticUtils.likePattern(criteria.getSearchRegN())));
             }
             if (criteria.getCntrCd() != null && !criteria.getCntrCd().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("cntrCd"), criteria.getCntrCd()));
@@ -36,20 +39,33 @@ public class ParticipantInfoSpecifications {
             if (criteria.getTnp() != null && !criteria.getTnp().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("tnp"), criteria.getTnp()));
             }
-            if (criteria.getNnp() != null && !criteria.getNnp().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("nnp"), criteria.getNnp()));
+            if (criteria.getSearchNnp() != null && !criteria.getSearchNnp().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("nnp"),
+                    StaticUtils.likePattern(criteria.getSearchNnp())));
             }
-            if (criteria.getAdr() != null && !criteria.getAdr().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("adr"), criteria.getAdr()));
+            if (criteria.getSearchAdr() != null && !criteria.getSearchAdr().isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("adr"),
+                    StaticUtils.likePattern(criteria.getSearchAdr())));
             }
-            if (criteria.getPrntBIC() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("prntBIC"), criteria.getPrntBIC()));
+            if (criteria.getSearchPrntBIC() != null) {
+                predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("prntBIC"),
+                    criteria.getSearchPrntBIC()));
             }
-            if (criteria.getDateInParticipant() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("dateInParticipant"), criteria.getDateInParticipant()));
+            if (criteria.getFromDateInParticipant() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateInParticipant"),
+                    criteria.getFromDateInParticipant()));
             }
-            if (criteria.getDateOutParticipant() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("dateOutParticipant"), criteria.getDateOutParticipant()));
+            if (criteria.getToDateInParticipant() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateInParticipant"),
+                    criteria.getToDateInParticipant()));
+            }
+            if (criteria.getFromDateOutParticipant() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateOutParticipant"),
+                    criteria.getFromDateOutParticipant()));
+            }
+            if (criteria.getToDateOutParticipant() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateOutParticipant"),
+                    criteria.getToDateOutParticipant()));
             }
             if (criteria.getPtType() != null && !criteria.getPtType().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("ptType"), criteria.getPtType()));
@@ -66,8 +82,9 @@ public class ParticipantInfoSpecifications {
             if (criteria.getParticipantStatus() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("participantStatus"), criteria.getParticipantStatus()));
             }
-            if (criteria.getBicParticipantInfoId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("bicParticipantInfoId"), criteria.getBicParticipantInfoId()));
+            if (criteria.getBicDirectoryEntryId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("bicDirectoryEntry").get("id"),
+                    criteria.getBicDirectoryEntryId()));
             }
 
             // Поля BaseEntity

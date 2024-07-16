@@ -1,9 +1,9 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
-import com.example.sumpractbackv1.model.dto.search.BICDirectoryEntrySearchCriteria;
+import com.example.sumpractbackv1.model.dto.search.BicDirectoryEntrySearchCriteria;
 import com.example.sumpractbackv1.model.entity.BicDirectoryEntry;
 import com.example.sumpractbackv1.repository.BICDirectoryEntryRepository;
-import com.example.sumpractbackv1.util.specifications.BICDirectoryEntrySpecifications;
+import com.example.sumpractbackv1.util.specifications.BicDirectoryEntrySpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,8 +17,8 @@ import java.util.List;
 public class BicDirectoryEntryService {
     private final BICDirectoryEntryRepository bicDirectoryEntryRepository;
 
-    public List<BicDirectoryEntry> searchBICDirectoryEntries(BICDirectoryEntrySearchCriteria criteria) {
-        Specification<BicDirectoryEntry> spec = BICDirectoryEntrySpecifications.byCriteria(criteria);
+    public List<BicDirectoryEntry> searchBicDirectoryEntries(BicDirectoryEntrySearchCriteria criteria) {
+        Specification<BicDirectoryEntry> spec = BicDirectoryEntrySpecifications.byCriteria(criteria);
         return bicDirectoryEntryRepository.findAll(spec);
     }
     //TODO логику для прокидывания родителя и дочерних

@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.util.specifications;
 
-import com.example.sumpractbackv1.model.dto.search.BICDirectoryEntrySearchCriteria;
+import com.example.sumpractbackv1.model.dto.search.BicDirectoryEntrySearchCriteria;
 import com.example.sumpractbackv1.model.entity.BicDirectoryEntry;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -8,21 +8,24 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BICDirectoryEntrySpecifications {
+public class BicDirectoryEntrySpecifications {
 
-    public static Specification<BicDirectoryEntry> byCriteria(BICDirectoryEntrySearchCriteria criteria) {
+    public static Specification<BicDirectoryEntry> byCriteria(BicDirectoryEntrySearchCriteria criteria) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             // Поля BICDirectoryEntry
-            if (criteria.getBic() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("bic"), criteria.getBic()));
+            if (criteria.getSearchBic() != null) {
+                predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("bic"),
+                    criteria.getSearchBic()));
             }
             if (criteria.getChangeType() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("changeType"), criteria.getChangeType()));
+                predicates.add(criteriaBuilder.equal(root.get("changeType"),
+                    criteria.getChangeType()));
             }
-            if (criteria.getImportDataBicId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("importDataBicId").get("id"), criteria.getImportDataBicId()));
+            if (criteria.getImportDataId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("importData").get("id"),
+                    criteria.getImportDataId()));
             }
 
             // Поля BaseEntity

@@ -19,19 +19,19 @@ import org.springdoc.core.annotations.ParameterObject;
 @ParameterObject
 public class AccRstrListSearchCriteria extends BaseEntitySearchCriteria {
 
-    @Parameter(description = "Код ограничений операций по счету")
+    @Parameter(description = "Фильтр по коду ограничений операций по счету")
     private AccRstr accRstr;
 
-    @Parameter(description = "Параметр для поиска даты начала действия ограничения операций по счету")
+    @Parameter(description = "Поиск по дате начала действия ограничения операций по счету")
     private LocalDate fromAccRstrDate;
 
-    @Parameter(description = "Параметр для поиска даты начала действия ограничения операций по счету")
+    @Parameter(description = "Поиск по дате начала действия ограничения операций по счету")
     private LocalDate toAccRstrDate;
 
-    @Parameter(description = "БИК преемника")
+    @Parameter(description = "Поиск по БИК преемника")
     private String searchSuccessorBIC;
 
-    @Parameter(description = "Id Accounts")
+    @Parameter(description = "Фильтр по Id Accounts")
     @Positive(message = "Id Accounts должен быть больше нуля")
     private Long accountsId;
 }
