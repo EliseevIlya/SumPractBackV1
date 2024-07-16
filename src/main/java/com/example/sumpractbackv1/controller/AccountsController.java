@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.request.AccountsRequest;
 import com.example.sumpractbackv1.model.dto.search.AccountsSearchCriteria;
 import com.example.sumpractbackv1.model.entity.Accounts;
 import com.example.sumpractbackv1.service.controllersServices.AccountsService;
@@ -23,11 +24,11 @@ public class AccountsController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
+    
     @PutMapping
-    public ResponseEntity<Accounts> saveAccounts(@Valid @RequestBody Accounts accounts) {
-        accountsService.saveAccount(accounts);
-        return new ResponseEntity<>(accounts, HttpStatus.CREATED);
+    public ResponseEntity<Accounts> saveAccounts(@Valid @RequestBody AccountsRequest accounts) {
+        var res = accountsService.saveAccount(accounts);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

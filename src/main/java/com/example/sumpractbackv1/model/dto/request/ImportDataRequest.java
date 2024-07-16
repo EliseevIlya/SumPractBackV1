@@ -3,10 +3,15 @@ package com.example.sumpractbackv1.model.dto.request;
 import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+@Getter
+@Setter
 public class ImportDataRequest extends BaseEntityRequest {
 
     private String xmlns;
