@@ -17,15 +17,15 @@ public class ParticipantInfoSpecifications {
             // Поля ParticipantInfo
             if (criteria.getSearchNameP() != null && !criteria.getSearchNameP().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("nameP"),
-                    StaticUtils.likePattern(criteria.getSearchNameP())));
+                        StaticUtils.likePattern(criteria.getSearchNameP())));
             }
             if (criteria.getSearchEnglName() != null && !criteria.getSearchEnglName().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("englName"),
-                    StaticUtils.likePattern(criteria.getSearchEnglName())));
+                        StaticUtils.likePattern(criteria.getSearchEnglName())));
             }
             if (criteria.getSearchRegN() != null && !criteria.getSearchRegN().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("regN"),
-                    StaticUtils.likePattern(criteria.getSearchRegN())));
+                        StaticUtils.likePattern(criteria.getSearchRegN())));
             }
             if (criteria.getCntrCd() != null && !criteria.getCntrCd().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("cntrCd"), criteria.getCntrCd()));
@@ -41,31 +41,31 @@ public class ParticipantInfoSpecifications {
             }
             if (criteria.getSearchNnp() != null && !criteria.getSearchNnp().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("nnp"),
-                    StaticUtils.likePattern(criteria.getSearchNnp())));
+                        StaticUtils.likePattern(criteria.getSearchNnp())));
             }
             if (criteria.getSearchAdr() != null && !criteria.getSearchAdr().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("adr"),
-                    StaticUtils.likePattern(criteria.getSearchAdr())));
+                        StaticUtils.likePattern(criteria.getSearchAdr())));
             }
             if (criteria.getSearchPrntBIC() != null) {
                 predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("prntBIC"),
-                    criteria.getSearchPrntBIC()));
+                        criteria.getSearchPrntBIC()));
             }
             if (criteria.getFromDateInParticipant() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateInParticipant"),
-                    criteria.getFromDateInParticipant()));
+                        criteria.getFromDateInParticipant()));
             }
             if (criteria.getToDateInParticipant() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateInParticipant"),
-                    criteria.getToDateInParticipant()));
+                        criteria.getToDateInParticipant()));
             }
             if (criteria.getFromDateOutParticipant() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateOutParticipant"),
-                    criteria.getFromDateOutParticipant()));
+                        criteria.getFromDateOutParticipant()));
             }
             if (criteria.getToDateOutParticipant() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateOutParticipant"),
-                    criteria.getToDateOutParticipant()));
+                        criteria.getToDateOutParticipant()));
             }
             if (criteria.getPtType() != null && !criteria.getPtType().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("ptType"), criteria.getPtType()));
@@ -84,7 +84,7 @@ public class ParticipantInfoSpecifications {
             }
             if (criteria.getBicDirectoryEntryId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("bicDirectoryEntry").get("id"),
-                    criteria.getBicDirectoryEntryId()));
+                        criteria.getBicDirectoryEntryId()));
             }
 
             // Поля BaseEntity

@@ -1,11 +1,10 @@
 package com.example.sumpractbackv1.model.dto.search;
 
 
-import org.springdoc.core.annotations.ParameterObject;
-
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.springdoc.core.annotations.ParameterObject;
 
 @Getter
 @Setter

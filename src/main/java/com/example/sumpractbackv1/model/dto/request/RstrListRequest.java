@@ -4,7 +4,7 @@ import com.example.sumpractbackv1.model.enums.Rstr;
 
 import java.time.LocalDate;
 
-public class RstrListRequest extends BaseEntityRequest{
+public class RstrListRequest extends BaseEntityRequest {
 
     private Rstr rstr;
 

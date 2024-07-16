@@ -22,7 +22,7 @@ public class ResponseDto<T> {
         this.totalPages = page.getTotalPages();
         this.totalElements = page.getTotalElements();
         this.size = page.getSize();
-        this.content =  page.getContent();
+        this.content = page.getContent();
         this.pageNumber = page.getNumber();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.model.dto.request;
 
-public class PartInfoRequest extends BaseEntityRequest{
+public class PartInfoRequest extends BaseEntityRequest {
 
     private Integer partNo;
 

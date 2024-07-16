@@ -6,7 +6,6 @@ import com.example.sumpractbackv1.model.entity.Accounts;
 import com.example.sumpractbackv1.service.controllersServices.AccountsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +23,7 @@ public class AccountsController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
     //TODO логику для прокидывания родителя и дочерних
     @PutMapping("/save")
     public ResponseEntity<Accounts> saveAccounts(@Valid @RequestBody Accounts accounts) {
@@ -33,7 +33,7 @@ public class AccountsController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Accounts> deleteAccounts(@PathVariable Long id) {
-        if (!accountsService.existsAccountById(id)){
+        if (!accountsService.existsAccountById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         accountsService.deleteAccountById(id);

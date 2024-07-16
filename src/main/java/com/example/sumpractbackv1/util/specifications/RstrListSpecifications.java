@@ -20,15 +20,15 @@ public class RstrListSpecifications {
             }
             if (criteria.getFromRstrDate() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("rstrDate"),
-                    criteria.getFromRstrDate()));
+                        criteria.getFromRstrDate()));
             }
             if (criteria.getToRstrDate() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("rstrDate"),
-                    criteria.getToRstrDate()));
+                        criteria.getToRstrDate()));
             }
             if (criteria.getParticipantInfoId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("participantInfo").get("id"),
-                    criteria.getParticipantInfoId()));
+                        criteria.getParticipantInfoId()));
             }
 
             // Поля BaseEntity

@@ -5,7 +5,6 @@ import com.example.sumpractbackv1.model.enums.RegulationAccountType;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -48,13 +47,14 @@ public class Accounts extends BaseEntity {
     private AccountStatus accountStatus;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "bic_directory_entry_id")@JsonIdentityReference(alwaysAsId=true)
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JoinColumn(name = "bic_directory_entry_id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private BicDirectoryEntry bicDirectoryEntry;
 
     @OneToMany(mappedBy = "accounts", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId=true)
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @SQLRestriction("deleted = false")
     private List<AccRstrList> accRstrLists;
 

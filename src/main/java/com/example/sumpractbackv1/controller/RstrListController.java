@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/rstrList")
 @RequiredArgsConstructor
@@ -34,7 +32,7 @@ public class RstrListController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<RstrList> deleteRstrList(@PathVariable Long id) {
-        if (!rstrListService.existsRstrListById(id)){
+        if (!rstrListService.existsRstrListById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         rstrListService.deleteRstrListById(id);

@@ -16,19 +16,19 @@ public class BaseEntitySpecifications {
         }
         if (criteria.getFromCreatedDate() != null) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createdDate"),
-                criteria.getFromCreatedDate()));
+                    criteria.getFromCreatedDate()));
         }
         if (criteria.getToCreatedDate() != null) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("createdDate"),
-                criteria.getToCreatedDate()));
+                    criteria.getToCreatedDate()));
         }
         if (criteria.getFromLastModifiedDate() != null) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("lastModifiedDate"),
-                criteria.getFromLastModifiedDate()));
+                    criteria.getFromLastModifiedDate()));
         }
         if (criteria.getToLastModifiedDate() != null) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("lastModifiedDate"),
-                criteria.getToLastModifiedDate()));
+                    criteria.getToLastModifiedDate()));
         }
         if (criteria.getCreatedBy() != null && !criteria.getCreatedBy().isEmpty()) {
             predicates.add(criteriaBuilder.equal(root.get("createdBy"), criteria.getCreatedBy()));

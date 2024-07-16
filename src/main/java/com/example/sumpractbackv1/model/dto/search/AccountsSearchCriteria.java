@@ -2,14 +2,12 @@ package com.example.sumpractbackv1.model.dto.search;
 
 import com.example.sumpractbackv1.model.enums.AccountStatus;
 import com.example.sumpractbackv1.model.enums.RegulationAccountType;
-
 import io.swagger.v3.oas.annotations.Parameter;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.springdoc.core.annotations.ParameterObject;
 
 import java.time.LocalDate;
-
-import org.springdoc.core.annotations.ParameterObject;
 
 @Getter
 @Setter
@@ -30,7 +28,7 @@ public class AccountsSearchCriteria extends BaseEntitySearchCriteria {
 
     @Parameter(description = "Поиск по БИК ПБР, обслуживающего счет участника перевода")
     private String searchAccountCbrbic;
-    
+
     @Parameter(description = "Поиск по дате открытия счета")
     private LocalDate fromDateInAccounts;
 

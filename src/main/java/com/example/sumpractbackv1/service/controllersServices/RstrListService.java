@@ -13,8 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -24,7 +22,7 @@ public class RstrListService {
     public ResponseDto<RstrList> searchRstrList(RstrListSearchCriteria criteria) {
         Specification<RstrList> spec = RstrListSpecifications.byCriteria(criteria);
         Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
-        return new ResponseDto<>(rstrListRepository.findAll(spec,pageable));
+        return new ResponseDto<>(rstrListRepository.findAll(spec, pageable));
     }
 
     //TODO логику для прокидывания родителя и дочерних

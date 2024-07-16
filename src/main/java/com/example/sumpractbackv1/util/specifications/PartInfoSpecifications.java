@@ -17,19 +17,19 @@ public class PartInfoSpecifications {
             // Поля PartInfo
             if (criteria.getPartNo() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("partNo"),
-                    criteria.getPartNo()));
+                        criteria.getPartNo()));
             }
             if (criteria.getPartQuantity() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("partQuantity"),
-                    criteria.getPartQuantity()));
+                        criteria.getPartQuantity()));
             }
             if (criteria.getSearchPartAggregateID() != null && !criteria.getSearchPartAggregateID().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("partAggregateID"),
-                    StaticUtils.likePattern(criteria.getSearchPartAggregateID())));
+                        StaticUtils.likePattern(criteria.getSearchPartAggregateID())));
             }
             if (criteria.getImportDataId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("importData").get("id"),
-                    criteria.getImportDataId()));
+                        criteria.getImportDataId()));
             }
 
             // Поля BaseEntity
