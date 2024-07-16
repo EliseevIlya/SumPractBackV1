@@ -36,7 +36,7 @@ public class BaseEntitySpecifications {
         if (criteria.getLastModifiedBy() != null && !criteria.getLastModifiedBy().isEmpty()) {
             predicates.add(criteriaBuilder.equal(root.get("lastModifiedBy"), criteria.getLastModifiedBy()));
         }
-        if (criteria.getIncludeDeleted() != true) {
+        if (!criteria.getIncludeDeleted()) {
             predicates.add(criteriaBuilder.equal(root.get("deleted"), false));
         }
 
