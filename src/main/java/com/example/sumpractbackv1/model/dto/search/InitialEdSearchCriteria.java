@@ -1,13 +1,11 @@
 package com.example.sumpractbackv1.model.dto.search;
 
-import lombok.*;
-
-import java.time.LocalDate;
-
-import org.springdoc.core.annotations.ParameterObject;
-
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.Positive;
+import lombok.*;
+import org.springdoc.core.annotations.ParameterObject;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter

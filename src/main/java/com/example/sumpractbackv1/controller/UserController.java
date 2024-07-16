@@ -1,15 +1,15 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.UserSearchCriteria;
 import com.example.sumpractbackv1.model.entity.User;
-import com.example.sumpractbackv1.service.UserService;
+import com.example.sumpractbackv1.service.controllersServices.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -18,8 +18,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> searchUsers(@Valid UserSearchCriteria criteria) {
-        List<User> result = userService.searchUsers(criteria);
+    public ResponseEntity<ResponseDto<User>> searchUsers(@Valid UserSearchCriteria criteria) {
+        ResponseDto<User> result = userService.searchUsers(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
@@ -32,7 +32,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id) {
-        if (!userService.existsUserById(id)){
+        if (!userService.existsUserById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         userService.deleteUserById(id);

@@ -2,14 +2,12 @@ package com.example.sumpractbackv1.model.dto.search;
 
 import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
-
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.*;
+import org.springdoc.core.annotations.ParameterObject;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-
-import org.springdoc.core.annotations.ParameterObject;
 
 @Getter
 @Setter

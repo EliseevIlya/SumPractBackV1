@@ -60,7 +60,7 @@ public class ParsAccounts {
                 .build();
         if (accounts.getAccRstrLists() != null) {
             accounts.getAccRstrLists().forEach(accRstrList ->
-                accRstrList.setAccounts(accounts));
+                    accRstrList.setAccounts(accounts));
         }
         return accounts;
     }

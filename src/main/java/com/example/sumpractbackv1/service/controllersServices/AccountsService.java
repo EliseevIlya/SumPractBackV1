@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.request.AccountsRequest;
 import com.example.sumpractbackv1.model.dto.search.AccountsSearchCriteria;
 import com.example.sumpractbackv1.model.entity.AccRstrList;
@@ -11,6 +12,9 @@ import com.example.sumpractbackv1.repository.BICDirectoryEntryRepository;
 import com.example.sumpractbackv1.util.specifications.AccountsSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +28,10 @@ public class AccountsService {
     private final AccRstrListRepository accRstrListRepository;
     private final BICDirectoryEntryRepository bicDirectoryEntryRepository;
 
-    public List<Accounts> searchAccounts(AccountsSearchCriteria criteria) {
+    public ResponseDto<Accounts> searchAccounts(AccountsSearchCriteria criteria) {
         Specification<Accounts> spec = AccountsSpecifications.byCriteria(criteria);
-        return accountsRepository.findAll(spec);
+        Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
+        return new ResponseDto<>(accountsRepository.findAll(spec, pageable));
     }
 
     public Accounts saveAccount(AccountsRequest accounts) {

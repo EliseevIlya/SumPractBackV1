@@ -92,7 +92,7 @@ public class ParsImportFile {
         }
         if (importData.getBicDirectoryEntryList() != null) {
             importData.getBicDirectoryEntryList().forEach(bicDirectoryEntry ->
-                bicDirectoryEntry.setImportData(importData));
+                    bicDirectoryEntry.setImportData(importData));
         }
         return importData;
     }

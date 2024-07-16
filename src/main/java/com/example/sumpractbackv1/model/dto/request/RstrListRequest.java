@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class RstrListRequest extends BaseEntityRequest{
+public class RstrListRequest extends BaseEntityRequest {
 
     private Rstr rstr;
 

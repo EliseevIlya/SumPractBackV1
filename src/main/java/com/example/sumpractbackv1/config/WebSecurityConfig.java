@@ -1,6 +1,6 @@
 package com.example.sumpractbackv1.config;
 
-import com.example.sumpractbackv1.service.UserService;
+import com.example.sumpractbackv1.service.controllersServices.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,16 +27,10 @@ import java.util.List;
 @EnableMethodSecurity(securedEnabled = true)
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    private final CustomAccessDeniedHandler customAccessDeniedHandler;
-    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final UserService userService;
-
     private static final String[] AUTH_WHITELIST = {
             "/auth/**",
             "/error"
     };
-
     private static final String[] SWAGGER_WHITELIST = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
@@ -44,6 +38,10 @@ public class WebSecurityConfig {
             "/swagger-resources/**",
             "/swagger-resources"
     };
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final UserService userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, Environment env) throws Exception {

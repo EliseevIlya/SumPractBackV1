@@ -17,23 +17,23 @@ public class InitialEdSpecifications {
             // Поля InitialED
             if (criteria.getSearchEdno() != null) {
                 predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("edno"),
-                    criteria.getSearchEdno()));
+                        criteria.getSearchEdno()));
             }
             if (criteria.getFromEdDate() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("edDate"),
-                    criteria.getFromEdDate()));
+                        criteria.getFromEdDate()));
             }
             if (criteria.getToEdDate() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("edDate"),
-                    criteria.getToEdDate()));
+                        criteria.getToEdDate()));
             }
             if (criteria.getSearchEdAuthor() != null) {
                 predicates.add(StaticUtils.likeTenD(criteriaBuilder, root.get("edAuthor"),
-                    criteria.getSearchEdAuthor()));
+                        criteria.getSearchEdAuthor()));
             }
             if (criteria.getImportDataId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("importData").get("id"),
-                    criteria.getImportDataId()));
+                        criteria.getImportDataId()));
             }
 
             // Поля BaseEntity

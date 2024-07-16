@@ -11,45 +11,46 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 
-@Schema(description = "класс для создания/изменение аккаунтов")
+@Schema(description = "класс для создания/изменение Accounts. Информация о счетах участника перевода денежных средств.")
 @Getter
 @Setter
 public class AccountsRequest extends BaseEntityRequest {
 
-    @Schema(description = "номер счета")
+    @Schema(description = "Номер счета.")
     @NotEmpty
     @Size(max = 20)
     private String account;
 
-    @Schema(description = "")
+    @Schema(description = "Тип счета в соответствии с нормативом.")
     @NotNull
+    @Size(max = 4)
     private RegulationAccountType regulationAccountType;
 
-    @Schema(description = "")
+    @Schema(description = "Контрольный ключ.")
     @Size(max = 2)
     private String ck;
 
-    @Schema(description = "")
+    @Schema(description = "БИК ПБР, обслуживающего счет участника перевода.")
     @NotNull
     @Max(999999999L)
     @PositiveOrZero
     private Long accountCbrbic;
 
-    @Schema(description = "")
+    @Schema(description = "Дата открытия счета.")
     @NotNull
     private LocalDate dateIn;
 
-    @Schema(description = "")
+    @Schema(description = "Дата исключения информации о счете участника.")
     private LocalDate dateOut;
 
-    @Schema(description = "")
+    @Schema(description = "Статус счета.")
     private AccountStatus accountStatus;
 
-    @Schema(description = "")
+    @Schema(description = "Связь с родителем BICDirectoryEntry")
     @PositiveOrZero
     private Long bicDirectoryEntry;
 
-    @Schema(description = "")
+    @Schema(description = "Связь с дочерним элементом AccRstrList")
     private List<Long> accRstrLists = List.of();
 
     public Accounts toAccounts() {

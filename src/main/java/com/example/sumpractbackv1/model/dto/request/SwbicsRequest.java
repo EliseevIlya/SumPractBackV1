@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SwbicsRequest extends  BaseEntityRequest{
+public class SwbicsRequest extends BaseEntityRequest {
 
     private String swbic;
 

@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.ImportDataSearchCriteria;
 import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.service.controllersServices.ImportDataService;
@@ -9,19 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/importData")
 @RequiredArgsConstructor
 public class ImportDataController {
     private final ImportDataService importDataService;
+
     // @ApiResponse(content = @Content(
     //     array = @ArraySchema(schema = @Schema(implementation = ImportDataResponse.class))
     // ))
     @GetMapping
-    public ResponseEntity<List<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
-        List<ImportData> result = importDataService.searchImportData(criteria);
+    public ResponseEntity<ResponseDto<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
+        ResponseDto<ImportData> result = importDataService.searchImportData(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
@@ -34,7 +34,7 @@ public class ImportDataController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ImportData> deleteImportData(@PathVariable Long id) {
-        if (!importDataService.existsImportDataById(id)){
+        if (!importDataService.existsImportDataById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         importDataService.deleteImportDataById(id);

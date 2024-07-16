@@ -2,7 +2,6 @@ package com.example.sumpractbackv1.util.specifications;
 
 import com.example.sumpractbackv1.model.dto.search.AccountsSearchCriteria;
 import com.example.sumpractbackv1.model.entity.Accounts;
-
 import jakarta.persistence.criteria.Predicate;
 import lombok.ToString;
 import org.springframework.data.jpa.domain.Specification;
@@ -20,43 +19,43 @@ public class AccountsSpecifications {
             // Поля Accounts
             if (criteria.getSearchAccount() != null && !criteria.getSearchAccount().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("account"),
-                    StaticUtils.likePattern(criteria.getSearchAccount())));
+                        StaticUtils.likePattern(criteria.getSearchAccount())));
             }
             if (criteria.getRegulationAccountType() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("regulationAccountType"),
-                    criteria.getRegulationAccountType()));
+                        criteria.getRegulationAccountType()));
             }
             if (criteria.getSearchCk() != null && !criteria.getSearchCk().isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("ck"),
-                    StaticUtils.likePattern(criteria.getSearchCk())));
+                        StaticUtils.likePattern(criteria.getSearchCk())));
             }
             if (criteria.getSearchAccountCbrbic() != null) {
                 predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("accountCbrbic"),
-                    criteria.getSearchAccountCbrbic()));
+                        criteria.getSearchAccountCbrbic()));
             }
             if (criteria.getFromDateInAccounts() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateInAccounts"),
-                    criteria.getFromDateInAccounts()));
+                        criteria.getFromDateInAccounts()));
             }
             if (criteria.getToDateInAccounts() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateInAccounts"),
-                    criteria.getToDateInAccounts()));
+                        criteria.getToDateInAccounts()));
             }
             if (criteria.getFromDateOutAccounts() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateOutAccounts"),
-                    criteria.getFromDateOutAccounts()));
+                        criteria.getFromDateOutAccounts()));
             }
             if (criteria.getToDateOutAccounts() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateOutAccounts"),
-                    criteria.getToDateOutAccounts()));
+                        criteria.getToDateOutAccounts()));
             }
             if (criteria.getAccountStatus() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("accountStatus"),
-                    criteria.getAccountStatus()));
+                        criteria.getAccountStatus()));
             }
             if (criteria.getBicDirectoryEntryId() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("bicDirectoryEntry").get("id"),
-                    criteria.getBicDirectoryEntryId()));
+                        criteria.getBicDirectoryEntryId()));
             }
 
             // Поля BaseEntity

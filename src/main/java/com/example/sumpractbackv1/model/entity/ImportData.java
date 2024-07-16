@@ -5,7 +5,6 @@ import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -64,8 +63,8 @@ public class ImportData extends BaseEntity {
     private InitialEd initialED;
 
     @OneToMany(mappedBy = "importData", cascade = CascadeType.ALL)
-    @JsonIdentityReference(alwaysAsId=true)
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @SQLRestriction("deleted = false")
     private List<BicDirectoryEntry> bicDirectoryEntryList;
 

@@ -1,15 +1,17 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.InitialEdSearchCriteria;
 import com.example.sumpractbackv1.model.entity.InitialEd;
 import com.example.sumpractbackv1.repository.InitialEdRepository;
 import com.example.sumpractbackv1.util.specifications.InitialEdSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -17,9 +19,10 @@ import java.util.List;
 public class InitialEdService {
     private final InitialEdRepository initialEDRepository;
 
-    public List<InitialEd> searchInitialEd(InitialEdSearchCriteria criteria) {
+    public ResponseDto<InitialEd> searchInitialEd(InitialEdSearchCriteria criteria) {
         Specification<InitialEd> spec = InitialEdSpecifications.byCriteria(criteria);
-        return initialEDRepository.findAll(spec);
+        Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
+        return new ResponseDto<>(initialEDRepository.findAll(spec, pageable));
     }
     //TODO логику для прокидывания родителя и дочерних
 

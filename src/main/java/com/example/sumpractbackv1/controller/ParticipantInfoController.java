@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.controller;
 
+import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.search.ParticipantInfoSearchCriteria;
 import com.example.sumpractbackv1.model.entity.ParticipantInfo;
 import com.example.sumpractbackv1.service.controllersServices.ParticipantInfoService;
@@ -9,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/participantInfo")
 @RequiredArgsConstructor
@@ -18,8 +17,8 @@ public class ParticipantInfoController {
     private final ParticipantInfoService participantInfoService;
 
     @GetMapping
-    public ResponseEntity<List<ParticipantInfo>> searchParticipantInfo(@Valid ParticipantInfoSearchCriteria criteria) {
-        List<ParticipantInfo> result = participantInfoService.searchParticipantInfo(criteria);
+    public ResponseEntity<ResponseDto<ParticipantInfo>> searchParticipantInfo(@Valid ParticipantInfoSearchCriteria criteria) {
+        ResponseDto<ParticipantInfo> result = participantInfoService.searchParticipantInfo(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     //TODO логику для прокидывания родителя и дочерних
@@ -32,7 +31,7 @@ public class ParticipantInfoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ParticipantInfo> deleteParticipantInfo(@PathVariable Long id) {
-        if (!participantInfoService.existsParticipantInfoById(id)){
+        if (!participantInfoService.existsParticipantInfoById(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         participantInfoService.deleteParticipantInfoById(id);

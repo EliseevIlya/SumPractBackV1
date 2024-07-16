@@ -20,26 +20,26 @@ public class ImportDataSpecifications {
             }
             if (criteria.getSearchEdno() != null) {
                 predicates.add(StaticUtils.likeBic(criteriaBuilder, root.get("edno"),
-                    criteria.getSearchEdno()));
+                        criteria.getSearchEdno()));
             }
             if (criteria.getSearchEdAuthor() != null) {
                 predicates.add(StaticUtils.likeTenD(criteriaBuilder, root.get("edAuthor"),
-                    criteria.getSearchEdAuthor()));
+                        criteria.getSearchEdAuthor()));
             }
             if (criteria.getSearchEdReceiver() != null) {
                 predicates.add(StaticUtils.likeTenD(criteriaBuilder, root.get("edReceiver"),
-                    criteria.getSearchEdReceiver()));
+                        criteria.getSearchEdReceiver()));
             }
             if (criteria.getCreationReason() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("creationReason"), criteria.getCreationReason()));
             }
             if (criteria.getFromCreationDateTime() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("creationDateTime"),
-                    criteria.getFromCreationDateTime()));
+                        criteria.getFromCreationDateTime()));
             }
             if (criteria.getToCreationDateTime() != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("creationDateTime"),
-                    criteria.getToCreationDateTime()));
+                        criteria.getToCreationDateTime()));
             }
             if (criteria.getInfoTypeCode() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("infoTypeCode"), criteria.getInfoTypeCode()));

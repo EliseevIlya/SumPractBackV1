@@ -1,14 +1,11 @@
 package com.example.sumpractbackv1.model.dto.search;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import lombok.*;
 
 import java.time.LocalDateTime;
-
-import io.swagger.v3.oas.annotations.Parameter;
 
 @Getter
 @Setter
@@ -37,8 +34,16 @@ public class BaseEntitySearchCriteria {
 
     @Parameter(description = "Параметр для поиска по имени изменявшего")
     private String lastModifiedBy;
-    
+
     @Parameter(description = "Флаг, показывающий нужно ли включать удаленные сущности")
     private Boolean includeDeleted = Boolean.FALSE;
+
+    @Parameter(description = "номер страницы")
+    @PositiveOrZero()
+    private Integer page = 0;
+
+    @Parameter(description = "количество отоброжаемых элементов")
+    @Positive()
+    private Integer size = 10;
 
 }

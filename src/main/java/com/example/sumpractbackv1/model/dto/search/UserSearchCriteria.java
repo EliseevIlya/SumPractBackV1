@@ -1,14 +1,13 @@
 package com.example.sumpractbackv1.model.dto.search;
 
 import com.example.sumpractbackv1.model.enums.Role;
-
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
+import org.springdoc.core.annotations.ParameterObject;
 
 import java.util.Date;
-
-import org.springdoc.core.annotations.ParameterObject;
 
 @Getter
 @Setter
@@ -33,5 +32,13 @@ public class UserSearchCriteria {
 
     @Parameter(description = "Поиск по дате создания")
     private Date toCreatedAt;
+
+    @Parameter(description = "номер страницы")
+    @PositiveOrZero()
+    private Integer page = 0;
+
+    @Parameter(description = "количество отоброжаемых элементов")
+    @Positive()
+    private Integer size = 10;
 
 }
