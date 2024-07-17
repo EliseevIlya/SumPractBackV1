@@ -1,6 +1,7 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.ParticipantInfoRequest;
 import com.example.sumpractbackv1.model.dto.search.ParticipantInfoSearchCriteria;
 import com.example.sumpractbackv1.model.entity.ParticipantInfo;
 import com.example.sumpractbackv1.service.controllersServices.ParticipantInfoService;
@@ -21,12 +22,11 @@ public class ParticipantInfoController {
         ResponseDto<ParticipantInfo> result = participantInfoService.searchParticipantInfo(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
-    public ResponseEntity<ParticipantInfo> saveParticipantInfo(@Valid @RequestBody ParticipantInfo participantInfo) {
-        participantInfoService.saveParticipantInfo(participantInfo);
-        return new ResponseEntity<>(participantInfo, HttpStatus.CREATED);
+    public ResponseEntity<ParticipantInfo> saveParticipantInfo(@Valid @RequestBody ParticipantInfoRequest participantInfo) {
+        var res = participantInfoService.saveParticipantInfo(participantInfo);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

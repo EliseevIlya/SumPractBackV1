@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.model.dto.request;
 
+import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 public class ImportDataRequest extends BaseEntityRequest {
 
-    private String xmlns;
+    private String xmlns = "urn:cbr-ru:ed:v2.0";
 
     private Long edno;
 
@@ -38,5 +39,22 @@ public class ImportDataRequest extends BaseEntityRequest {
 
     private Long initialED;
 
-    private List<Long> bicDirectoryEntryList;
+    private List<Long> bicDirectoryEntryList = List.of();
+
+    public ImportData toImportData() {
+        var importData = ImportData.builder()
+                .xmlns(xmlns)
+                .edno(edno)
+                .edDate(edDate)
+                .edAuthor(edAuthor)
+                .edReceiver(edReceiver)
+                .creationReason(creationReason)
+                .creationDateTime(creationDateTime)
+                .infoTypeCode(infoTypeCode)
+                .businessDay(businessDay)
+                .directoryVersion(directoryVersion)
+                .build();
+        importData.setId(getId());
+        return importData;
+    }
 }

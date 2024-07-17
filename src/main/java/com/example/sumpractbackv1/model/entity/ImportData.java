@@ -56,13 +56,13 @@ public class ImportData extends BaseEntity {
     @Column(name = "directory_version", length = 2)
     private Integer directoryVersion;
 
-    @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private PartInfo partInfo;
 
-    @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "importData", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private InitialEd initialED;
 
-    @OneToMany(mappedBy = "importData", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "importData", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @SQLRestriction("deleted = false")

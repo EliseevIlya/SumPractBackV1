@@ -80,7 +80,7 @@ public class ParticipantInfo extends BaseEntity {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private BicDirectoryEntry bicDirectoryEntry;
 
-    @OneToMany(mappedBy = "participantInfo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "participantInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @SQLRestriction("deleted = false")

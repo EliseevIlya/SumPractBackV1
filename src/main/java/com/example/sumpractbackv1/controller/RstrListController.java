@@ -1,6 +1,7 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.RstrListRequest;
 import com.example.sumpractbackv1.model.dto.search.RstrListSearchCriteria;
 import com.example.sumpractbackv1.model.entity.RstrList;
 import com.example.sumpractbackv1.service.controllersServices.RstrListService;
@@ -21,12 +22,11 @@ public class RstrListController {
         ResponseDto<RstrList> result = rstrListService.searchRstrList(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
-    public ResponseEntity<RstrList> saveRstrList(@Valid @RequestBody RstrList rstrList) {
-        rstrListService.saveRstrList(rstrList);
-        return new ResponseEntity<>(rstrList, HttpStatus.CREATED);
+    public ResponseEntity<RstrList> saveRstrList(@Valid @RequestBody RstrListRequest rstrList) {
+        var res = rstrListService.saveRstrList(rstrList);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.model.dto.request;
 
+import com.example.sumpractbackv1.model.entity.ParticipantInfo;
 import com.example.sumpractbackv1.model.enums.ParticipantStatus;
 
 import lombok.Getter;
@@ -48,5 +49,30 @@ public class ParticipantInfoRequest extends BaseEntityRequest {
 
     private Long bicDirectoryEntry;
 
-    private List<Long> rstrLists;
+    private List<Long> rstrLists = List.of();
+
+    public ParticipantInfo toParticipantInfo() {
+        ParticipantInfo participantInfo = ParticipantInfo.builder()
+                .nameP(nameP)
+                .englName(englName)
+                .regN(regN)
+                .cntrCd(cntrCd)
+                .rgn(rgn)
+                .ind(ind)
+                .tnp(tnp)
+                .nnp(nnp)
+                .adr(adr)
+                .prntBIC(prntBIC)
+                .dateIn(dateIn)
+                .dateOut(dateOut)
+                .ptType(ptType)
+                .srvcs(srvcs)
+                .xchType(xchType)
+                .uid(uid)
+                .participantStatus(participantStatus)
+                .build();
+        participantInfo.setId(getId());
+        return participantInfo;
+    }
+
 }
