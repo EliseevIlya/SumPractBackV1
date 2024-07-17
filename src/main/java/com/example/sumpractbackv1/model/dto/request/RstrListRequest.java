@@ -1,5 +1,6 @@
 package com.example.sumpractbackv1.model.dto.request;
 
+import com.example.sumpractbackv1.model.entity.RstrList;
 import com.example.sumpractbackv1.model.enums.Rstr;
 
 import lombok.Getter;
@@ -16,4 +17,14 @@ public class RstrListRequest extends BaseEntityRequest {
     private LocalDate rstrDate;
 
     private Long participantInfo;
+
+    public RstrList toRstrList() {
+        var rstrList = RstrList.builder()
+                .rstr(rstr)
+                .rstrDate(rstrDate)
+                .build();
+        rstrList.setId(getId());
+        return rstrList;
+    }
+
 }

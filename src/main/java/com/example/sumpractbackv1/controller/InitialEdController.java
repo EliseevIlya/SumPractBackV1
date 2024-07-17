@@ -1,6 +1,7 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.InitialEdRequest;
 import com.example.sumpractbackv1.model.dto.search.InitialEdSearchCriteria;
 import com.example.sumpractbackv1.model.entity.InitialEd;
 import com.example.sumpractbackv1.service.controllersServices.InitialEdService;
@@ -21,12 +22,11 @@ public class InitialEdController {
         ResponseDto<InitialEd> result = initialEdService.searchInitialEd(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
-    public ResponseEntity<InitialEd> saveInitialED(@Valid @RequestBody InitialEd initialEd) {
-        initialEdService.saveInitialED(initialEd);
-        return new ResponseEntity<>(initialEd, HttpStatus.CREATED);
+    public ResponseEntity<InitialEd> saveInitialED(@Valid @RequestBody InitialEdRequest initialEd) {
+        var res = initialEdService.saveInitialED(initialEd);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

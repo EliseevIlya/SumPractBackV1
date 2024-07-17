@@ -38,9 +38,9 @@ public class AccountsService {
         List<AccRstrList> accRstrLists = accRstrListRepository.findAllById(
             accounts.getAccRstrLists()
         );
-        BicDirectoryEntry bicDirectoryEntry = bicDirectoryEntryRepository.findById(
-            accounts.getBicDirectoryEntry()
-        ).orElse(null);
+        BicDirectoryEntry bicDirectoryEntry = accounts.getBicDirectoryEntry() != null
+            ? bicDirectoryEntryRepository.findById(accounts.getBicDirectoryEntry()).orElse(null)
+            : null;
         Accounts currentAccounts = accounts.getId() != null
             ? accountsRepository.findById(accounts.getId()).orElse(null)
             : null;

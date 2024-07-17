@@ -1,9 +1,12 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.AccRstrListRequest;
 import com.example.sumpractbackv1.model.dto.search.AccRstrListSearchCriteria;
 import com.example.sumpractbackv1.model.entity.AccRstrList;
+import com.example.sumpractbackv1.model.entity.Accounts;
 import com.example.sumpractbackv1.repository.AccRstrListRepository;
+import com.example.sumpractbackv1.repository.AccountsRepository;
 import com.example.sumpractbackv1.util.specifications.AccRstrListSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class AccRstrListService {
     private final AccRstrListRepository accRstrListRepository;
+    private final AccountsRepository accountsRepository;
 
     public ResponseDto<AccRstrList> searchAccRstrList(AccRstrListSearchCriteria criteria) {
         Specification<AccRstrList> spec = AccRstrListSpecifications.byCriteria(criteria);
@@ -25,8 +29,25 @@ public class AccRstrListService {
         return new ResponseDto<>(accRstrListRepository.findAll(spec, pageable));
     }
 
-    public void saveAccRstrList(AccRstrList accRstrList) {
-        accRstrListRepository.save(accRstrList);
+    public AccRstrList saveAccRstrList(AccRstrListRequest accRstrList) {
+        Accounts accounts = accRstrList.getAccounts() != null
+            ? accountsRepository.findById(accRstrList.getAccounts()).orElse(null)
+            : null;
+        AccRstrList currentAccRstrList = accRstrList.getId() != null
+            ? accRstrListRepository.findById(accRstrList.getId()).orElse(null)
+            : null;
+
+        AccRstrList accRstrListEntity = accRstrList.toAccRstrList();
+
+        accRstrListEntity.setAccounts(accounts);
+        if (accounts != null) accounts.getAccRstrLists().add(accRstrListEntity);
+
+        if (currentAccRstrList != null) {
+            accRstrListEntity.setCreatedDate(currentAccRstrList.getCreatedDate());
+            accRstrListEntity.setCreatedBy(currentAccRstrList.getCreatedBy());
+        }
+
+        return accRstrListRepository.save(accRstrListEntity);
     }
     //TODO логику для прокидывания родителя и дочерних
 

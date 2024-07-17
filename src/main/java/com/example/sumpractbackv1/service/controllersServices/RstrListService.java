@@ -1,8 +1,11 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.RstrListRequest;
 import com.example.sumpractbackv1.model.dto.search.RstrListSearchCriteria;
+import com.example.sumpractbackv1.model.entity.ParticipantInfo;
 import com.example.sumpractbackv1.model.entity.RstrList;
+import com.example.sumpractbackv1.repository.ParticipantInfoRepository;
 import com.example.sumpractbackv1.repository.RstrListRepository;
 import com.example.sumpractbackv1.util.specifications.RstrListSpecifications;
 import jakarta.transaction.Transactional;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class RstrListService {
     private final RstrListRepository rstrListRepository;
+    private final ParticipantInfoRepository participantInfoRepository;
 
     public ResponseDto<RstrList> searchRstrList(RstrListSearchCriteria criteria) {
         Specification<RstrList> spec = RstrListSpecifications.byCriteria(criteria);
@@ -25,10 +29,23 @@ public class RstrListService {
         return new ResponseDto<>(rstrListRepository.findAll(spec, pageable));
     }
 
-    //TODO логику для прокидывания родителя и дочерних
+    public RstrList saveRstrList(RstrListRequest rstrList) {
+        ParticipantInfo participantInfo = rstrList.getParticipantInfo() != null
+            ? participantInfoRepository.findById(rstrList.getParticipantInfo()).orElse(null)
+            : null;
+        RstrList currentRstrList = rstrList.getId() != null
+            ? rstrListRepository.findById(rstrList.getId()).orElse(null)
+            : null;
 
-    public void saveRstrList(RstrList rstrList) {
-        rstrListRepository.save(rstrList);
+        RstrList rstrListEntity = rstrList.toRstrList();
+        rstrListEntity.setParticipantInfo(participantInfo);
+        if (currentRstrList != null) {
+            rstrListEntity.setCreatedDate(currentRstrList.getCreatedDate());
+            rstrListEntity.setCreatedBy(currentRstrList.getCreatedBy());
+        }
+        if (participantInfo != null) participantInfo.getRstrLists().add(rstrListEntity);
+
+        return rstrListRepository.save(rstrListEntity);
     }
 
     public void deleteRstrListById(Long id) {
