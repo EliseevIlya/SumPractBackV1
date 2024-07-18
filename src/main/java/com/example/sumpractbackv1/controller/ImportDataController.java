@@ -1,6 +1,7 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.ImportDataRequest;
 import com.example.sumpractbackv1.model.dto.search.ImportDataSearchCriteria;
 import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.service.controllersServices.ImportDataService;
@@ -24,12 +25,11 @@ public class ImportDataController {
         ResponseDto<ImportData> result = importDataService.searchImportData(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
-    public ResponseEntity<ImportData> saveImportData(@Valid @RequestBody ImportData criteria) {
-        importDataService.saveImportData(criteria);
-        return new ResponseEntity<>(criteria, HttpStatus.CREATED);
+    public ResponseEntity<ImportData> saveImportData(@Valid @RequestBody ImportDataRequest criteria) {
+        var result = importDataService.saveImportData(criteria);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

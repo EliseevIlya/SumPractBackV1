@@ -1,6 +1,7 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.AccRstrListRequest;
 import com.example.sumpractbackv1.model.dto.search.AccRstrListSearchCriteria;
 import com.example.sumpractbackv1.model.entity.AccRstrList;
 import com.example.sumpractbackv1.service.controllersServices.AccRstrListService;
@@ -24,9 +25,9 @@ public class AccRstrListController {
     //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
-    public ResponseEntity<AccRstrList> saveAccRstrList(@Valid @RequestBody AccRstrList accRstrList) {
-        accRstrListService.saveAccRstrList(accRstrList);
-        return new ResponseEntity<>(accRstrList, HttpStatus.CREATED);
+    public ResponseEntity<AccRstrList> saveAccRstrList(@Valid @RequestBody AccRstrListRequest accRstrList) {
+        var res = accRstrListService.saveAccRstrList(accRstrList);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

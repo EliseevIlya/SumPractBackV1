@@ -34,10 +34,10 @@ public class BicDirectoryEntry extends BaseEntity {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private ImportData importData;
 
-    @OneToOne(mappedBy = "bicDirectoryEntry", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "bicDirectoryEntry", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ParticipantInfo participantInfo;
 
-    @OneToMany(mappedBy = "bicDirectoryEntry", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bicDirectoryEntry", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @SQLRestriction("deleted = false")

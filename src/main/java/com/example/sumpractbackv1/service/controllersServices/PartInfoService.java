@@ -1,8 +1,11 @@
 package com.example.sumpractbackv1.service.controllersServices;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.PartInfoRequest;
 import com.example.sumpractbackv1.model.dto.search.PartInfoSearchCriteria;
+import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.model.entity.PartInfo;
+import com.example.sumpractbackv1.repository.ImportDataRepository;
 import com.example.sumpractbackv1.repository.PartInfoRepository;
 import com.example.sumpractbackv1.util.specifications.PartInfoSpecifications;
 import jakarta.transaction.Transactional;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class PartInfoService {
     private final PartInfoRepository partInfoRepository;
+    private final ImportDataRepository importDataRepository;
 
     public ResponseDto<PartInfo> searchPartInfo(PartInfoSearchCriteria criteria) {
         Specification<PartInfo> spec = PartInfoSpecifications.byCriteria(criteria);
@@ -25,10 +29,24 @@ public class PartInfoService {
         return new ResponseDto<>(partInfoRepository.findAll(spec, pageable));
     }
 
-    //TODO логику для прокидывания родителя и дочерних
+    public PartInfo savePartInfo(PartInfoRequest partInfo) {
+        ImportData importData = partInfo.getImportData() != null
+            ? importDataRepository.findById(partInfo.getImportData()).orElse(null)
+            : null;
+        PartInfo currentPartInfo = partInfo.getId() != null
+            ? partInfoRepository.findById(partInfo.getId()).orElse(null)
+            : null;
 
-    public void savePartInfo(PartInfo partInfo) {
-        partInfoRepository.save(partInfo);
+        PartInfo partInfoEntity = partInfo.toPartInfo();
+        partInfoEntity.setImportData(importData);
+        
+        if (currentPartInfo != null) {
+            partInfoEntity.setCreatedDate(currentPartInfo.getCreatedDate());
+            partInfoEntity.setCreatedBy(currentPartInfo.getCreatedBy());
+        }
+        if (importData != null) importData.setPartInfo(partInfoEntity);
+
+        return partInfoRepository.save(partInfoEntity);
     }
 
     public void deletePartInfoById(Long id) {

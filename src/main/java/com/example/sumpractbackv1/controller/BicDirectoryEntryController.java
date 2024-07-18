@@ -1,6 +1,7 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.BicDirectoryEntryRequest;
 import com.example.sumpractbackv1.model.dto.search.BicDirectoryEntrySearchCriteria;
 import com.example.sumpractbackv1.model.entity.BicDirectoryEntry;
 import com.example.sumpractbackv1.service.controllersServices.BicDirectoryEntryService;
@@ -21,12 +22,11 @@ public class BicDirectoryEntryController {
         ResponseDto<BicDirectoryEntry> result = bicDirectoryEntryService.searchBicDirectoryEntries(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
-    public ResponseEntity<BicDirectoryEntry> saveBICDirectoryEntry(@Valid @RequestBody BicDirectoryEntry bicDirectoryEntry) {
-        bicDirectoryEntryService.saveBicDirectoryEntry(bicDirectoryEntry);
-        return new ResponseEntity<>(bicDirectoryEntry, HttpStatus.CREATED);
+    public ResponseEntity<BicDirectoryEntry> saveBICDirectoryEntry(@Valid @RequestBody BicDirectoryEntryRequest bicDirectoryEntry) {
+        var res = bicDirectoryEntryService.saveBicDirectoryEntry(bicDirectoryEntry);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

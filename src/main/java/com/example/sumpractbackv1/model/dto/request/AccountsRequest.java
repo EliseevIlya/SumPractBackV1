@@ -23,7 +23,6 @@ public class AccountsRequest extends BaseEntityRequest {
 
     @Schema(description = "Тип счета в соответствии с нормативом.")
     @NotNull
-    @Size(max = 4)
     private RegulationAccountType regulationAccountType;
 
     @Schema(description = "Контрольный ключ.")

@@ -1,6 +1,7 @@
 package com.example.sumpractbackv1.controller;
 
 import com.example.sumpractbackv1.model.dto.ResponseDto;
+import com.example.sumpractbackv1.model.dto.request.SwbicsRequest;
 import com.example.sumpractbackv1.model.dto.search.SwbicsSearchCriteria;
 import com.example.sumpractbackv1.model.entity.Swbics;
 import com.example.sumpractbackv1.service.controllersServices.SwbicsService;
@@ -21,12 +22,11 @@ public class SwbicsController {
         ResponseDto<Swbics> result = swbicsService.searchSwbics(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
-    public ResponseEntity<Swbics> saveSwbics(@Valid @RequestBody Swbics swbics) {
-        swbicsService.saveSwbics(swbics);
-        return new ResponseEntity<>(swbics, HttpStatus.CREATED);
+    public ResponseEntity<Swbics> saveSwbics(@Valid @RequestBody SwbicsRequest swbics) {
+        var res = swbicsService.saveSwbics(swbics);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
