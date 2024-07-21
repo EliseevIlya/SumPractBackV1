@@ -55,13 +55,11 @@ public class UserService {
         return this::getByUsername;
     }
 
-    //TODO вынести в отдельный сервис или переместить в папку controllersServices
     public ResponseDto<User> searchUsers(UserSearchCriteria criteria) {
         Specification<User> spec = UserSpecifications.byCriteria(criteria);
         Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
         return new ResponseDto<>(repository.findAll(spec, pageable));
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     public void saveUser(User user) {
         repository.save(user);

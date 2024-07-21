@@ -1,12 +1,11 @@
 package com.example.sumpractbackv1.model.dto.request;
 
 
-import java.time.LocalDate;
-
 import com.example.sumpractbackv1.model.entity.InitialEd;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -22,10 +21,10 @@ public class InitialEdRequest extends BaseEntityRequest {
 
     public InitialEd toInitialEd() {
         var initialEd = InitialEd.builder()
-            .edno(edno)
-            .edDate(edDate)
-            .edAuthor(edAuthor)
-            .build();
+                .edno(edno)
+                .edDate(edDate)
+                .edAuthor(edAuthor)
+                .build();
         initialEd.setId(getId());
         return initialEd;
     }

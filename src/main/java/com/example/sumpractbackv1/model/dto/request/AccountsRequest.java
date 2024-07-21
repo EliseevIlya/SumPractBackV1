@@ -54,14 +54,14 @@ public class AccountsRequest extends BaseEntityRequest {
 
     public Accounts toAccounts() {
         var accounts = Accounts.builder()
-            .account(account)
-            .regulationAccountType(regulationAccountType)
-            .ck(ck)
-            .accountCbrbic(accountCbrbic)
-            .dateIn(dateIn)
-            .dateOut(dateOut)
-            .accountStatus(accountStatus)
-            .build();
+                .account(account)
+                .regulationAccountType(regulationAccountType)
+                .ck(ck)
+                .accountCbrbic(accountCbrbic)
+                .dateIn(dateIn)
+                .dateOut(dateOut)
+                .accountStatus(accountStatus)
+                .build();
         System.out.println(getId());
         accounts.setId(getId());
         return accounts;

@@ -2,7 +2,6 @@ package com.example.sumpractbackv1.model.dto.request;
 
 import com.example.sumpractbackv1.model.entity.RstrList;
 import com.example.sumpractbackv1.model.enums.Rstr;
-
 import lombok.Getter;
 import lombok.Setter;
 

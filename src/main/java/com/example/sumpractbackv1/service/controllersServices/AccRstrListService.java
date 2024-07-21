@@ -31,11 +31,11 @@ public class AccRstrListService {
 
     public AccRstrList saveAccRstrList(AccRstrListRequest accRstrList) {
         Accounts accounts = accRstrList.getAccounts() != null
-            ? accountsRepository.findById(accRstrList.getAccounts()).orElse(null)
-            : null;
+                ? accountsRepository.findById(accRstrList.getAccounts()).orElse(null)
+                : null;
         AccRstrList currentAccRstrList = accRstrList.getId() != null
-            ? accRstrListRepository.findById(accRstrList.getId()).orElse(null)
-            : null;
+                ? accRstrListRepository.findById(accRstrList.getId()).orElse(null)
+                : null;
 
         AccRstrList accRstrListEntity = accRstrList.toAccRstrList();
 
@@ -49,7 +49,6 @@ public class AccRstrListService {
 
         return accRstrListRepository.save(accRstrListEntity);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     public void deleteAccRstrListById(Long id) {
         accRstrListRepository.deleteById(id);

@@ -23,7 +23,7 @@ public class AccountsController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    
+
     @PutMapping
     public ResponseEntity<Accounts> saveAccounts(@Valid @RequestBody AccountsRequest accounts) {
         var res = accountsService.saveAccount(accounts);

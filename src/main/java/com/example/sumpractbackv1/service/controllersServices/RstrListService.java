@@ -31,11 +31,11 @@ public class RstrListService {
 
     public RstrList saveRstrList(RstrListRequest rstrList) {
         ParticipantInfo participantInfo = rstrList.getParticipantInfo() != null
-            ? participantInfoRepository.findById(rstrList.getParticipantInfo()).orElse(null)
-            : null;
+                ? participantInfoRepository.findById(rstrList.getParticipantInfo()).orElse(null)
+                : null;
         RstrList currentRstrList = rstrList.getId() != null
-            ? rstrListRepository.findById(rstrList.getId()).orElse(null)
-            : null;
+                ? rstrListRepository.findById(rstrList.getId()).orElse(null)
+                : null;
 
         RstrList rstrListEntity = rstrList.toRstrList();
         rstrListEntity.setParticipantInfo(participantInfo);

@@ -36,14 +36,14 @@ public class AccountsService {
 
     public Accounts saveAccount(AccountsRequest accounts) {
         List<AccRstrList> accRstrLists = accRstrListRepository.findAllById(
-            accounts.getAccRstrLists()
+                accounts.getAccRstrLists()
         );
         BicDirectoryEntry bicDirectoryEntry = accounts.getBicDirectoryEntry() != null
-            ? bicDirectoryEntryRepository.findById(accounts.getBicDirectoryEntry()).orElse(null)
-            : null;
+                ? bicDirectoryEntryRepository.findById(accounts.getBicDirectoryEntry()).orElse(null)
+                : null;
         Accounts currentAccounts = accounts.getId() != null
-            ? accountsRepository.findById(accounts.getId()).orElse(null)
-            : null;
+                ? accountsRepository.findById(accounts.getId()).orElse(null)
+                : null;
 
         Accounts accountsEntity = accounts.toAccounts();
         accountsEntity.setAccRstrLists(accRstrLists);
@@ -51,14 +51,14 @@ public class AccountsService {
 
         if (currentAccounts != null) {
             currentAccounts.getAccRstrLists()
-                .forEach(accRstrList -> accRstrList.setAccounts(null));
+                    .forEach(accRstrList -> accRstrList.setAccounts(null));
             if (currentAccounts.getBicDirectoryEntry() != null)
                 currentAccounts.getBicDirectoryEntry().getAccountsList().remove(currentAccounts);
-                
+
             accountsEntity.setCreatedDate(currentAccounts.getCreatedDate());
             accountsEntity.setCreatedBy(currentAccounts.getCreatedBy());
         }
-        
+
         accRstrLists.forEach(accRstrList -> accRstrList.setAccounts(accountsEntity));
         if (bicDirectoryEntry != null)
             bicDirectoryEntry.getAccountsList().add(accountsEntity);

@@ -36,14 +36,14 @@ public class ParticipantInfoService {
 
     public ParticipantInfo saveParticipantInfo(ParticipantInfoRequest participantInfo) {
         BicDirectoryEntry bicDirectoryEntry = participantInfo.getBicDirectoryEntry() != null
-            ? bicDirectoryEntryRepository.findById(participantInfo.getBicDirectoryEntry()).orElse(null)
-            : null;
+                ? bicDirectoryEntryRepository.findById(participantInfo.getBicDirectoryEntry()).orElse(null)
+                : null;
         List<RstrList> rstrLists = rstrListRepository.findAllById(
-            participantInfo.getRstrLists()
+                participantInfo.getRstrLists()
         );
         ParticipantInfo currentParticipantInfo = participantInfo.getId() != null
-            ? participantInfoRepository.findById(participantInfo.getId()).orElse(null)
-            : null;
+                ? participantInfoRepository.findById(participantInfo.getId()).orElse(null)
+                : null;
 
         ParticipantInfo participantInfoEntity = participantInfo.toParticipantInfo();
         participantInfoEntity.setBicDirectoryEntry(bicDirectoryEntry);
@@ -54,13 +54,13 @@ public class ParticipantInfoService {
             participantInfoEntity.setCreatedBy(currentParticipantInfo.getCreatedBy());
 
             currentParticipantInfo.getRstrLists()
-                .forEach(rstrList -> rstrList.setParticipantInfo(null));
+                    .forEach(rstrList -> rstrList.setParticipantInfo(null));
         }
 
         rstrLists.forEach(rstrList -> rstrList.setParticipantInfo(participantInfoEntity));
         if (bicDirectoryEntry != null)
             bicDirectoryEntry.setParticipantInfo(participantInfoEntity);
-        
+
         return participantInfoRepository.save(participantInfoEntity);
     }
 
