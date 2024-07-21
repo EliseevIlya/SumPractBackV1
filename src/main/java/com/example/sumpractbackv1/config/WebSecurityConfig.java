@@ -1,11 +1,13 @@
 package com.example.sumpractbackv1.config;
 
+import com.example.sumpractbackv1.model.enums.Permissions;
 import com.example.sumpractbackv1.service.controllersServices.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -61,7 +63,9 @@ public class WebSecurityConfig {
                     request
                             .requestMatchers(AUTH_WHITELIST).permitAll()
                             .requestMatchers(SWAGGER_WHITELIST).permitAll()
-                            .anyRequest().authenticated();
+                            .requestMatchers(HttpMethod.GET, "*").hasAuthority(Permissions.READ_DATA.name())
+                            .requestMatchers(HttpMethod.PUT, "/user").hasAuthority(Permissions.CREATE_USER.name())
+                            .anyRequest().hasAuthority(Permissions.EDIT_DATA.name());
                 })
                 .httpBasic(basic -> basic.disable())
                 .authenticationProvider(authenticationProvider())
