@@ -1,6 +1,8 @@
 package com.example.sumpractbackv1.model.entity;
 
 import com.example.sumpractbackv1.model.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +29,7 @@ public class User implements UserDetails {
     private String username;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @CreationTimestamp

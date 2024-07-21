@@ -39,8 +39,7 @@ public class UserService {
 
     public User create(User user) {
         if (repository.existsByUsername(user.getUsername())) {
-            // Заменить на свои исключения
-            throw new RuntimeException("Пользователь с таким именем уже существует");
+            return null;
         }
 
         return save(user);
@@ -59,10 +58,6 @@ public class UserService {
         Specification<User> spec = UserSpecifications.byCriteria(criteria);
         Pageable pageable = PageRequest.of(criteria.getPage(), criteria.getSize(), Sort.by("id"));
         return new ResponseDto<>(repository.findAll(spec, pageable));
-    }
-
-    public void saveUser(User user) {
-        repository.save(user);
     }
 
     public void deleteUserById(Long id) {
