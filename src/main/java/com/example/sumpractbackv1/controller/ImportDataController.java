@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class ImportDataController {
     private final ImportDataService importDataService;
 
-    // @ApiResponse(content = @Content(
-    //     array = @ArraySchema(schema = @Schema(implementation = ImportDataResponse.class))
-    // ))
+
     @GetMapping
     public ResponseEntity<ResponseDto<ImportData>> searchImportData(@Valid ImportDataSearchCriteria criteria) {
         ResponseDto<ImportData> result = importDataService.searchImportData(criteria);

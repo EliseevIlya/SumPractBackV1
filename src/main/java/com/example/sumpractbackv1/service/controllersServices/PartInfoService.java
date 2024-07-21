@@ -31,15 +31,15 @@ public class PartInfoService {
 
     public PartInfo savePartInfo(PartInfoRequest partInfo) {
         ImportData importData = partInfo.getImportData() != null
-            ? importDataRepository.findById(partInfo.getImportData()).orElse(null)
-            : null;
+                ? importDataRepository.findById(partInfo.getImportData()).orElse(null)
+                : null;
         PartInfo currentPartInfo = partInfo.getId() != null
-            ? partInfoRepository.findById(partInfo.getId()).orElse(null)
-            : null;
+                ? partInfoRepository.findById(partInfo.getId()).orElse(null)
+                : null;
 
         PartInfo partInfoEntity = partInfo.toPartInfo();
         partInfoEntity.setImportData(importData);
-        
+
         if (currentPartInfo != null) {
             partInfoEntity.setCreatedDate(currentPartInfo.getCreatedDate());
             partInfoEntity.setCreatedBy(currentPartInfo.getCreatedBy());

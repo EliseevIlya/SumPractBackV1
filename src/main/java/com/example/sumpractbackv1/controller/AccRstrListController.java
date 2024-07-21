@@ -22,7 +22,6 @@ public class AccRstrListController {
         ResponseDto<AccRstrList> result = accRstrListService.searchAccRstrList(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
     public ResponseEntity<AccRstrList> saveAccRstrList(@Valid @RequestBody AccRstrListRequest accRstrList) {

@@ -22,7 +22,6 @@ public class UserController {
         ResponseDto<User> result = userService.searchUsers(criteria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //TODO логику для прокидывания родителя и дочерних
 
     @PutMapping
     public ResponseEntity<User> saveUser(@Valid @RequestBody User user) {

@@ -3,16 +3,8 @@ package com.example.sumpractbackv1.service.controllersServices;
 import com.example.sumpractbackv1.model.dto.ResponseDto;
 import com.example.sumpractbackv1.model.dto.request.BicDirectoryEntryRequest;
 import com.example.sumpractbackv1.model.dto.search.BicDirectoryEntrySearchCriteria;
-import com.example.sumpractbackv1.model.entity.Accounts;
-import com.example.sumpractbackv1.model.entity.BicDirectoryEntry;
-import com.example.sumpractbackv1.model.entity.ImportData;
-import com.example.sumpractbackv1.model.entity.ParticipantInfo;
-import com.example.sumpractbackv1.model.entity.Swbics;
-import com.example.sumpractbackv1.repository.AccountsRepository;
-import com.example.sumpractbackv1.repository.BICDirectoryEntryRepository;
-import com.example.sumpractbackv1.repository.ImportDataRepository;
-import com.example.sumpractbackv1.repository.ParticipantInfoRepository;
-import com.example.sumpractbackv1.repository.SwbicsRepository;
+import com.example.sumpractbackv1.model.entity.*;
+import com.example.sumpractbackv1.repository.*;
 import com.example.sumpractbackv1.util.specifications.BicDirectoryEntrySpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -42,20 +34,20 @@ public class BicDirectoryEntryService {
 
     public BicDirectoryEntry saveBicDirectoryEntry(BicDirectoryEntryRequest bicDirectoryEntry) {
         ImportData importData = bicDirectoryEntry.getImportData() != null
-            ? importDataRepository.findById(bicDirectoryEntry.getImportData()).orElse(null)
-            : null;
+                ? importDataRepository.findById(bicDirectoryEntry.getImportData()).orElse(null)
+                : null;
         ParticipantInfo participantInfo = bicDirectoryEntry.getParticipantInfo() != null
-            ? participantInfoRepository.findById(bicDirectoryEntry.getParticipantInfo()).orElse(null)
-            : null;
+                ? participantInfoRepository.findById(bicDirectoryEntry.getParticipantInfo()).orElse(null)
+                : null;
         List<Swbics> swbicsList = swbicsRepository.findAllById(
-            bicDirectoryEntry.getSwbicsList()
+                bicDirectoryEntry.getSwbicsList()
         );
         List<Accounts> accountsList = accountsRepository.findAllById(
-            bicDirectoryEntry.getAccountsList()
+                bicDirectoryEntry.getAccountsList()
         );
         BicDirectoryEntry currentBicDirectoryEntry = bicDirectoryEntry.getId() != null
-            ? bicDirectoryEntryRepository.findById(bicDirectoryEntry.getId()).orElse(null)
-            : null;
+                ? bicDirectoryEntryRepository.findById(bicDirectoryEntry.getId()).orElse(null)
+                : null;
 
         BicDirectoryEntry bicDirectoryEntryEntity = bicDirectoryEntry.toBicDirectoryEntry();
         bicDirectoryEntryEntity.setImportData(importData);
@@ -67,9 +59,9 @@ public class BicDirectoryEntryService {
             bicDirectoryEntryEntity.setCreatedBy(currentBicDirectoryEntry.getCreatedBy());
 
             currentBicDirectoryEntry.getSwbicsList()
-                .forEach(swbics -> swbics.setBicDirectoryEntry(null));
+                    .forEach(swbics -> swbics.setBicDirectoryEntry(null));
             currentBicDirectoryEntry.getAccountsList()
-                .forEach(accounts -> accounts.setBicDirectoryEntry(null));
+                    .forEach(accounts -> accounts.setBicDirectoryEntry(null));
         }
 
         swbicsList.forEach(swbics -> swbics.setBicDirectoryEntry(bicDirectoryEntryEntity));

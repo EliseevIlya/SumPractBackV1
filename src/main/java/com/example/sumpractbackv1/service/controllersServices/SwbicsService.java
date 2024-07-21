@@ -31,11 +31,11 @@ public class SwbicsService {
 
     public Swbics saveSwbics(SwbicsRequest swbics) {
         BicDirectoryEntry bicDirectoryEntry = swbics.getBicDirectoryEntry() != null
-            ? bicDirectoryEntryRepository.findById(swbics.getBicDirectoryEntry()).orElse(null)
-            : null;
+                ? bicDirectoryEntryRepository.findById(swbics.getBicDirectoryEntry()).orElse(null)
+                : null;
         Swbics currentSwbics = swbics.getId() != null
-            ? swbicsRepository.findById(swbics.getId()).orElse(null)
-            : null;
+                ? swbicsRepository.findById(swbics.getId()).orElse(null)
+                : null;
 
         Swbics swbicsEntity = swbics.toSwbics();
         swbicsEntity.setBicDirectoryEntry(bicDirectoryEntry);

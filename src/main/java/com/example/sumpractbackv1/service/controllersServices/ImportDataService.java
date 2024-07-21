@@ -39,17 +39,17 @@ public class ImportDataService {
 
     public ImportData saveImportData(ImportDataRequest importData) {
         PartInfo partInfo = importData.getPartInfo() != null
-            ? partInfoRepository.findById(importData.getPartInfo()).orElse(null)
-            : null;
+                ? partInfoRepository.findById(importData.getPartInfo()).orElse(null)
+                : null;
         InitialEd initialEd = importData.getInitialED() != null
-            ? initialEdRepository.findById(importData.getInitialED()).orElse(null)
-            : null;
+                ? initialEdRepository.findById(importData.getInitialED()).orElse(null)
+                : null;
         List<BicDirectoryEntry> bicDirectoryEntries = bicDirectoryEntryRepository.findAllById(
-            importData.getBicDirectoryEntryList()
+                importData.getBicDirectoryEntryList()
         );
         ImportData currentImportData = importData.getId() != null
-            ? importDataRepository.findById(importData.getId()).orElse(null)
-            : null;
+                ? importDataRepository.findById(importData.getId()).orElse(null)
+                : null;
 
         ImportData importDataEntity = importData.toImportData();
         importDataEntity.setPartInfo(partInfo);
@@ -61,7 +61,7 @@ public class ImportDataService {
             importDataEntity.setCreatedBy(currentImportData.getCreatedBy());
 
             currentImportData.getBicDirectoryEntryList()
-                .forEach(bicDirectoryEntry -> bicDirectoryEntry.setImportData(null));
+                    .forEach(bicDirectoryEntry -> bicDirectoryEntry.setImportData(null));
         }
 
         bicDirectoryEntries.forEach(bicDirectoryEntry -> bicDirectoryEntry.setImportData(importDataEntity));

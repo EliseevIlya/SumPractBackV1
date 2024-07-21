@@ -31,11 +31,11 @@ public class InitialEdService {
 
     public InitialEd saveInitialED(InitialEdRequest initialED) {
         ImportData importData = initialED.getImportData() != null
-            ? importDataRepository.findById(initialED.getImportData()).orElse(null)
-            : null;
+                ? importDataRepository.findById(initialED.getImportData()).orElse(null)
+                : null;
         InitialEd currentInitialED = initialED.getId() != null
-            ? initialEDRepository.findById(initialED.getId()).orElse(null)
-            : null;
+                ? initialEDRepository.findById(initialED.getId()).orElse(null)
+                : null;
 
         InitialEd initialEDEntity = initialED.toInitialEd();
         initialEDEntity.setImportData(importData);

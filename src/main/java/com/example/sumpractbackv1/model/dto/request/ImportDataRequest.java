@@ -3,7 +3,6 @@ package com.example.sumpractbackv1.model.dto.request;
 import com.example.sumpractbackv1.model.entity.ImportData;
 import com.example.sumpractbackv1.model.enums.CreationReason;
 import com.example.sumpractbackv1.model.enums.InfoTypeCode;
-
 import lombok.Getter;
 import lombok.Setter;
 
